@@ -706,6 +706,10 @@ MonoBehaviour:
   speed: 0.3
   stoppingDistance: 2
   retreaDistance: 0.1
+  circleRadiusMin: 5
+  circleRadiusMax: 7
+  maxTurningForce: 20
+  maxPropellerForce: 100
   startTimeBtwShots: 2
   player: {fileID: 991902233}
   projectile: {fileID: 4211328842096449313, guid: f218d3be1d09b334988e29ee6d402e56,
@@ -724,8 +728,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 2
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
