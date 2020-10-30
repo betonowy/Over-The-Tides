@@ -18,10 +18,15 @@ public class PlayerController : MonoBehaviour {
     private float timeBtwShoots;
     public float startTimeBtwShoots;
 
+    public Transform shotPointLeft;
+    public Transform shotPointRight;
+
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
 
         timeBtwShoots = startTimeBtwShoots;
+        shotPointLeft.transform.Rotate(0f, 0f, 90f, Space.World);
+        shotPointRight.transform.Rotate(0f, 0f, -90f, Space.World);
     }
 
     private void Update() {
@@ -32,23 +37,26 @@ public class PlayerController : MonoBehaviour {
     private void shooting() {
         if (Input.GetKeyDown(KeyCode.Q)) {
             if (timeBtwShoots <= 0) {
-                Instantiate(projectile, transform.position, Quaternion.identity);
+                //Instantiate(projectile, transform.position, Quaternion.identity);
+                Instantiate(projectile, shotPointLeft.position, shotPointLeft.rotation);
                 timeBtwShoots = startTimeBtwShoots;
             }
-            else {
-                timeBtwShoots -= Time.deltaTime;
-            }
-        }
-    }
 
+        } 
+        else if (Input.GetKeyDown(KeyCode.E)) {
+                if (timeBtwShoots <= 0) {
+                    //Instantiate(projectile, transform.position, Quaternion.identity);
+                    Instantiate(projectile, shotPointRight.position, shotPointRight.rotation);
+                    timeBtwShoots = startTimeBtwShoots;
+                }
+
+        }
+        else timeBtwShoots -= Time.deltaTime;
+    }
 
     private void mouseMovement() {
         if (Input.GetMouseButtonDown(0))
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //else
-        //targetPosition = transform.position;
-        //Debug.Log(targetPosition.ToString());
-        //Debug.Log(transform.position.ToString());
 
         targetDistance = Vector3.Distance(targetPosition.normalized, transform.position.normalized);
 
