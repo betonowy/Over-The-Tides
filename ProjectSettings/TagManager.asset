@@ -48,3 +48,6 @@ TagManager:
   - name: Foreground
     uniqueID: 4068905029
     locked: 0
+  - name: Sailor
+    uniqueID: 185148453
+    locked: 0
