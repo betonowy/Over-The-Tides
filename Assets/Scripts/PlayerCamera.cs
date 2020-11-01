@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    Camera cam;
-    bool check = false;
+    public Camera cam;
+    static bool check = false;
+    public GameObject PlayerBoat;
 
     void Start()
     {
@@ -16,10 +17,16 @@ public class PlayerCamera : MonoBehaviour
     private void LateUpdate() {
         if (check) {
             cam.enabled = true;
+            PlayerBoat.SendMessage("setOrderMode", true);
         }
         else {
             cam.enabled = false;
+            PlayerBoat.SendMessage("setOrderMode", false);
         }
+    }
+
+    public bool getCheck() {
+        return check;
     }
 
     public void onCheck() {
