@@ -6,41 +6,6 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(Camera))]
 public class CameraScript : MonoBehaviour
 {
-    /*
-    public Transform player, enemy;
-    public Camera camera;
-
-    [SerializeField] Vector2 posOffset;
-    public float minSizeY = 5f;
-
-    void Update()
-    {
-        setCameraPos();
-        setCameraSize();
-
-    }
-
-    void setCameraPos() {
-        Vector3 middle = (player.transform.position + enemy.transform.position) * .5f;
-
-        camera.transform.position = new Vector3(middle.x, middle.y, camera.transform.position.z);
-    }
-
-    void setCameraSize() {
-
-        float minSizeX = minSizeY * Screen.width / Screen.height;
-
- 
-        float width = Mathf.Abs(player.position.x - enemy.position.x) * 0.8f;
-        float height = Mathf.Abs(player.position.y - enemy.position.y) * 0.8f;
-
-
-        //computing the size
-        float camSizeX = Mathf.Max(width, minSizeX);
-        camera.orthographicSize = Mathf.Max(height, camSizeX * Screen.height / Screen.width, minSizeY);
-    }
-    */
-
     public List<Transform> targets;
 
     public Vector3 offset;
@@ -60,9 +25,24 @@ public class CameraScript : MonoBehaviour
     public float playerViewWidth;
     public float playerViewHeight;
 
+
+    public GameObject quad;
+
+    private float height = 40f;
+    private float width;
+
     private void Start() {
         cam = GetComponent<Camera>();
         cam.enabled = true;
+
+        width = height * Camera.main.aspect;
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                var newQuad = Instantiate(quad, new Vector3(x - width / 2f, y - height / 2f, 50), Quaternion.identity);
+                newQuad.transform.parent = gameObject.transform;
+            }
+        }
     }
 
     private void LateUpdate() {
