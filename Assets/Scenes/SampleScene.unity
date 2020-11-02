@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 192857679}
   - component: {fileID: 192857680}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cannonNoFire (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 462433661}
   - component: {fileID: 462433662}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SteerWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 511314506}
   - component: {fileID: 511314505}
   - component: {fileID: 511314504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,13 +513,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601194148}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: -1.1, y: 1.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1415315963}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1 &761583867
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,7 +529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 761583868}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: shotPointLeft
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -735,7 +735,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857419230}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.2, y: 1.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -752,7 +752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 895311100}
   - component: {fileID: 895311101}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cannonNoFire (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -836,7 +836,7 @@ GameObject:
   - component: {fileID: 991902231}
   - component: {fileID: 991902234}
   - component: {fileID: 991902235}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: playerBoat
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1030,7 +1030,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1255604001}
   - component: {fileID: 1255604002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cannonNoFire (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1111,7 +1111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1318371525}
   - component: {fileID: 1318371526}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1342,11 +1342,14 @@ MonoBehaviour:
   player: {fileID: 991902233}
   projectile: {fileID: 4211328842096449313, guid: f218d3be1d09b334988e29ee6d402e56,
     type: 3}
-  shootingRange: 0
+  shootingRange: 15
   castPoint0: {fileID: 857419231}
   castPoint1: {fileID: 1018185670}
   castPoint2: {fileID: 601194149}
   castPoint3: {fileID: 1692132444}
+  mask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &1415315965
 Rigidbody2D:
   serializedVersion: 4
@@ -1600,7 +1603,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1850845370}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: shotPointRight
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -1712,7 +1715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1885806234}
   - component: {fileID: 1885806235}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cannonNoFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

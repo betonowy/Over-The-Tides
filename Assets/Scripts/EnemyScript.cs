@@ -16,15 +16,13 @@ public class EnemyScript : MonoBehaviour {
     public GameObject projectile;
     private Rigidbody2D myBody;
 
-    public float shootingRange = 5f;
+    public float shootingRange;
 
     public Transform castPoint0;
     public Transform castPoint1;
     public Transform castPoint2;
     public Transform castPoint3;
-
-    
-
+    public LayerMask mask;
 
     // Start is called before the first frame update
 
@@ -42,7 +40,7 @@ public class EnemyScript : MonoBehaviour {
         turn(turnCorrection(wishToGoDirection()) < 0);
         propeller(true);
 
-        sniping();
+        shooting();
     }
 
     Vector2 getVectorToPlayer() {
@@ -115,43 +113,27 @@ public class EnemyScript : MonoBehaviour {
             myBody.AddForce(-getMyDirection() * maxPropellerForce * Time.deltaTime);
         }
     }
-    private void sniping() {
-        bool flag;
-        if (isInRange(castPoint0)) {
-            shooting(castPoint0);
-        } else if (isInRange(castPoint0)) {
-            shooting(castPoint0);
-        } else if (isInRange(castPoint1)) {
-            shooting(castPoint1);
-        } else if (isInRange(castPoint2)) {
-            shooting(castPoint2);
-        } else if (isInRange(castPoint3)) {
-            shooting(castPoint3);
-        }
+    private void shooting() {
+
+        isInRange(castPoint0);
+        isInRange(castPoint1);
+        isInRange(castPoint2);
+        isInRange(castPoint3);
+
+
         timeBtwShots -= Time.deltaTime;
 
     }
-    private bool isInRange(Transform castPoint) {
-        bool flag = false;
-        float distance = shootingRange;
-        Vector2 endPos = castPoint.position + Vector3.right * distance;
+    private void isInRange(Transform castPoint) {
+        RaycastHit2D hit = Physics2D.Raycast(castPoint.position, castPoint.transform.TransformDirection(Vector3.right), shootingRange, mask);
 
-        RaycastHit2D ray = Physics2D.Linecast(castPoint.position, endPos, 1 << LayerMask.NameToLayer("Combat"));
-
-        if (ray.collider != null) {
-            if(ray.collider.gameObject.CompareTag("Player")) {
-                flag = true;
-            } else {
-                flag = false;
-            }
-            Debug.DrawLine(castPoint.position, ray.point, Color.yellow);
-        } else {
-            Debug.DrawLine(castPoint.position, ray.point, Color.blue);
+        if(hit.collider != null) {
+            shot(castPoint);
         }
-        return flag;
+        Debug.DrawRay(castPoint.position, castPoint.transform.TransformDirection(Vector3.right) * shootingRange, Color.blue);
     }
 
-    private void shooting(Transform castPoint) {
+    private void shot(Transform castPoint) {
         if (timeBtwShots <= 0) {
             Instantiate(projectile, castPoint.position, castPoint.rotation);
             timeBtwShots = startTimeBtwShots;
