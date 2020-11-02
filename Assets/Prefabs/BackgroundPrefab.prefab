@@ -109,8 +109,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frames:
   - {fileID: 21300000, guid: dbc6323e1a6ca43489e17d3437a55ce6, type: 3}
-  - {fileID: 21300000, guid: 0fdb381d05c4bb343a7de1b77724aeff, type: 3}
-  - {fileID: 21300000, guid: dbc6323e1a6ca43489e17d3437a55ce6, type: 3}
   - {fileID: 21300000, guid: 3aa99e058cdca47478cdffd2edab2792, type: 3}
   - {fileID: 21300000, guid: 2bc7059a1d69fd34a9431730b3e691d2, type: 3}
   - {fileID: 21300000, guid: e03e623389b03a346bcac3df4a744a9a, type: 3}
@@ -122,5 +120,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e03e623389b03a346bcac3df4a744a9a, type: 3}
   - {fileID: 21300000, guid: 2bc7059a1d69fd34a9431730b3e691d2, type: 3}
   - {fileID: 21300000, guid: 3aa99e058cdca47478cdffd2edab2792, type: 3}
-  minDelay: 100
-  maxDelay: 200
+  - {fileID: 21300000, guid: dbc6323e1a6ca43489e17d3437a55ce6, type: 3}
+  - {fileID: 21300000, guid: 0fdb381d05c4bb343a7de1b77724aeff, type: 3}
+  minDelay: 0
+  maxDelay: 300
+  spriteScale: 1

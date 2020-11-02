@@ -52,3 +52,6 @@ TagManager:
   - name: Sailor
     uniqueID: 185148453
     locked: 0
+  - name: High Mast
+    uniqueID: 3670588765
+    locked: 0

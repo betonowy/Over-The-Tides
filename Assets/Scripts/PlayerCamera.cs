@@ -7,6 +7,7 @@ public class PlayerCamera : MonoBehaviour
     public Camera cam;
     static bool check = false;
     public GameObject PlayerBoat;
+    public float scaleView = 1;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class PlayerCamera : MonoBehaviour
 
     public void onCheck() {
         check = true;
+        cam.fieldOfView = scaleView;
     }
 
     public void offCheck() {
