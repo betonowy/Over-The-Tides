@@ -28,7 +28,7 @@ public class CameraScript : MonoBehaviour
 
     public GameObject quad;
 
-    private float height = 40f;
+    private float height = 90f;
     private float width;
 
     private void Start() {

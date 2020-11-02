@@ -16,6 +16,16 @@ public class EnemyScript : MonoBehaviour {
     public GameObject projectile;
     private Rigidbody2D myBody;
 
+    public float shootingRange = 5f;
+
+    public Transform castPoint0;
+    public Transform castPoint1;
+    public Transform castPoint2;
+    public Transform castPoint3;
+
+    
+
+
     // Start is called before the first frame update
 
     void Start() {
@@ -32,13 +42,7 @@ public class EnemyScript : MonoBehaviour {
         turn(turnCorrection(wishToGoDirection()) < 0);
         propeller(true);
 
-        if (timeBtwShots <= 0) {
-            Instantiate(projectile, transform.position, Quaternion.identity);
-            timeBtwShots = startTimeBtwShots;
-        } else {
-            timeBtwShots -= Time.deltaTime;
-        }
-
+        sniping();
     }
 
     Vector2 getVectorToPlayer() {
@@ -109,6 +113,48 @@ public class EnemyScript : MonoBehaviour {
             myBody.AddForce(getMyDirection() * maxPropellerForce * Time.deltaTime);
         } else {
             myBody.AddForce(-getMyDirection() * maxPropellerForce * Time.deltaTime);
+        }
+    }
+    private void sniping() {
+        bool flag;
+        if (isInRange(castPoint0)) {
+            shooting(castPoint0);
+        } else if (isInRange(castPoint0)) {
+            shooting(castPoint0);
+        } else if (isInRange(castPoint1)) {
+            shooting(castPoint1);
+        } else if (isInRange(castPoint2)) {
+            shooting(castPoint2);
+        } else if (isInRange(castPoint3)) {
+            shooting(castPoint3);
+        }
+        timeBtwShots -= Time.deltaTime;
+
+    }
+    private bool isInRange(Transform castPoint) {
+        bool flag = false;
+        float distance = shootingRange;
+        Vector2 endPos = castPoint.position + Vector3.right * distance;
+
+        RaycastHit2D ray = Physics2D.Linecast(castPoint.position, endPos, 1 << LayerMask.NameToLayer("Combat"));
+
+        if (ray.collider != null) {
+            if(ray.collider.gameObject.CompareTag("Player")) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+            Debug.DrawLine(castPoint.position, ray.point, Color.yellow);
+        } else {
+            Debug.DrawLine(castPoint.position, ray.point, Color.blue);
+        }
+        return flag;
+    }
+
+    private void shooting(Transform castPoint) {
+        if (timeBtwShots <= 0) {
+            Instantiate(projectile, castPoint.position, castPoint.rotation);
+            timeBtwShots = startTimeBtwShots;
         }
     }
 }
