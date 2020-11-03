@@ -49,7 +49,9 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Q)) {
             if (timeBtwShoots <= 0) {
                 //Instantiate(projectile, transform.position, Quaternion.identity);
-                Instantiate(projectile, shotPointLeft.position, shotPointLeft.rotation);
+                //Instantiate(projectile, shotPointLeft.position, shotPointLeft.rotation);
+                GameObject cannon = GameObject.Find("cannonNoFire (1)");
+                cannon.SendMessage("shot");
                 timeBtwShoots = startTimeBtwShoots;
             }
 

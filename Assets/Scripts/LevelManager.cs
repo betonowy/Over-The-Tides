@@ -26,11 +26,11 @@ public class LevelManager : MonoBehaviour
             mainCamera.offCheck();
             playerCamera.onCheck();
         }
-        if (Input.GetKeyDown(KeyCode.Q)) {
+        /*if (Input.GetKeyDown(KeyCode.Q)) {
             projectPlayer.shotLeft();
         }
         if (Input.GetKeyDown(KeyCode.E)) {
             projectPlayer.shotRight();
-        }
+        }*/
     }
 }
