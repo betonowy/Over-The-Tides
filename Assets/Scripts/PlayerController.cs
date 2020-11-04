@@ -22,11 +22,17 @@ public class PlayerController : MonoBehaviour {
     public float maxPropellerForce;
 
     public float shipLife = 100;
+    private float maxShipLife;
+
+    private GameObject healthBar;
 
     private void Start() {
         myBody = GetComponent<Rigidbody2D>();
         pCam = FindObjectOfType<PlayerCamera>();
         timeBtwShoots = startTimeBtwShoots;
+        healthBar = GameObject.Find("Health bar");
+        healthBar.SendMessage("setMaxHealth", shipLife);
+        maxShipLife = shipLife;
     }
 
     private void Update() {
@@ -133,6 +139,7 @@ public class PlayerController : MonoBehaviour {
 
     void Damage(float value) {
         shipLife -= value;
+        healthBar.SendMessage("setHealth", (shipLife < 0) ? 0 : shipLife);
     }
 
     void checkLife() {

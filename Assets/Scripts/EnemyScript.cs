@@ -29,12 +29,10 @@ public class EnemyScript : MonoBehaviour {
     // Start is called before the first frame update
 
     void Start() {
-
         player = GameObject.FindGameObjectWithTag("Player").transform;
         myBody = GetComponent<Rigidbody2D>();
 
         timeBtwShots = startTimeBtwShots;
-
     }
 
     // Update is called once per frame
@@ -138,9 +136,17 @@ public class EnemyScript : MonoBehaviour {
     }
 
     private void shot(Transform castPoint) {
-        if (timeBtwShots <= 0) {
-            Instantiate(projectile, castPoint.position, castPoint.rotation);
-            timeBtwShots = startTimeBtwShots;
+        if (castPoint0 == castPoint) {
+            GameObject.Find("cannonNoFire (4)").SendMessage("shot");
+        }
+        if (castPoint1 == castPoint) {
+            GameObject.Find("cannonNoFire (5)").SendMessage("shot");
+        }
+        if (castPoint2 == castPoint) {
+            GameObject.Find("cannonNoFire (6)").SendMessage("shot");
+        }
+        if (castPoint3 == castPoint) {
+            GameObject.Find("cannonNoFire (7)").SendMessage("shot");
         }
     }
 
