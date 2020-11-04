@@ -122,9 +122,7 @@ public class EnemyScript : MonoBehaviour {
         isInRange(castPoint2);
         isInRange(castPoint3);
 
-
         timeBtwShots -= Time.deltaTime;
-
     }
     private void isInRange(Transform castPoint) {
         RaycastHit2D hit = Physics2D.Raycast(castPoint.position, castPoint.transform.TransformDirection(Vector3.right), shootingRange, mask);
