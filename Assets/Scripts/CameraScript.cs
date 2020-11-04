@@ -86,7 +86,7 @@ public class CameraScript : MonoBehaviour {
         //computing the size
         float minSizeX = minSizeY * Screen.width / Screen.height;
         float camSizeX = GetGreatesDistance() * 0.8f;
-        cam.orthographicSize = Mathf.Max(bounds.size.x * 0.8f, camSizeX * Screen.height / Screen.width, minSizeY);
+        cam.orthographicSize = Mathf.Max(bounds.size.x * 0.8f, camSizeX * Screen.height / Screen.width, bounds.size.y);
     }
 
     private float GetGreatesDistance() {
