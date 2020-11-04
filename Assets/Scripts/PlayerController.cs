@@ -18,9 +18,6 @@ public class PlayerController : MonoBehaviour {
     private float timeBtwShoots;
     public float startTimeBtwShoots;
 
-    public Transform shotPointLeft;
-    public Transform shotPointRight;
-
     public float maxTurningForce;
     public float maxPropellerForce;
 
@@ -30,11 +27,11 @@ public class PlayerController : MonoBehaviour {
         myBody = GetComponent<Rigidbody2D>();
         pCam = FindObjectOfType<PlayerCamera>();
         timeBtwShoots = startTimeBtwShoots;
-        shotPointLeft.transform.Rotate(0f, 0f, 90f, Space.World);
-        shotPointRight.transform.Rotate(0f, 0f, -90f, Space.World);
     }
 
     private void Update() {
+        checkLife();
+
         if (!reachedTarget) {
             Propeller(true);
             Turn(TurnCorrection(WishToGoDirection()) < 0);
@@ -50,17 +47,19 @@ public class PlayerController : MonoBehaviour {
     private void Shooting() {
         if (Input.GetKeyDown(KeyCode.Q)) {
             if (timeBtwShoots <= 0) {
-                //Instantiate(projectile, transform.position, Quaternion.identity);
-                //Instantiate(projectile, shotPointLeft.position, shotPointLeft.rotation);
                 GameObject cannon = GameObject.Find("cannonNoFire (1)");
+                GameObject cannon2 = GameObject.Find("cannonNoFire (0)");
                 cannon.SendMessage("shot");
+                cannon2.SendMessage("shot");
                 timeBtwShoots = startTimeBtwShoots;
             }
 
         } else if (Input.GetKeyDown(KeyCode.E)) {
             if (timeBtwShoots <= 0) {
-                //Instantiate(projectile, transform.position, Quaternion.identity);
-                Instantiate(projectile, shotPointRight.position, shotPointRight.rotation);
+                GameObject cannon = GameObject.Find("cannonNoFire (2)");
+                GameObject cannon2 = GameObject.Find("cannonNoFire (3)");
+                cannon.SendMessage("shot");
+                cannon2.SendMessage("shot");
                 timeBtwShoots = startTimeBtwShoots;
             }
 
@@ -134,6 +133,12 @@ public class PlayerController : MonoBehaviour {
 
     void Damage(float value) {
         shipLife -= value;
+    }
+
+    void checkLife() {
+        if (shipLife < 0) {
+            Destroy(gameObject);
+        }
     }
 
 }

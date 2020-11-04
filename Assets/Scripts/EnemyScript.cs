@@ -24,6 +24,8 @@ public class EnemyScript : MonoBehaviour {
     public Transform castPoint3;
     public LayerMask mask;
 
+    public float shipLife = 100;
+
     // Start is called before the first frame update
 
     void Start() {
@@ -37,6 +39,8 @@ public class EnemyScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        checkLife();
+
         turn(turnCorrection(wishToGoDirection()) < 0);
         propeller(true);
 
@@ -137,6 +141,16 @@ public class EnemyScript : MonoBehaviour {
         if (timeBtwShots <= 0) {
             Instantiate(projectile, castPoint.position, castPoint.rotation);
             timeBtwShots = startTimeBtwShots;
+        }
+    }
+
+    void Damage(float value) {
+        shipLife -= value;
+    }
+
+    void checkLife() {
+        if (shipLife < 0) {
+            Destroy(gameObject);
         }
     }
 }
