@@ -27,7 +27,7 @@ public class CameraScript : MonoBehaviour {
 
     public GameObject quad;
 
-    private float height = 90f;
+    private float height = 1;
     private float width;
 
     private void Start() {
@@ -35,7 +35,7 @@ public class CameraScript : MonoBehaviour {
         cam.enabled = true;
 
         width = height * Camera.main.aspect;
-
+        
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 var newQuad = Instantiate(quad, new Vector3(x - width / 2f, y - height / 2f, 50), Quaternion.identity);

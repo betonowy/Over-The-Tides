@@ -12,6 +12,8 @@ public class BackgroundScript : MonoBehaviour {
 
     public float spriteScale = 1;
 
+    private float offsetScale;
+
     private void Start() {
         //transform.localScale = new Vector3(transform.localScale.x * 2f, transform.localScale.y * 2f, 0);
         mr = GetComponent<MeshRenderer>();
@@ -20,9 +22,10 @@ public class BackgroundScript : MonoBehaviour {
         cam = GameObject.Find("Main Camera");
         resetCounter();
         mr.material.mainTextureScale = new Vector2(spriteScale, spriteScale);
+        offsetScale = 1 / ((gameObject.transform.lossyScale.x + gameObject.transform.lossyScale.x) / 2);
     }
     private void Update() {
-        mr.material.mainTextureOffset = cam.transform.position * spriteScale;
+        mr.material.mainTextureOffset = cam.transform.position * spriteScale * offsetScale;
 
         if (frameNum == 0) {
             if (framesTillNextAni-- < 0) {
