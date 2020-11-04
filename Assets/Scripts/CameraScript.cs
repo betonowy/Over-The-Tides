@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Camera))]
-public class CameraScript : MonoBehaviour
-{
+public class CameraScript : MonoBehaviour {
     public List<Transform> targets;
 
     public Vector3 offset;
@@ -48,15 +47,14 @@ public class CameraScript : MonoBehaviour
     private void LateUpdate() {
         if (targets.Count == 0)
             return;
-        
-        if(check) {
+
+        if (check) {
             cam.enabled = true;
-        }
-        else {
+        } else {
             cam.enabled = false;
         }
 
-        if(cam.enabled == true) {
+        if (cam.enabled == true) {
             Move();
             Zoom();
         }
@@ -69,7 +67,7 @@ public class CameraScript : MonoBehaviour
         Vector3 newPosition = centerPoint + offset;
 
         transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
-        
+
     }
 
     private void Zoom() {
@@ -77,8 +75,8 @@ public class CameraScript : MonoBehaviour
         //cam.orthographicSize = Mathf.Max(height, camSizeX * Screen.height / Screen.width, minSizeY);
         //Mathf.Lerp(cam.fieldOfView, newZoom, Time.deltaTime);
 
-       // float width = Mathf.Abs(player.position.x - enemy.position.x) * 0.8f;
-       // float height = Mathf.Abs(player.position.y - enemy.position.y) * 0.8f;
+        // float width = Mathf.Abs(player.position.x - enemy.position.x) * 0.8f;
+        // float height = Mathf.Abs(player.position.y - enemy.position.y) * 0.8f;
 
         var bounds = new Bounds(targets[0].position, Vector3.zero);
         for (int i = 0; i < targets.Count; i++) {
@@ -92,7 +90,7 @@ public class CameraScript : MonoBehaviour
     }
 
     private float GetGreatesDistance() {
-     
+
         var bounds = new Bounds(targets[0].position, Vector3.zero);
         for (int i = 0; i < targets.Count; i++) {
             bounds.Encapsulate(targets[i].position);
@@ -105,7 +103,7 @@ public class CameraScript : MonoBehaviour
             return targets[0].position;
 
         var bounds = new Bounds(targets[0].position, Vector3.zero);
-        for(int i=0; i<targets.Count; i++) {
+        for (int i = 0; i < targets.Count; i++) {
             bounds.Encapsulate(targets[i].position);
         }
 

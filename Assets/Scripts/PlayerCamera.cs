@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCamera : MonoBehaviour
-{
+public class PlayerCamera : MonoBehaviour {
     public Camera cam;
     static bool check = false;
     public GameObject PlayerBoat;
     public float scaleView = 1;
 
-    void Start()
-    {
+    void Start() {
         cam = GetComponent<Camera>();
         cam.enabled = false;
     }
@@ -18,11 +16,10 @@ public class PlayerCamera : MonoBehaviour
     private void LateUpdate() {
         if (check) {
             cam.enabled = true;
-            PlayerBoat.SendMessage("setOrderMode", true);
-        }
-        else {
+            PlayerBoat.SendMessage("SetOrderMode", true);
+        } else {
             cam.enabled = false;
-            PlayerBoat.SendMessage("setOrderMode", false);
+            PlayerBoat.SendMessage("SetOrderMode", false);
         }
     }
 

@@ -127,7 +127,7 @@ public class EnemyScript : MonoBehaviour {
     private void isInRange(Transform castPoint) {
         RaycastHit2D hit = Physics2D.Raycast(castPoint.position, castPoint.transform.TransformDirection(Vector3.right), shootingRange, mask);
 
-        if(hit.collider != null) {
+        if (hit.collider != null) {
             shot(castPoint);
         }
         Debug.DrawRay(castPoint.position, castPoint.transform.TransformDirection(Vector3.right) * shootingRange, Color.blue);

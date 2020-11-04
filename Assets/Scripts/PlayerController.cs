@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour {
     public float maxTurningForce;
     public float maxPropellerForce;
 
+    public float shipLife = 100;
+
     private void Start() {
         myBody = GetComponent<Rigidbody2D>();
         pCam = FindObjectOfType<PlayerCamera>();
@@ -34,18 +36,18 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         if (!reachedTarget) {
-            propeller(true);
-            turn(turnCorrection(wishToGoDirection()) < 0);
+            Propeller(true);
+            Turn(TurnCorrection(WishToGoDirection()) < 0);
         }
 
         if ((targetPosition - gameObject.transform.position).magnitude < distanceBeforeTargetReached)
             reachedTarget = true;
 
-        mouseMovement();
-        shooting();
+        MouseMovement();
+        Shooting();
     }
 
-    private void shooting() {
+    private void Shooting() {
         if (Input.GetKeyDown(KeyCode.Q)) {
             if (timeBtwShoots <= 0) {
                 //Instantiate(projectile, transform.position, Quaternion.identity);
@@ -65,7 +67,7 @@ public class PlayerController : MonoBehaviour {
         } else timeBtwShoots -= Time.deltaTime;
     }
 
-    private void mouseMovement() {
+    private void MouseMovement() {
         if (!orderMode) {
             if (Input.GetMouseButtonDown(0)) {
                 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -85,49 +87,53 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    Vector2 getVectorToPlayer() {
+    Vector2 GetVectorToPlayer() {
         return targetPosition - gameObject.transform.position;
     }
 
-    Vector2 getMyDirection() {
+    Vector2 GetMyDirection() {
         float rotation = Mathf.Deg2Rad * myBody.rotation;
         return new Vector2(-Mathf.Sin(rotation), Mathf.Cos(rotation));
     }
 
-    Vector2 getRightHandDirection() {
-        Vector2 twist = getMyDirection();
+    Vector2 GetRightHandDirection() {
+        Vector2 twist = GetMyDirection();
         return new Vector2(twist.y, -twist.x);
     }
 
-    Vector2 wishToGoDirection() {
-        Vector2 distance = getVectorToPlayer();
+    Vector2 WishToGoDirection() {
+        Vector2 distance = GetVectorToPlayer();
         Vector2 directVector = distance.normalized;
 
         return directVector;
     }
 
-    float turnCorrection(Vector2 wishVector) {
-        return Vector2.Dot(wishVector, getRightHandDirection());
+    float TurnCorrection(Vector2 wishVector) {
+        return Vector2.Dot(wishVector, GetRightHandDirection());
     }
 
-    void turn(bool direction) {
+    void Turn(bool direction) {
         if (direction) {
             myBody.AddTorque(maxTurningForce * Time.deltaTime);
         } else {
             myBody.AddTorque(-maxTurningForce * Time.deltaTime);
         }
     }
-    void propeller(bool direction) {
+
+    void Propeller(bool direction) {
         if (direction) {
-            myBody.AddForce(getMyDirection() * maxPropellerForce * Time.deltaTime);
+            myBody.AddForce(GetMyDirection() * maxPropellerForce * Time.deltaTime);
         } else {
-            myBody.AddForce(-getMyDirection() * maxPropellerForce * Time.deltaTime);
+            myBody.AddForce(-GetMyDirection() * maxPropellerForce * Time.deltaTime);
         }
     }
 
-    void setOrderMode(bool val) {
+    void SetOrderMode(bool val) {
         orderMode = val;
     }
 
+    void Damage(float value) {
+        shipLife -= value;
+    }
 
 }

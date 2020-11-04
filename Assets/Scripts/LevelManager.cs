@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
-{
+public class LevelManager : MonoBehaviour {
     public PlayerCamera playerCamera;
     public CameraScript mainCamera;
     public ProjectPlayer projectPlayer;
@@ -16,13 +15,12 @@ public class LevelManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1)) {
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
             mainCamera.onCheck();
             playerCamera.offCheck();
         }
-        if(Input.GetKeyDown(KeyCode.Alpha2)) {
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
             mainCamera.offCheck();
             playerCamera.onCheck();
         }

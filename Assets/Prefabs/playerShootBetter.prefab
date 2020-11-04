@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 590715102023347284}
   - component: {fileID: 3907059953808364029}
   - component: {fileID: 105418482068398801}
+  - component: {fileID: 747794297571216078}
   m_Layer: 0
   m_Name: playerShootBetter
   m_TagString: Untagged
@@ -96,7 +97,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -116,3 +117,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4515fdaed5b1a154ab3b154efb668524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 10
+  dieVelocityRatio: 0.5
+  damageMultipier: 10
+--- !u!58 &747794297571216078
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3531933280094005140}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.05

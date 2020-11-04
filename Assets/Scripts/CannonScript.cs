@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
-public class CannonScript : MonoBehaviour
-{
+public class CannonScript : MonoBehaviour {
     public GameObject ballTemplate;
-    public float ballSpawnDistance = 0.1f;
-    public float ballSpeed = 3;
+    public float ballSpawnDistance = 0.2f;
+    public float ballSpeed = 2;
     public float cooldownTime = 3;
-
+    public float power = 20;
 
     private Vector2 transformedSpawnPoint = new Vector2();
     private Vector2 spawnVelocityVector = new Vector2();
@@ -16,15 +16,13 @@ public class CannonScript : MonoBehaviour
 
     private Rigidbody2D cannonRB;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         cannonRB = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if(cooldown > 0) {
+    void Update() {
+        if (cooldown > 0) {
             cooldown -= Time.deltaTime;
         }
     }
@@ -48,6 +46,8 @@ public class CannonScript : MonoBehaviour
 
         ballRigidbody.position += transformedSpawnPoint;
         ballRigidbody.velocity = spawnVelocityVector;
+
+        spawnedBall.SendMessage("SetInitialSpeed", spawnVelocityVector);
 
         cooldown += cooldownTime;
     }
