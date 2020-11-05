@@ -9,8 +9,8 @@ public class selectBoxController : MonoBehaviour {
     private void Awake() {
         selectedSailors = new List<SailorScript>();
     }
-    private void Update() {
 
+    private void Update() {
         if(Input.GetMouseButtonDown(0)) {
             var mouse = Input.mousePosition;
             mouse.z = 10;
@@ -21,6 +21,7 @@ public class selectBoxController : MonoBehaviour {
                 sailor.ChangeBoolSprite(false);
             }
         }
+
         if(Input.GetMouseButton(0)) {
             var mouse = Input.mousePosition;
             mouse.z = 10;
@@ -54,10 +55,19 @@ public class selectBoxController : MonoBehaviour {
             var mouse = Input.mousePosition;
             mouse.z = 10;
             Vector2 sailorTarget = Camera.allCameras[0].ScreenToWorldPoint(mouse);
-
+            /*
             foreach(SailorScript sailor in selectedSailors) {
                 sailor.SendMessage("setTargetWorldSpace", sailorTarget);
             }
+            */
+
+        }
+    }
+
+    void GetChildrenObjects() {
+        GameObject shipParent = GameObject.Find("playerBoat");
+        int count = shipParent.transform.childCount;
+        for (int i = 0; i < count; i++) {
         }
     }
 

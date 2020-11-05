@@ -4,20 +4,31 @@ using UnityEngine;
 using UnityEngine.Animations;
 
 public class CannonScript : MonoBehaviour {
+
     public GameObject ballTemplate;
+
     public float ballSpawnDistance = 0.2f;
     public float ballSpeed = 2;
     public float cooldownTime = 3;
     public float power = 20;
 
+    public Vector2[] nodes;
+
     private Vector2 transformedSpawnPoint = new Vector2();
     private Vector2 spawnVelocityVector = new Vector2();
     private float cooldown = 0;
 
+    private NodeScript ns;
     private Rigidbody2D cannonRB;
+
     // Start is called before the first frame update
     void Start() {
         cannonRB = GetComponent<Rigidbody2D>();
+        ns = new NodeScript();
+        ns.SetParent(gameObject);
+        for (int i = 0; i < nodes.Length; i++) {
+            ns.CreateRelativeNode(nodes[i]);
+        }
     }
 
     // Update is called once per frame
@@ -27,6 +38,10 @@ public class CannonScript : MonoBehaviour {
         }
     }
 
+    NodeScript getNodeScript() {
+        return ns;
+    }
+
     void updateSpawnPointAndVelocity() {
         float rotation = cannonRB.rotation * Mathf.Deg2Rad;
 
@@ -34,7 +49,6 @@ public class CannonScript : MonoBehaviour {
         transformedSpawnPoint.y = Mathf.Cos(rotation);
 
         spawnVelocityVector = transformedSpawnPoint * ballSpeed + cannonRB.velocity;
-
         transformedSpawnPoint *= ballSpawnDistance;
     }
 
@@ -51,7 +65,7 @@ public class CannonScript : MonoBehaviour {
             spawnedBall.SendMessage("SetInitialSpeed", spawnVelocityVector);
             cooldown += cooldownTime;
         } else {
-            cooldown -= Time.deltaTime;
+            cooldown -= Time.deltaTime * ns.ReadyCrewCount() / nodes.Length;
         }
     }
 }
