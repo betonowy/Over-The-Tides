@@ -79,8 +79,8 @@ public class PlayerController : MonoBehaviour {
                 targetPosition.z = gameObject.transform.position.z;
                 reachedTarget = false;
             }
-        } else {
-            if (Input.GetMouseButtonDown(0)) {
+        } /*else {
+            if (Input.GetMouseButtonDown(1)) {
                 GameObject[] sailors = GameObject.FindGameObjectsWithTag("Sailor");
                 var mouse = Input.mousePosition;
                 mouse.z = 10;
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour {
                     sailors[i].SendMessage("setTargetWorldSpace", sailorTarget);
                 }
             }
-        }
+        }*/
     }
 
     Vector2 GetVectorToPlayer() {

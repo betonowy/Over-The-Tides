@@ -61,4 +61,8 @@ public class SailorScript : MonoBehaviour {
         targetShipPosition = worldToShipCoordinates(coord);
         Debug.Log("coords after trans: " + targetShipPosition);
     }
+
+    public void Vomit() {
+        Debug.Log("XD");
+    }
 }
