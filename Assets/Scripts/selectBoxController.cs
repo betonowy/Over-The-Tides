@@ -16,6 +16,10 @@ public class selectBoxController : MonoBehaviour {
             mouse.z = 10;
             Vector3 tempStart = Camera.allCameras[0].ScreenToWorldPoint(mouse);
             startPos = tempStart;
+            foreach (SailorScript sailor in selectedSailors)
+            {
+                sailor.ChangeBoolSprite(false);
+            }
         }
         if(Input.GetMouseButton(0)) {
             var mouse = Input.mousePosition;
@@ -40,7 +44,7 @@ public class selectBoxController : MonoBehaviour {
                 SailorScript sailor = collider2D.GetComponent<SailorScript>();
                 if(sailor != null) {
                     selectedSailors.Add(sailor);
-                    
+                    sailor.ChangeBoolSprite(true);
                 }
             }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D;
 using UnityEngine;
 
 public class SailorScript : MonoBehaviour {
@@ -11,6 +12,12 @@ public class SailorScript : MonoBehaviour {
     public Vector2 shipPosition;
     public Vector2 targetShipPosition;
 
+    private SpriteRenderer spriteRenderer;
+    public Sprite newSprite_Front_Green;
+    public Sprite newSprite_Front_White;
+
+    private bool changeSprite;
+
     public float walkSpeed;
 
     // Start is called before the first frame update
@@ -18,6 +25,9 @@ public class SailorScript : MonoBehaviour {
         rBody = GetComponent<Rigidbody2D>();
         ship = FindObjectOfType<PlayerController>();
         shipBody = ship.gameObject.GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = newSprite_Front_White;
+        changeSprite = false;
     }
 
     // Update is called once per frame
@@ -29,6 +39,10 @@ public class SailorScript : MonoBehaviour {
             Destroy(gameObject);
         }
         
+        if(!changeSprite)
+            spriteRenderer.sprite = newSprite_Front_White;
+        if (changeSprite)
+            spriteRenderer.sprite = newSprite_Front_Green;
     }
 
     private void stayOnShip() {
@@ -69,5 +83,10 @@ public class SailorScript : MonoBehaviour {
 
     public void Vomit() {
         Debug.Log("XD");
+    }
+
+    public void ChangeBoolSprite(bool newBool)
+    {
+        changeSprite = newBool;
     }
 }
