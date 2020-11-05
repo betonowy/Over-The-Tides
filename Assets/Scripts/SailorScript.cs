@@ -17,8 +17,9 @@ public class SailorScript : MonoBehaviour {
     public Sprite newSprite_Front_White;
 
     private bool changeSprite;
-
     public float walkSpeed;
+
+    private NodeClass assignedNode;
 
     // Start is called before the first frame update
     void Start() {
@@ -88,5 +89,16 @@ public class SailorScript : MonoBehaviour {
     public void ChangeBoolSprite(bool newBool)
     {
         changeSprite = newBool;
+    }
+
+    public void AssignNode(NodeClass nc) {
+        assignedNode = nc;
+    }
+
+    public void LeaveNode() {
+        if (assignedNode != null) {
+            assignedNode.SetSailor(null);
+        }
+        assignedNode = null;
     }
 }

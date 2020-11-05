@@ -24,22 +24,19 @@ public class CannonScript : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         cannonRB = GetComponent<Rigidbody2D>();
-        ns = new NodeScript();
+        ns = gameObject.AddComponent<NodeScript>();
         ns.SetParent(gameObject);
         for (int i = 0; i < nodes.Length; i++) {
             ns.CreateRelativeNode(nodes[i]);
         }
+        cooldown = cooldownTime;
     }
 
     // Update is called once per frame
     void Update() {
         if (cooldown > 0) {
-            cooldown -= Time.deltaTime;
+            cooldown -= Time.deltaTime * ns.ReadyCrewCount() / nodes.Length;
         }
-    }
-
-    NodeScript getNodeScript() {
-        return ns;
     }
 
     void updateSpawnPointAndVelocity() {
@@ -53,6 +50,9 @@ public class CannonScript : MonoBehaviour {
     }
 
     void shot() {
+        if (ns.ReadyCrewCount() == 0) {
+            Debug.Log("No crew at cannon: " + gameObject.name);
+        }
         if (cooldown <= 0) {
             updateSpawnPointAndVelocity();
 
@@ -64,8 +64,6 @@ public class CannonScript : MonoBehaviour {
 
             spawnedBall.SendMessage("SetInitialSpeed", spawnVelocityVector);
             cooldown += cooldownTime;
-        } else {
-            cooldown -= Time.deltaTime * ns.ReadyCrewCount() / nodes.Length;
         }
     }
 }

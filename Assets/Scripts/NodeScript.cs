@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.ExceptionServices;
 using UnityEngine;
 
-public class NodeScript
+public class NodeScript : MonoBehaviour
 {
     GameObject parentGameObject;
     ArrayList nodes;
@@ -28,6 +28,10 @@ public class NodeScript
     public void SetParent(GameObject parent) {
         parentGameObject = parent;
         nodes = new ArrayList();
+    }
+
+    public GameObject GetParent() {
+        return parentGameObject;
     }
 
     public bool AssignSailor(GameObject sailor) {
