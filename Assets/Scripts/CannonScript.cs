@@ -39,16 +39,19 @@ public class CannonScript : MonoBehaviour {
     }
 
     void shot() {
-        updateSpawnPointAndVelocity();
+        if (cooldown <= 0) {
+            updateSpawnPointAndVelocity();
 
-        GameObject spawnedBall = Instantiate(ballTemplate, gameObject.transform.position, gameObject.transform.rotation);
-        Rigidbody2D ballRigidbody = spawnedBall.GetComponent<Rigidbody2D>();
+            GameObject spawnedBall = Instantiate(ballTemplate, gameObject.transform.position, gameObject.transform.rotation);
+            Rigidbody2D ballRigidbody = spawnedBall.GetComponent<Rigidbody2D>();
 
-        ballRigidbody.position += transformedSpawnPoint;
-        ballRigidbody.velocity = spawnVelocityVector;
+            ballRigidbody.position += transformedSpawnPoint;
+            ballRigidbody.velocity = spawnVelocityVector;
 
-        spawnedBall.SendMessage("SetInitialSpeed", spawnVelocityVector);
-
-        cooldown += cooldownTime;
+            spawnedBall.SendMessage("SetInitialSpeed", spawnVelocityVector);
+            cooldown += cooldownTime;
+        } else {
+            cooldown -= Time.deltaTime;
+        }
     }
 }

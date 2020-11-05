@@ -51,25 +51,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Shooting() {
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            if (timeBtwShoots <= 0) {
-                GameObject cannon = GameObject.Find("cannonNoFire (1)");
-                GameObject cannon2 = GameObject.Find("cannonNoFire (0)");
-                cannon.SendMessage("shot");
-                cannon2.SendMessage("shot");
-                timeBtwShoots = startTimeBtwShoots;
-            }
-
-        } else if (Input.GetKeyDown(KeyCode.E)) {
-            if (timeBtwShoots <= 0) {
-                GameObject cannon = GameObject.Find("cannonNoFire (2)");
-                GameObject cannon2 = GameObject.Find("cannonNoFire (3)");
-                cannon.SendMessage("shot");
-                cannon2.SendMessage("shot");
-                timeBtwShoots = startTimeBtwShoots;
-            }
-
-        } else timeBtwShoots -= Time.deltaTime;
+        if (Input.GetKey(KeyCode.Q)) {
+            GameObject cannon = GameObject.Find("cannonNoFire (1)");
+            GameObject cannon2 = GameObject.Find("cannonNoFire (0)");
+            cannon.SendMessage("shot");
+            cannon2.SendMessage("shot");
+        } else if (Input.GetKey(KeyCode.E)) {
+            GameObject cannon = GameObject.Find("cannonNoFire (2)");
+            GameObject cannon2 = GameObject.Find("cannonNoFire (3)");
+            cannon.SendMessage("shot");
+            cannon2.SendMessage("shot");
+        }
     }
 
     private void MouseMovement() {
