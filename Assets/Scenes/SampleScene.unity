@@ -559,14 +559,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a4861c67e3da545ba0e166f59027f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 991902233}
-  - {fileID: 1415315963}
   offset: {x: 0, y: 0, z: -50}
   smoothTime: 0.1
   minZoom: 10
   maxZoom: 200
-  zoomLimiter: 300
+  zoom: 20
+  zoomSpeed: 0.01
+  moveSpeed: 0.05
   minSizeY: 5
   playerViewWidth: 10
   playerViewHeight: 10
@@ -1215,7 +1214,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

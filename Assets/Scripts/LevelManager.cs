@@ -7,6 +7,8 @@ public class LevelManager : MonoBehaviour {
     public CameraScript mainCamera;
     public ProjectPlayer projectPlayer;
 
+    private bool lockCameraChange = false;
+
     // Start is called before the first frame update
     void Start() {
         playerCamera = FindObjectOfType<PlayerCamera>();
@@ -16,13 +18,19 @@ public class LevelManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && !lockCameraChange) {
             mainCamera.onCheck();
             playerCamera.offCheck();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+        if (Input.GetKeyDown(KeyCode.Alpha2) && !lockCameraChange) {
             mainCamera.offCheck();
             playerCamera.onCheck();
+        }
+        if (Input.GetKey(KeyCode.R)) {
+            mainCamera.increaseZoom();
+        }
+        if (Input.GetKey(KeyCode.F)) {
+            mainCamera.decreaseZoom();
         }
         /*if (Input.GetKeyDown(KeyCode.Q)) {
             projectPlayer.shotLeft();
@@ -30,5 +38,11 @@ public class LevelManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E)) {
             projectPlayer.shotRight();
         }*/
+    }
+
+    void OnPlayerDeath() {
+        lockCameraChange = true;
+        mainCamera.onCheck();
+        playerCamera.offCheck();
     }
 }

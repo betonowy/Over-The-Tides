@@ -39,7 +39,10 @@ public class EnemyScript : MonoBehaviour {
     void Update() {
         checkLife();
 
-        turn(turnCorrection(wishToGoDirection()) < 0);
+        try {
+            turn(turnCorrection(wishToGoDirection()) < 0);
+        } catch { }
+
         propeller(true);
 
         shooting();

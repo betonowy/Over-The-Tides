@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     Rigidbody2D myBody;
-    PlayerCamera pCam;
+    CameraScript pCam;
     private bool orderMode = true;
 
     public Vector3 targetPosition;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
         myBody = GetComponent<Rigidbody2D>();
-        pCam = FindObjectOfType<PlayerCamera>();
+        pCam = FindObjectOfType<CameraScript>();
         timeBtwShoots = startTimeBtwShoots;
         healthBar = GameObject.Find("Health bar");
         healthBar.SendMessage("setMaxHealth", shipLife);
@@ -144,8 +144,8 @@ public class PlayerController : MonoBehaviour {
 
     void checkLife() {
         if (shipLife < 0) {
+            FindObjectOfType<LevelManager>().SendMessage("OnPlayerDeath");
             Destroy(gameObject);
         }
     }
-
 }

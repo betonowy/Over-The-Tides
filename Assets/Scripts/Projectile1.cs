@@ -28,8 +28,10 @@ public class Projectile1 : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        collision.gameObject.SendMessage("Damage", damageMultipier * rb.velocity.magnitude / initialVelocity.magnitude);
-        DestroyProjectile();
+        if (!collision.gameObject.name.StartsWith("playerShootBetter")) {
+            collision.gameObject.SendMessage("Damage", damageMultipier * rb.velocity.magnitude / initialVelocity.magnitude);
+            DestroyProjectile();
+        }
     }
 
     void SetInitialSpeed(Vector2 init) {

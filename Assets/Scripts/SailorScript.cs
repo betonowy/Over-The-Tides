@@ -23,7 +23,12 @@ public class SailorScript : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         goToTarget();
-        stayOnShip();
+        try {
+            stayOnShip();
+        } catch {
+            Destroy(gameObject);
+        }
+        
     }
 
     private void stayOnShip() {
