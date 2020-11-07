@@ -56,7 +56,8 @@ public class PlayerController : MonoBehaviour {
             GameObject cannon2 = GameObject.Find("cannonNoFire (0)");
             cannon.SendMessage("shot");
             cannon2.SendMessage("shot");
-        } else if (Input.GetKey(KeyCode.E)) {
+        }
+        if (Input.GetKey(KeyCode.E)) {
             GameObject cannon = GameObject.Find("cannonNoFire (2)");
             GameObject cannon2 = GameObject.Find("cannonNoFire (3)");
             cannon.SendMessage("shot");

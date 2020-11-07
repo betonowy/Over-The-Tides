@@ -11,41 +11,37 @@ public class selectBoxController : MonoBehaviour {
     public float maxDistance = 0.5f;
     public float sailorSpacing = 0.1f;
     public bool enableFreeMove = true;
+    private Vector2 mouseStart;
 
     private void Awake() {
         selectedSailors = new List<SailorScript>();
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            var mouse = Input.mousePosition;
-            mouse.z = 10;
-            Vector3 tempStart = Camera.allCameras[0].ScreenToWorldPoint(mouse);
-            startPos = tempStart;
+        if (Input.GetMouseButtonDown(0) && Camera.allCameras.Length > 1) {
+            mouseStart = Input.mousePosition;
             foreach (SailorScript sailor in selectedSailors) {
                 sailor.ChangeBoolSprite(false);
             }
-        }
-
-        if (Input.GetMouseButton(0)) {
-            var mouse = Input.mousePosition;
-            mouse.z = 10;
-            Vector3 currentMousePosition = Camera.allCameras[0].ScreenToWorldPoint(mouse);
-
-            Vector3 lowerLeft = new Vector3(Mathf.Min(startPos.x, currentMousePosition.x),
-                Mathf.Min(startPos.y, currentMousePosition.y));
-            Vector3 upperRigt = new Vector3(Mathf.Max(startPos.x, currentMousePosition.x),
-                Mathf.Max(startPos.y, currentMousePosition.y));
-        }
-
-        if (Input.GetMouseButtonUp(0)) {
-
-            var mouse = Input.mousePosition;
-            mouse.z = 10;
-            Vector3 tempEnd = Camera.allCameras[0].ScreenToWorldPoint(mouse);
-            Collider2D[] collider2DArray = Physics2D.OverlapAreaAll(startPos, tempEnd);
-
             selectedSailors.Clear();
+        }
+
+        if (Input.GetMouseButtonUp(0) && Camera.allCameras.Length > 1) {
+            startPos = Camera.allCameras[1].ScreenToWorldPoint(mouseStart);
+            Vector3 tempEnd = Camera.allCameras[1].ScreenToWorldPoint(Input.mousePosition);
+            
+            float rotation = Camera.allCameras[1].transform.rotation.eulerAngles.z;
+            float rad = -rotation * Mathf.Deg2Rad;
+
+            Vector2 boxSize = startPos - tempEnd;
+
+            boxSize.x = boxSize.x * Mathf.Cos(rad) - boxSize.y * Mathf.Sin(rad);
+            boxSize.y = boxSize.y * Mathf.Cos(rad) + boxSize.x * Mathf.Sin(rad);
+
+            if (boxSize.x < 0) boxSize.x = -boxSize.x;
+            if (boxSize.y < 0) boxSize.y = -boxSize.y;
+            Collider2D[] collider2DArray = Physics2D.OverlapBoxAll((startPos + tempEnd) / 2, boxSize, rotation);
+
             foreach (Collider2D collider2D in collider2DArray) {
                 SailorScript sailor = collider2D.GetComponent<SailorScript>();
                 if (sailor != null) {
@@ -56,10 +52,10 @@ public class selectBoxController : MonoBehaviour {
 
         }
 
-        if (Input.GetMouseButtonDown(1)) {
+        if (Input.GetMouseButtonDown(1) && Camera.allCameras.Length > 1) {
             var mouse = Input.mousePosition;
             mouse.z = 10;
-            Vector2 sailorTarget = Camera.allCameras[0].ScreenToWorldPoint(mouse);
+            Vector2 sailorTarget = Camera.allCameras[1].ScreenToWorldPoint(mouse);
 
             GameObject shipParent = GameObject.Find("playerBoat");
             int count = shipParent.transform.childCount;
@@ -113,7 +109,7 @@ public class selectBoxController : MonoBehaviour {
 
                 foreach (SailorScript sailor in selectedSailors) {
                     Vector2 offset = startingPointSquare + new Vector2(colCounter++ * sailorSpacing, rowCounter * sailorSpacing);
-                    
+
                     if (colCounter >= cols) {
                         colCounter = 0;
                         rowCounter++;

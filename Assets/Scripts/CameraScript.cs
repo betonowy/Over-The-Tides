@@ -52,7 +52,7 @@ public class CameraScript : MonoBehaviour {
         if (check) {
             cam.enabled = true;
         } else {
-            cam.enabled = false;
+            //cam.enabled = false;
         }
 
         if (cam.enabled == true) {

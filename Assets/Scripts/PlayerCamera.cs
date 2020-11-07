@@ -6,7 +6,7 @@ public class PlayerCamera : MonoBehaviour {
     public Camera cam;
     static bool check = false;
     public GameObject PlayerBoat;
-    public float scaleView = 1;
+    public float widthMod = 0.15f;
 
     void Start() {
         cam = GetComponent<Camera>();
@@ -14,13 +14,24 @@ public class PlayerCamera : MonoBehaviour {
     }
 
     private void LateUpdate() {
+        var temp = cam.rect;
+        temp.width = widthMod / ((float)Screen.width / Screen.height);
+        temp.x = 1 - temp.width;
+        cam.rect = temp;
+        temp = Camera.allCameras[0].rect;
+
         if (check) {
             cam.enabled = true;
+            temp.width = 1 - cam.rect.width;
             PlayerBoat.SendMessage("SetOrderMode", true);
         } else {
             cam.enabled = false;
+            temp.width = 1;
             PlayerBoat.SendMessage("SetOrderMode", false);
         }
+
+        Camera.allCameras[0].rect = temp;
+        
     }
 
     public bool getCheck() {
@@ -29,7 +40,6 @@ public class PlayerCamera : MonoBehaviour {
 
     public void onCheck() {
         check = true;
-        cam.fieldOfView = scaleView;
     }
 
     public void offCheck() {

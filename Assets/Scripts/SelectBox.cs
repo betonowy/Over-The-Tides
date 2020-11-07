@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngineInternal;
 
-public class SelectBox : MonoBehaviour
-{
+public class SelectBox : MonoBehaviour {
 
     [SerializeField] private RectTransform selectSquareImage;
 
-    [SerializeField] public Camera camera;
+    [SerializeField] public Camera cam;
 
     private Vector3 startPos;
     private Vector3 endPos;
@@ -15,18 +15,17 @@ public class SelectBox : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         selectSquareImage.gameObject.SetActive(false);
-        camera = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
     }
 
     // Update is called once per frame
     void Update() {
-        if (camera.enabled) {
-            if (Input.GetMouseButtonDown(0)) {
-                RaycastHit hit;
-                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity)) {
-                    startPos = hit.point;
+        if (cam.enabled) {
+            Vector2 mousePoint = Input.mousePosition;
 
-                }
+            if (Input.GetMouseButtonDown(0)) {
+                startPos = mousePoint;
+                selectSquareImage.gameObject.SetActive(true);
             }
 
             if (Input.GetMouseButtonUp(0)) {
@@ -34,23 +33,15 @@ public class SelectBox : MonoBehaviour
             }
 
             if (Input.GetMouseButton(0)) {
-                if (!selectSquareImage.gameObject.activeInHierarchy) {
-                    selectSquareImage.gameObject.SetActive(true);
-                }
-                endPos = Input.mousePosition;
+                endPos = mousePoint;
 
-                Vector3 squareStart = camera.WorldToScreenPoint(startPos);
-                squareStart.z = 0f;
+                selectSquareImage.position = (startPos + endPos) / 2f;
 
-                Vector3 center = (squareStart + endPos) / 2f;
+                Vector2 size = endPos - startPos;
+                if (size.x < 0) size.x = -size.x;
+                if (size.y < 0) size.y = -size.y;
 
-                selectSquareImage.position = center;
-
-                float sizeX = Mathf.Abs(squareStart.x - endPos.x);
-                float sizeY = Mathf.Abs(squareStart.y - endPos.y);
-
-                selectSquareImage.sizeDelta = new Vector2(sizeX, sizeY);
-
+                selectSquareImage.sizeDelta = size;
             }
         }
     }
