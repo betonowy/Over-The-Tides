@@ -50,9 +50,6 @@ public class CannonScript : MonoBehaviour {
     }
 
     void shot() {
-        if (ns.ReadyCrewCount() == 0) {
-            Debug.Log("No crew at cannon: " + gameObject.name);
-        }
         if (cooldown <= 0) {
             updateSpawnPointAndVelocity();
 

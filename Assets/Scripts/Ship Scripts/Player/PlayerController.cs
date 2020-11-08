@@ -10,13 +10,12 @@ public class PlayerController : MonoBehaviour {
     CameraScript pCam;
     private bool orderMode = true;
 
+    // UI elements
+    public GameObject moveTargetMark;
+
     public Vector3 targetPosition;
     public bool reachedTarget = true;
     public float distanceBeforeTargetReached = 0.5f;
-
-    public GameObject projectile;
-    private float timeBtwShoots;
-    public float startTimeBtwShoots;
 
     public float maxTurningForce;
     public float maxPropellerForce;
@@ -29,7 +28,6 @@ public class PlayerController : MonoBehaviour {
     private void Start() {
         myBody = GetComponent<Rigidbody2D>();
         pCam = FindObjectOfType<CameraScript>();
-        timeBtwShoots = startTimeBtwShoots;
         healthBar = GameObject.Find("Health bar");
         healthBar.SendMessage("setMaxHealth", shipLife);
         maxShipLife = shipLife;
@@ -66,23 +64,20 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void MouseMovement() {
-        if (!orderMode) {
-            if (Input.GetMouseButtonDown(0)) {
-                targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0)) {
+            Vector2 mousePos = Input.mousePosition;
+            // check if mouse inside viewport
+            Vector2 viewport = Camera.allCameras[0].ScreenToViewportPoint(mousePos);
+            bool insideViewport = true;
+            if (viewport.x > 1f || viewport.x < 0f || viewport.y > 1f || viewport.y < 0f)
+                insideViewport = false;
+            // point ship where you want to go
+            if (insideViewport) {
+                targetPosition = Camera.allCameras[0].ScreenToWorldPoint(Input.mousePosition);
                 targetPosition.z = gameObject.transform.position.z;
                 reachedTarget = false;
             }
-        } /*else {
-            if (Input.GetMouseButtonDown(1)) {
-                GameObject[] sailors = GameObject.FindGameObjectsWithTag("Sailor");
-                var mouse = Input.mousePosition;
-                mouse.z = 10;
-                Vector2 sailorTarget = Camera.allCameras[0].ScreenToWorldPoint(mouse);
-                for (int i = 0; i < sailors.Length; i++) {
-                    sailors[i].SendMessage("setTargetWorldSpace", sailorTarget);
-                }
-            }
-        }*/
+        }
     }
 
     Vector2 GetVectorToPlayer() {

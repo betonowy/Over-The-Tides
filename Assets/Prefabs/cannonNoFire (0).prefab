@@ -123,6 +123,9 @@ MonoBehaviour:
   ballSpeed: 3
   cooldownTime: 3
   power: 20
+  nodes:
+  - {x: 0.2, y: -0.3}
+  - {x: -0.2, y: -0.3}
 --- !u!1773428102 &3276126805382000791
 ParentConstraint:
   m_ObjectHideFlags: 0

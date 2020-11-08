@@ -5,8 +5,7 @@ using UnityEngineInternal;
 
 public class SelectBox : MonoBehaviour {
 
-    [SerializeField] private RectTransform selectSquareImage;
-
+    [SerializeField] public RectTransform selectSquareImage;
     [SerializeField] public Camera cam;
 
     private Vector3 startPos;
@@ -23,7 +22,7 @@ public class SelectBox : MonoBehaviour {
         if (cam.enabled) {
             Vector2 mousePoint = Input.mousePosition;
 
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(0) && selectBoxController.mouseInsideCameraViewport()) {
                 startPos = mousePoint;
                 selectSquareImage.gameObject.SetActive(true);
             }
@@ -32,7 +31,7 @@ public class SelectBox : MonoBehaviour {
                 selectSquareImage.gameObject.SetActive(false);
             }
 
-            if (Input.GetMouseButton(0)) {
+            if (Input.GetMouseButton(0) && selectBoxController.mouseInsideCameraViewport()){
                 endPos = mousePoint;
 
                 selectSquareImage.position = (startPos + endPos) / 2f;

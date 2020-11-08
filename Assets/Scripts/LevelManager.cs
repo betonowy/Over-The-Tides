@@ -5,7 +5,6 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
     public PlayerCamera playerCamera;
     public CameraScript mainCamera;
-    public ProjectPlayer projectPlayer;
 
     private bool lockCameraChange = false;
 
@@ -13,7 +12,6 @@ public class LevelManager : MonoBehaviour {
     void Start() {
         playerCamera = FindObjectOfType<PlayerCamera>();
         mainCamera = FindObjectOfType<CameraScript>();
-        projectPlayer = FindObjectOfType<ProjectPlayer>();
     }
 
     // Update is called once per frame
@@ -32,12 +30,6 @@ public class LevelManager : MonoBehaviour {
         if (Input.GetKey(KeyCode.F)) {
             mainCamera.decreaseZoom();
         }
-        /*if (Input.GetKeyDown(KeyCode.Q)) {
-            projectPlayer.shotLeft();
-        }
-        if (Input.GetKeyDown(KeyCode.E)) {
-            projectPlayer.shotRight();
-        }*/
     }
 
     void OnPlayerDeath() {
