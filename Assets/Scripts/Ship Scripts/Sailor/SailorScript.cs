@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SailorScript : MonoBehaviour {
     Rigidbody2D rBody;
-    PlayerController ship;
+    ShipScript ship;
     private float alpha;
     Rigidbody2D shipBody;
 
@@ -24,7 +24,7 @@ public class SailorScript : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         rBody = GetComponent<Rigidbody2D>();
-        ship = FindObjectOfType<PlayerController>();
+        ship = transform.parent.gameObject.GetComponent<ShipScript>();
         shipBody = ship.gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = newSprite_Front_White;

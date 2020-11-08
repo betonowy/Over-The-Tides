@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerCamera : MonoBehaviour {
     public Camera cam;
     static bool check = false;
-    public GameObject PlayerBoat;
     public float widthMod = 0.15f;
 
     void Start() {
@@ -23,11 +22,9 @@ public class PlayerCamera : MonoBehaviour {
         if (check) {
             cam.enabled = true;
             temp.width = 1 - cam.rect.width;
-            PlayerBoat.SendMessage("SetOrderMode", true);
         } else {
             cam.enabled = false;
             temp.width = 1;
-            PlayerBoat.SendMessage("SetOrderMode", false);
         }
 
         Camera.allCameras[0].rect = temp;

@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
-    public PlayerCamera playerCamera;
-    public CameraScript mainCamera;
+    public PlayerCamera playerCameraPrefab;
+    public CameraScript mainCameraPrefab;
+
+    private PlayerCamera playerCamera;
+    private CameraScript mainCamera;
 
     private bool lockCameraChange = false;
 
     // Start is called before the first frame update
     void Start() {
-        playerCamera = FindObjectOfType<PlayerCamera>();
-        mainCamera = FindObjectOfType<CameraScript>();
+        playerCamera = Instantiate(playerCameraPrefab);
+        playerCamera.transform.SetParent(GameObject.Find("playerBoat").transform);
+        mainCamera = Instantiate(mainCameraPrefab);
     }
 
     // Update is called once per frame

@@ -13,6 +13,7 @@ public class SelectBox : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        selectSquareImage = GameObject.Find("SelectionBox").GetComponent<RectTransform>();
         selectSquareImage.gameObject.SetActive(false);
         cam = GetComponent<Camera>();
     }

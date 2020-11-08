@@ -41,8 +41,7 @@ public class CameraScript : MonoBehaviour {
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                var newQuad = Instantiate(quad, new Vector3(x - width / 2f, y - height / 2f, 50), Quaternion.identity);
-                newQuad.transform.parent = gameObject.transform;
+                var newQuad = Instantiate(quad, new Vector3(x - width / 2f, y - height / 2f, 50), Quaternion.identity, gameObject.transform);
             }
         }
         playerObject = GameObject.Find("playerBoat");
