@@ -86,66 +86,64 @@ public class selectBoxController : MonoBehaviour {
                 }
             }
 
-            if (placedOnShip) {
-                GameObject shipParent = GameObject.Find("playerBoat");
-                int count = shipParent.transform.childCount;
+            GameObject shipParent = GameObject.Find("playerBoat");
+            int count = shipParent.transform.childCount;
 
-                ArrayList children = new ArrayList();
-                ArrayList usable = new ArrayList();
+            ArrayList children = new ArrayList();
+            ArrayList usable = new ArrayList();
 
-                for (int i = 0; i < count; i++) {
-                    children.Add(shipParent.transform.GetChild(i).gameObject);
+            for (int i = 0; i < count; i++) {
+                children.Add(shipParent.transform.GetChild(i).gameObject);
+            }
+
+            foreach (GameObject child in children) {
+                if (child.CompareTag("SailorUse")) {
+                    usable.Add(child.GetComponent<NodeScript>());
+                }
+            }
+
+            NodeScript chosenNode = null;
+            float closestDistance = maxDistance;
+
+            foreach (NodeScript ns in usable) {
+                Vector2 coord = ns.GetParent().GetComponent<Rigidbody2D>().position;
+                float dist = (sailorTarget - coord).magnitude;
+                if (dist < closestDistance) {
+                    chosenNode = ns;
+                    closestDistance = dist;
+                }
+            }
+
+            if (chosenNode != null) {
+                int free = chosenNode.getFreeNodes();
+                if (free > selectedSailors.Count) free = selectedSailors.Count;
+
+                GameObject[] sentSailors = new GameObject[free];
+
+                while (free-- > 0 && selectedSailors.Count > 0) {
+                    sentSailors[free] = selectedSailors[0].gameObject;
+                    selectedSailors[0].SendMessage("LeaveNode");
+                    selectedSailors[0].ChangeBoolSprite(false);
+                    selectedSailors.RemoveAt(0);
                 }
 
-                foreach (GameObject child in children) {
-                    if (child.CompareTag("SailorUse")) {
-                        usable.Add(child.GetComponent<NodeScript>());
-                    }
-                }
+                chosenNode.AssignSailors(sentSailors);
+            } else if (enableFreeMove && placedOnShip) {
 
-                NodeScript chosenNode = null;
-                float closestDistance = maxDistance;
+                Vector2 startingPointSquare = new Vector2(sailorSpacing * (-cols + 1) / 2f, sailorSpacing * (-rows + 1) / 2f);
 
-                foreach (NodeScript ns in usable) {
-                    Vector2 coord = ns.GetParent().transform.position;
-                    float dist = (sailorTarget - coord).magnitude;
-                    if (dist < closestDistance) {
-                        chosenNode = ns;
-                        closestDistance = dist;
-                    }
-                }
+                int rowCounter = 0, colCounter = 0;
 
-                if (chosenNode != null) {
-                    int free = chosenNode.getFreeNodes();
-                    if (free > selectedSailors.Count) free = selectedSailors.Count;
+                foreach (SailorScript sailor in selectedSailors) {
+                    Vector2 offset = startingPointSquare + new Vector2(colCounter++ * sailorSpacing, rowCounter * sailorSpacing);
 
-                    GameObject[] sentSailors = new GameObject[free];
-
-                    while (free-- > 0 && selectedSailors.Count > 0) {
-                        sentSailors[free] = selectedSailors[0].gameObject;
-                        selectedSailors[0].SendMessage("LeaveNode");
-                        selectedSailors[0].ChangeBoolSprite(false);
-                        selectedSailors.RemoveAt(0);
+                    if (colCounter >= cols) {
+                        colCounter = 0;
+                        rowCounter++;
                     }
 
-                    chosenNode.AssignSailors(sentSailors);
-                } else if (enableFreeMove) {
-
-                    Vector2 startingPointSquare = new Vector2(sailorSpacing * (-cols + 1) / 2f, sailorSpacing * (-rows + 1) / 2f);
-
-                    int rowCounter = 0, colCounter = 0;
-
-                    foreach (SailorScript sailor in selectedSailors) {
-                        Vector2 offset = startingPointSquare + new Vector2(colCounter++ * sailorSpacing, rowCounter * sailorSpacing);
-
-                        if (colCounter >= cols) {
-                            colCounter = 0;
-                            rowCounter++;
-                        }
-
-                        sailor.SendMessage("LeaveNode");
-                        sailor.SendMessage("setTargetWorldSpace", sailorTarget + offset);
-                    }
+                    sailor.SendMessage("LeaveNode");
+                    sailor.SendMessage("setTargetWorldSpace", sailorTarget + offset);
                 }
             }
         }

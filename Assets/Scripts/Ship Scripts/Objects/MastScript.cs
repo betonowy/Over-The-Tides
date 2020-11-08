@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SteerWheelScript : MonoBehaviour
+public class MastScript : MonoBehaviour
 {
     public Vector2[] nodes;
 
@@ -18,13 +18,13 @@ public class SteerWheelScript : MonoBehaviour
         }
     }
 
+    public NodeScript getNodes() {
+        return ns;
+    }
+
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public NodeScript getNodeScript() {
-        return ns;
     }
 }

@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour {
     private bool orderMode = true;
 
     // UI elements
-    public GameObject moveTargetMark;
+    public GameObject moveTargetMark; // prefab
+    private GameObject activeMoveMark;
 
     public Vector3 targetPosition;
     public bool reachedTarget = true;
@@ -25,12 +26,19 @@ public class PlayerController : MonoBehaviour {
 
     private GameObject healthBar;
 
+    private SteerWheelScript steerWheelObject;
+    private MastScript frontMastObject;
+    private MastScript backMastObject;
+
     private void Start() {
         myBody = GetComponent<Rigidbody2D>();
         pCam = FindObjectOfType<CameraScript>();
         healthBar = GameObject.Find("Health bar");
         healthBar.SendMessage("setMaxHealth", shipLife);
         maxShipLife = shipLife;
+        steerWheelObject = transform.Find("SteerWheel").GetComponent<SteerWheelScript>();
+        frontMastObject = transform.Find("Mast").GetComponent<MastScript>();
+        backMastObject = transform.Find("Mastback").GetComponent<MastScript>();
     }
 
     private void Update() {
@@ -41,8 +49,13 @@ public class PlayerController : MonoBehaviour {
             Turn(TurnCorrection(WishToGoDirection()) < 0);
         }
 
-        if ((targetPosition - gameObject.transform.position).magnitude < distanceBeforeTargetReached)
+        if ((targetPosition - gameObject.transform.position).magnitude < distanceBeforeTargetReached) {
             reachedTarget = true;
+            if (activeMoveMark != null) {
+                Destroy(activeMoveMark);
+                activeMoveMark = null;
+            }
+        }
 
         MouseMovement();
         Shooting();
@@ -76,6 +89,11 @@ public class PlayerController : MonoBehaviour {
                 targetPosition = Camera.allCameras[0].ScreenToWorldPoint(Input.mousePosition);
                 targetPosition.z = gameObject.transform.position.z;
                 reachedTarget = false;
+                if (activeMoveMark != null) {
+                    Destroy(activeMoveMark);
+                }
+                activeMoveMark = Instantiate(moveTargetMark);
+                activeMoveMark.transform.position = targetPosition;
             }
         }
     }
@@ -107,17 +125,17 @@ public class PlayerController : MonoBehaviour {
 
     void Turn(bool direction) {
         if (direction) {
-            myBody.AddTorque(maxTurningForce * Time.deltaTime);
+            myBody.AddTorque(maxTurningForce * Time.deltaTime * turnModifier());
         } else {
-            myBody.AddTorque(-maxTurningForce * Time.deltaTime);
+            myBody.AddTorque(-maxTurningForce * Time.deltaTime * turnModifier());
         }
     }
 
     void Propeller(bool direction) {
         if (direction) {
-            myBody.AddForce(GetMyDirection() * maxPropellerForce * Time.deltaTime);
+            myBody.AddForce(GetMyDirection() * maxPropellerForce * Time.deltaTime * speedModifier());
         } else {
-            myBody.AddForce(-GetMyDirection() * maxPropellerForce * Time.deltaTime);
+            myBody.AddForce(-GetMyDirection() * maxPropellerForce * Time.deltaTime * speedModifier());
         }
     }
 
@@ -135,5 +153,22 @@ public class PlayerController : MonoBehaviour {
             FindObjectOfType<LevelManager>().SendMessage("OnPlayerDeath");
             Destroy(gameObject);
         }
+    }
+
+    bool steerWheelManned() {
+        if (steerWheelObject.getNodeScript().ReadyCrewCount() > 0)
+            return true;
+        return false;
+    }
+
+    float speedModifier() {
+        float maxMastManned = frontMastObject.getNodes().countNodes() + backMastObject.getNodes().countNodes();
+        float currentlyManned = frontMastObject.getNodes().ReadyCrewCount() + backMastObject.getNodes().ReadyCrewCount();
+        return currentlyManned / maxMastManned;
+    }
+
+    float turnModifier() {
+        NodeScript script = steerWheelObject.getNodeScript();
+        return (float)script.ReadyCrewCount() / script.countNodes();
     }
 }

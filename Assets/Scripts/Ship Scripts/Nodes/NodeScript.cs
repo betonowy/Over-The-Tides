@@ -20,6 +20,10 @@ public class NodeScript : MonoBehaviour
         return count;
     }
 
+    public int countNodes() {
+        return nodes.Count;
+    }
+
     public void CreateRelativeNode(Vector2 relPos) {
         new NodeClass(relPos, parentGameObject);
         nodes.Add((new NodeClass(relPos, parentGameObject)));
