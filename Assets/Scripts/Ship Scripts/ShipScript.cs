@@ -16,6 +16,14 @@ public class ShipScript : MonoBehaviour
     //public bool reachedTarget = true;
     //public float distanceBeforeTargetReached = 0.5f;
 
+    public enum teamEnum {
+        teamRed,
+        teamBlue,
+        FFA
+    }
+
+    public teamEnum team;
+
     public float maxTurningForce;
     public float maxPropellerForce;
 

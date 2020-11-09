@@ -44,10 +44,17 @@ public class CameraScript : MonoBehaviour {
                 var newQuad = Instantiate(quad, new Vector3(x - width / 2f, y - height / 2f, 50), Quaternion.identity, gameObject.transform);
             }
         }
-        playerObject = GameObject.Find("playerBoat");
+
+        if (GameObject.Find("playerBoatFFA") != null) {
+            playerObject = GameObject.Find("playerBoatFFA");
+        } else if(GameObject.Find("playerBoatBlue") != null) {
+            playerObject = GameObject.Find("playerBoatBlue");
+        } else if (GameObject.Find("playerBoatRed") != null) {
+            playerObject = GameObject.Find("playerBoatRed");
+        }
     }
 
-    private void LateUpdate() {
+    private void Update() {
         if (check) {
             cam.enabled = true;
         } else {

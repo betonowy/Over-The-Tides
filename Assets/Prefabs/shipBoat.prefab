@@ -229,7 +229,7 @@ SpriteRenderer:
   m_SortingLayerID: -624378531
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8673d7c7b3d0d5b41bceec95630b56ae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5f4b817efec6764bb9aed6e7aa81966, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -463,8 +463,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad9579cb2b453c04aaad7c03690b1f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 2
   maxTurningForce: 40
-  maxPropellerForce: 200
+  maxPropellerForce: 300
   shipLife: 100
 --- !u!1 &7063351172709882576
 GameObject:
@@ -539,7 +540,7 @@ SpriteRenderer:
   m_SortingLayerID: -624378531
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8673d7c7b3d0d5b41bceec95630b56ae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5f4b817efec6764bb9aed6e7aa81966, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

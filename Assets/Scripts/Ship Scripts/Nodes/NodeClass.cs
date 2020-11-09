@@ -62,7 +62,6 @@ public class NodeClass {
                                                position.y * Mathf.Cos(rotation) + position.x * Mathf.Sin(rotation));
                 setPosition += relative;
                 assignedSailor.SendMessage("setTargetWorldSpace", setPosition);
-                Debug.Log("Target: " + setPosition);
                 return true;
             }
         } catch { }

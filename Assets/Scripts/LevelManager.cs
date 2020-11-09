@@ -14,7 +14,13 @@ public class LevelManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         playerCamera = Instantiate(playerCameraPrefab);
-        playerCamera.transform.SetParent(GameObject.Find("playerBoat").transform);
+        if (GameObject.Find("playerBoatFFA") != null) {
+            playerCamera.transform.SetParent(GameObject.Find("playerBoatFFA").transform);
+        } else if (GameObject.Find("playerBoatBlue") != null) {
+            playerCamera.transform.SetParent(GameObject.Find("playerBoatBlue").transform);
+        } else if (GameObject.Find("playerBoatRed") != null) {
+            playerCamera.transform.SetParent(GameObject.Find("playerBoatRed").transform);
+        }
         mainCamera = Instantiate(mainCameraPrefab);
     }
 

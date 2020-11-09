@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour {
     // Start is called before the first frame update
 
     void Start() {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.Find("playerBoat").transform;
         myBody = GetComponent<Rigidbody2D>();
 
         timeBtwShots = startTimeBtwShots;
@@ -37,6 +37,10 @@ public class EnemyController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (myBody == null) {
+            myBody = GetComponent<Rigidbody2D>();
+        }
+
         checkLife();
 
         try {

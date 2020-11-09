@@ -77,9 +77,7 @@ public class SailorScript : MonoBehaviour {
     }
 
     private void setTargetWorldSpace(Vector2 coord) {
-        Debug.Log("coords before trans: " + coord);
         targetShipPosition = worldToShipCoordinates(coord);
-        Debug.Log("coords after trans: " + targetShipPosition);
     }
 
     public void Vomit() {
