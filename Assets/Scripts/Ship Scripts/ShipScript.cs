@@ -156,6 +156,6 @@ public class ShipScript : MonoBehaviour
 
     private float turnModifier() {
         NodeScript script = steerWheelObject.getNodeScript();
-        return (float)script.ReadyCrewCount() / script.countNodes();
+        return (float)script.ReadyCrewCount() / script.countNodes() * myBody.velocity.magnitude;
     }
 }
