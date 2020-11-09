@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class ShipScript : MonoBehaviour
 {
@@ -36,12 +37,38 @@ public class ShipScript : MonoBehaviour
     private MastScript frontMastObject;
     private MastScript backMastObject;
 
+    private GameObject[] cannons;
+
     private void Start() {
         myBody = GetComponent<Rigidbody2D>();
         maxShipLife = shipLife;
         steerWheelObject = transform.Find("SteerWheel").GetComponent<SteerWheelScript>();
         frontMastObject = transform.Find("Mast").GetComponent<MastScript>();
         backMastObject = transform.Find("Mastback").GetComponent<MastScript>();
+        UpdateCannons();
+    }
+
+    private void UpdateCannons() {
+        int childCount = gameObject.transform.childCount;
+
+        GameObject[] children = new GameObject[childCount];
+
+        int cannonCount = 0;
+
+        for (int i = 0; i < childCount; i++) {
+            children[i] = gameObject.transform.GetChild(i).gameObject;
+            if (children[i].name.StartsWith("cannon")) {
+                cannonCount++;
+            }
+        }
+
+        cannons = new GameObject[cannonCount];
+
+        for (int i = 0; i < childCount; i++) {
+            if (children[i].name.StartsWith("cannon")) {
+                cannons[--cannonCount] = children[i];
+            }
+        }
     }
 
     private void Update() {
@@ -49,17 +76,19 @@ public class ShipScript : MonoBehaviour
     }
 
     public void ShootLeft() {
-        GameObject cannon = GameObject.Find("cannonNoFire (1)");
-        GameObject cannon2 = GameObject.Find("cannonNoFire (0)");
-        cannon.SendMessage("shot");
-        cannon2.SendMessage("shot");
+        foreach (GameObject c in cannons) {
+            if (c.GetComponent<ParentConstraint>().GetRotationOffset(0).z > 0) {
+                c.SendMessage("shot");
+            }
+        }
     }
 
     public void ShootRight() {
-        GameObject cannon = GameObject.Find("cannonNoFire (2)");
-        GameObject cannon2 = GameObject.Find("cannonNoFire (3)");
-        cannon.SendMessage("shot");
-        cannon2.SendMessage("shot");
+        foreach (GameObject c in cannons) {
+            if (c.GetComponent<ParentConstraint>().GetRotationOffset(0).z < 0) {
+                c.SendMessage("shot");
+            }
+        }
     }
 
     public Vector2 GetMyDirection() {

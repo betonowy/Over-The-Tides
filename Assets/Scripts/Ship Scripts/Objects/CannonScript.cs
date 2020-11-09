@@ -34,9 +34,8 @@ public class CannonScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (cooldown > 0) {
-            cooldown -= Time.deltaTime * ns.ReadyCrewCount() / nodes.Length;
-        }
+        cooldown -= Time.deltaTime * (float)ns.ReadyCrewCount() / (float)nodes.Length;
+        Debug.Log(cooldown);
     }
 
     void updateSpawnPointAndVelocity() {
@@ -60,7 +59,7 @@ public class CannonScript : MonoBehaviour {
             ballRigidbody.velocity = spawnVelocityVector;
 
             spawnedBall.SendMessage("SetInitialSpeed", spawnVelocityVector);
-            cooldown += cooldownTime;
+            cooldown = cooldownTime;
         }
     }
 }

@@ -7,6 +7,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 79346668949609350, guid: 29b44decaaccfae4bb40e1f357b806c9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f5f4b817efec6764bb9aed6e7aa81966,
+        type: 3}
     - target: {fileID: 79346669921403986, guid: 29b44decaaccfae4bb40e1f357b806c9,
         type: 3}
       propertyPath: team
@@ -72,5 +78,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemyBoatFFA
       objectReference: {fileID: 0}
+    - target: {fileID: 79346670265794184, guid: 29b44decaaccfae4bb40e1f357b806c9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f5f4b817efec6764bb9aed6e7aa81966,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29b44decaaccfae4bb40e1f357b806c9, type: 3}
