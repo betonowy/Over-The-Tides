@@ -15,7 +15,7 @@ MonoBehaviour:
   aiEncircleRadiusMax: 20
   aiEncircleRadiusMin: 15
   aiAttackDistance: 30
-  aiAttackAccuracyBeforeShoot: 0
+  aiAttackAccuracyBeforeShoot: 0.9
   aiAttackFrontBlindSpot: 0.3
   aiCrewOrderPeriod: 3
   aiMovementOrderPeriod: 1

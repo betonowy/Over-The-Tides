@@ -112,8 +112,6 @@ public class EnemyScript : MonoBehaviour {
 
         if (aiShootRight)
             ship.ShootRight();
-        ship.ShootLeft();
-        ship.ShootRight();
     }
 
     void HandleOrders() {

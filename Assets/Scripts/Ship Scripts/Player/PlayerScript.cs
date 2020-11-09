@@ -30,6 +30,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthBar.SendMessage("setHealth", shipScript.shipLife);
         Movement();
         Shooting();
     }
