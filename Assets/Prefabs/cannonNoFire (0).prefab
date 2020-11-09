@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3276126805382000785}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -1.2, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -120,7 +120,7 @@ MonoBehaviour:
   ballTemplate: {fileID: 3531933280094005140, guid: 93af975eac52f6b4ebaac92304cfbdd8,
     type: 3}
   ballSpawnDistance: 0.2
-  ballSpeed: 3
+  ballSpeed: 4.5
   cooldownTime: 3
   power: 20
   nodes:
