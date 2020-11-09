@@ -14,6 +14,10 @@ public class EnemyScript : MonoBehaviour {
     public float aiAttackOrderPeriod = 2;
     public float aiOrderPeriodRandomize = 0.5f;
 
+    private float aiCrewOrderTime = 0;
+    private float aiMovementOrderTime = 0;
+    private float aiAttackOrderTime = 0;
+
     private float aiPriorityShootRight = 0;
     private float aiPriorityShootLeft = 0;
     private float aiPriorityMast = 0;
@@ -33,19 +37,15 @@ public class EnemyScript : MonoBehaviour {
     private GameObject[] masts;
     private GameObject[] steers;
 
+    private ShipScript ship;
+
     // Start is called before the first frame update
     void Start() {
         UpdateChildren();
-        Debug.Log("Sailors: " + sailors.Length);
-        Debug.Log("Cannons: " + cannons.Length);
-        Debug.Log("Masts: " + masts.Length);
-        Debug.Log("Steers: " + steers.Length);
     }
 
     private void UpdateChildren() {
         int childCount = gameObject.transform.childCount;
-
-        Debug.Log("childCount: " + childCount);
 
         GameObject[] children = new GameObject[childCount];
 
@@ -108,5 +108,129 @@ public class EnemyScript : MonoBehaviour {
             initialAssignment = false;
             TestAssignment();
         }
+    }
+
+    void calculateCrewPriority() {
+        float shootRightTargetPriority = 0;
+        float shootLeftTargetPriority = 0;
+        float mastTargetPriority = 0;
+        float steerTargetPriority = 0;
+
+        GameObject[] targets = getAllTargets();
+
+        if (targets.Length <= 0) {
+            return;
+        }
+
+        GameObject closestTarget = targets[0];
+        {
+            float minDist = getDistanceToTarget(targets[0]);
+            for (int i = 1; i < targets.Length; i++) {
+                float dist = getDistanceToTarget(targets[i]);
+                if (dist < minDist) {
+                    minDist = dist;
+                    closestTarget = targets[i];
+                }
+            }
+        }
+
+        for (int i = 0; i < targets.Length; i++) {
+            if (getDistanceToTarget(targets[i]) < aiAttackDistance / 2) {
+                if (scalarRightHandTowardsTarget(targets[i]) > 0) {
+                    shootRightTargetPriority += 2;
+                } else {
+                    shootLeftTargetPriority += 2;
+                }
+            } else if (getDistanceToTarget(targets[i]) < aiAttackDistance) {
+                if (scalarRightHandTowardsTarget(targets[i]) > 0) {
+                    shootRightTargetPriority += 1;
+                } else {
+                    shootLeftTargetPriority += 1;
+                }
+            }
+        }
+
+        if (getDistanceToTarget(closestTarget) > aiAttackDistance) {
+            mastTargetPriority = 10;
+            steerTargetPriority = 5;
+        } else {
+            mastTargetPriority = 1;
+            steerTargetPriority = 1;
+        }
+
+        int sailorCount = sailors.Length;
+        float prioritySummary = mastTargetPriority + steerTargetPriority + shootLeftTargetPriority + shootRightTargetPriority;
+        float ratio = sailors.Length / prioritySummary;
+    }
+
+    GameObject[] getAllTargets() {
+        return GameObject.FindGameObjectsWithTag("Ship");
+    }
+
+    float getDistanceToTarget(GameObject g) {
+        Vector2 targetPos = g.transform.position - gameObject.transform.position;
+        return targetPos.magnitude;
+    }
+
+
+
+
+
+
+
+    Vector2 getVectorToTarget(GameObject g) {
+        return g.transform.position - gameObject.transform.position;
+    }
+
+    Vector2 getMyDirection() {
+        float rotation = Mathf.Deg2Rad * gameObject.GetComponent<Rigidbody2D>().rotation;
+        return new Vector2(-Mathf.Sin(rotation), Mathf.Cos(rotation));
+    }
+
+    Vector2 getRightHandDirection() {
+        Vector2 twist = getMyDirection();
+        return new Vector2(twist.y, -twist.x);
+    }
+
+    float scalarTowardsTarget(GameObject g) {
+        return Vector2.Dot(getMyDirection(), getVectorToTarget(g).normalized);
+    }
+
+    float scalarRightHandTowardsTarget(GameObject g) {
+        return Vector2.Dot(getRightHandDirection(), getVectorToTarget(g).normalized);
+    }
+
+    float linearDecision(float input, float thresholdOne, float thresholdZero) {
+        if (thresholdOne == thresholdZero) {
+            if (input >= thresholdOne) return 1;
+            else return 0;
+        }
+
+        float score = (input - thresholdZero) / (thresholdOne - thresholdZero);
+
+        if (score >= 1) return 1;
+        else if (score <= 0) return 0;
+
+        return score;
+    }
+
+    Vector2 proportionalOfVectors(float proportion, Vector2 a, Vector2 b) {
+        float antiProportion = 1 - proportion;
+        return new Vector2(a.x * antiProportion + b.x * proportion, a.y * antiProportion + b.y * proportion);
+    }
+
+    Vector2 wishToGoDirection(GameObject g) {
+        Vector2 distance = getVectorToTarget(g);
+        Vector2 directVector = distance.normalized;
+        Vector2 encirclingVector;
+
+        if (scalarRightHandTowardsTarget(g) > 0) encirclingVector = new Vector2(-directVector.y, directVector.x);
+        else encirclingVector = new Vector2(directVector.y, -directVector.x);
+
+        return proportionalOfVectors(linearDecision(distance.magnitude, aiEncircleRadiusMax, aiEncircleRadiusMin), encirclingVector, directVector);
+    }
+
+    float turnCorrection(Vector2 wishVector) {
+        return Vector2.Dot(wishVector, getRightHandDirection());
     }
 }
