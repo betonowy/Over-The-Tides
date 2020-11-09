@@ -3,27 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
-    public float speed = 5f;
+    public float lifeTime = 3;
+    public float dieVelocityRatio = 0.5f;
+    public float damageMultipier = 10;
+    private Vector2 initialVelocity;
 
-    private Transform player;
-    private Vector2 target;
+    private Rigidbody2D rb;
 
     void Start() {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        target = new Vector2(player.position.x, player.position.y);
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update() {
-        //transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        if (lifeTime < 0) {
+            DestroyProjectile();
+        } else {
+            lifeTime -= Time.deltaTime;
+        }
 
-        transform.Translate(speed * Time.deltaTime, 0, 0);
-
-        if (transform.position.x == target.x && transform.position.y == target.y) {
+        if (rb.velocity.magnitude < initialVelocity.magnitude * dieVelocityRatio) {
             DestroyProjectile();
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (!collision.gameObject.name.StartsWith("playerShootBetter")) {
+            collision.gameObject.SendMessage("Damage", damageMultipier * rb.velocity.magnitude / initialVelocity.magnitude);
+            DestroyProjectile();
+        }
+    }
+
+    void SetInitialSpeed(Vector2 init) {
+        initialVelocity = init;
+    }
+
     void DestroyProjectile() {
         Destroy(gameObject);
     }
