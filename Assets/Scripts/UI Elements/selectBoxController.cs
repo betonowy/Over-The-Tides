@@ -86,8 +86,18 @@ public class selectBoxController : MonoBehaviour {
                 }
             }
 
-            GameObject shipParent = GameObject.Find("playerBoat");
-            int count = shipParent.transform.childCount;
+            GameObject shipParent;
+            int count;
+            if (GameObject.Find("playerBoatFFA") != null) {
+                shipParent = GameObject.Find("playerBoatFFA");
+                count = shipParent.transform.childCount;
+            } else if (GameObject.Find("playerBoatBlue") != null) {
+                shipParent = GameObject.Find("playerBoatBlue");
+                count = shipParent.transform.childCount;
+            } else {
+                shipParent = GameObject.Find("playerBoatRed");
+                count = shipParent.transform.childCount;
+            }
 
             ArrayList children = new ArrayList();
             ArrayList usable = new ArrayList();
