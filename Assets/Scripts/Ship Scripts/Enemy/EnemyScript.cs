@@ -1,164 +1,112 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour {
-    public float circleRadiusMin;
-    public float circleRadiusMax;
-    public float maxTurningForce;
-    public float maxPropellerForce;
+    public float aiEncircleRadiusMax = 20;
+    public float aiEncircleRadiusMin = 15;
 
-    private float timeBtwShots;
-    public float startTimeBtwShots;
+    public float aiAttackDistance = 15;
+    public float aiAttackAngle = 15;
 
-    public Transform player;
-    public GameObject projectile;
-    private Rigidbody2D myBody;
+    public float aiCrewOrderPeriod = 3;
+    public float aiMovementOrderPeriod = 2;
+    public float aiAttackOrderPeriod = 2;
+    public float aiOrderPeriodRandomize = 0.5f;
 
-    public float shootingRange;
+    private float aiPriorityShootRight = 0;
+    private float aiPriorityShootLeft = 0;
+    private float aiPriorityMast = 0;
+    private float aiPrioritySteer = 0;
 
-    public Transform castPoint0;
-    public Transform castPoint1;
-    public Transform castPoint2;
-    public Transform castPoint3;
-    public LayerMask mask;
+    public float aiPriorityRaiseSpeed = 0.1f;
+    public float aiPrioritySettleSpeed = 0.1f;
 
-    public float shipLife = 100;
+    private Vector2 aiTargetDirection;
+    private bool aiShootRight = false;
+    private bool aiShootLeft = false;
+
+    private bool initialAssignment = true;
+
+    private GameObject[] sailors;
+    private GameObject[] cannons;
+    private GameObject[] masts;
+    private GameObject[] steers;
 
     // Start is called before the first frame update
-
     void Start() {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        myBody = GetComponent<Rigidbody2D>();
+        UpdateChildren();
+        Debug.Log("Sailors: " + sailors.Length);
+        Debug.Log("Cannons: " + cannons.Length);
+        Debug.Log("Masts: " + masts.Length);
+        Debug.Log("Steers: " + steers.Length);
+    }
 
-        timeBtwShots = startTimeBtwShots;
+    private void UpdateChildren() {
+        int childCount = gameObject.transform.childCount;
+
+        Debug.Log("childCount: " + childCount);
+
+        GameObject[] children = new GameObject[childCount];
+
+        int cannonCount = 0;
+        int mastCount = 0;
+        int steerCount = 0;
+        int sailorCount = 0;
+
+        for (int i = 0; i < childCount; i++) {
+            children[i] = gameObject.transform.GetChild(i).gameObject;
+            if (children[i].name.StartsWith("cannon")) {
+                cannonCount++;
+            } else if (children[i].name.StartsWith("Mast")) {
+                mastCount++;
+            } else if (children[i].name.StartsWith("Steer")) {
+                steerCount++;
+            } else if (children[i].name.StartsWith("Sailor")) {
+                sailorCount++;
+            }
+        }
+
+        cannons = new GameObject[cannonCount];
+        masts = new GameObject[mastCount];
+        steers = new GameObject[steerCount];
+        sailors = new GameObject[sailorCount];
+
+        for (int i = 0; i < childCount; i++) {
+            if (children[i].name.StartsWith("cannon")) {
+                cannons[--cannonCount] = children[i];
+            } else if (children[i].name.StartsWith("Mast")) {
+                masts[--mastCount] = children[i];
+            } else if (children[i].name.StartsWith("Steer")) {
+                steers[--steerCount] = children[i];
+            } else if (children[i].name.StartsWith("Sailor")) {
+                sailors[--sailorCount] = children[i];
+            }
+        }
+    }
+
+    private void TestAssignment() {
+        int sailorsLeft = sailors.Length;
+        for (int i = 0; i < cannons.Length && sailorsLeft > 0; i++) {
+            cannons[i].GetComponent<NodeScript>().AssignSailor(sailors[--sailorsLeft]);
+        }
+        int divide = sailorsLeft / 2;
+        for (int i = 0; i < divide && sailorsLeft > 0 && i < steers.Length; i++) {
+            steers[i].GetComponent<NodeScript>().AssignSailor(sailors[--sailorsLeft]);
+        }
+        {
+            int mastsAssigned = 0;
+            while (sailorsLeft > 0 && mastsAssigned < masts.Length) {
+                masts[mastsAssigned++].GetComponent<NodeScript>().AssignSailor(sailors[--sailorsLeft]);
+            }
+        }
     }
 
     // Update is called once per frame
     void Update() {
-        checkLife();
-
-        try {
-            turn(turnCorrection(wishToGoDirection()) < 0);
-        } catch { }
-
-        propeller(true);
-
-        shooting();
-    }
-
-    Vector2 getVectorToPlayer() {
-        return player.transform.position - gameObject.transform.position;
-    }
-
-    Vector2 getMyDirection() {
-        float rotation = Mathf.Deg2Rad * myBody.rotation;
-        return new Vector2(-Mathf.Sin(rotation), Mathf.Cos(rotation));
-    }
-
-    Vector2 getRightHandDirection() {
-        Vector2 twist = getMyDirection();
-        return new Vector2(twist.y, -twist.x);
-    }
-
-    float scalarTowardsTarget() {
-        return Vector2.Dot(getMyDirection(), getVectorToPlayer().normalized);
-    }
-
-    float scalarRightHandTowardsTarget() {
-        return Vector2.Dot(getRightHandDirection(), getVectorToPlayer().normalized);
-    }
-
-    float linearDecision(float input, float thresholdOne, float thresholdZero) {
-        if (thresholdOne == thresholdZero) {
-            if (input >= thresholdOne) return 1;
-            else return 0;
-        }
-
-        float score = (input - thresholdZero) / (thresholdOne - thresholdZero);
-
-        if (score >= 1) return 1;
-        else if (score <= 0) return 0;
-
-        return score;
-    }
-
-    Vector2 proportionalOfVectors(float proportion, Vector2 a, Vector2 b) {
-        float antiProportion = 1 - proportion;
-        return new Vector2(a.x * antiProportion + b.x * proportion, a.y * antiProportion + b.y * proportion);
-    }
-
-    Vector2 wishToGoDirection() {
-        Vector2 distance = getVectorToPlayer();
-        Vector2 directVector = distance.normalized;
-        Vector2 encirclingVector;
-
-        if (scalarRightHandTowardsTarget() > 0) encirclingVector = new Vector2(-directVector.y, directVector.x);
-        else encirclingVector = new Vector2(directVector.y, -directVector.x);
-
-        return proportionalOfVectors(linearDecision(distance.magnitude, circleRadiusMax, circleRadiusMin), encirclingVector, directVector);
-    }
-
-    float turnCorrection(Vector2 wishVector) {
-        return Vector2.Dot(wishVector, getRightHandDirection());
-    }
-
-    void turn(bool direction) {
-        if (direction) {
-            myBody.AddTorque(maxTurningForce * Time.deltaTime);
-        } else {
-            myBody.AddTorque(-maxTurningForce * Time.deltaTime);
-        }
-    }
-    void propeller(bool direction) {
-        if (direction) {
-            myBody.AddForce(getMyDirection() * maxPropellerForce * Time.deltaTime);
-        } else {
-            myBody.AddForce(-getMyDirection() * maxPropellerForce * Time.deltaTime);
-        }
-    }
-    private void shooting() {
-
-        isInRange(castPoint0);
-        isInRange(castPoint1);
-        isInRange(castPoint2);
-        isInRange(castPoint3);
-
-        timeBtwShots -= Time.deltaTime;
-    }
-    private void isInRange(Transform castPoint) {
-        RaycastHit2D hit = Physics2D.Raycast(castPoint.position, castPoint.transform.TransformDirection(Vector3.right), shootingRange, mask);
-
-        if (hit.collider != null) {
-            shot(castPoint);
-        }
-        Debug.DrawRay(castPoint.position, castPoint.transform.TransformDirection(Vector3.right) * shootingRange, Color.blue);
-    }
-
-    private void shot(Transform castPoint) {
-        if (castPoint0 == castPoint) {
-            GameObject.Find("cannonNoFire (4)").SendMessage("shot");
-        }
-        if (castPoint1 == castPoint) {
-            GameObject.Find("cannonNoFire (5)").SendMessage("shot");
-        }
-        if (castPoint2 == castPoint) {
-            GameObject.Find("cannonNoFire (6)").SendMessage("shot");
-        }
-        if (castPoint3 == castPoint) {
-            GameObject.Find("cannonNoFire (7)").SendMessage("shot");
-        }
-    }
-
-    void Damage(float value) {
-        shipLife -= value;
-    }
-
-    void checkLife() {
-        if (shipLife < 0) {
-            Destroy(gameObject);
+        if (initialAssignment) {
+            initialAssignment = false;
+            TestAssignment();
         }
     }
 }
-
