@@ -375,10 +375,18 @@ public class EnemyScript : MonoBehaviour {
     GameObject[] getAllTargets() {
         GameObject[] g = GameObject.FindGameObjectsWithTag("Ship");
 
-        GameObject[] b = new GameObject[g.Length - 1];
+        int select = 0;
+
+        foreach (var potentialTarget in g) {
+            if(potentialTarget.GetComponent<ShipScript>().team != ship.team || potentialTarget.GetComponent<ShipScript>().team == ShipScript.teamEnum.FFA) {
+                select++;
+            }
+        }
+
+        GameObject[] b = new GameObject[select];
 
         for (int i = 0, j = 0; i < g.Length; i++) {
-            if (g[i] != gameObject) {
+            if (g[i].GetComponent<ShipScript>().team != ship.team || g[i].GetComponent<ShipScript>().team == ShipScript.teamEnum.FFA) {
                 b[j++] = g[i];
             }
         }
