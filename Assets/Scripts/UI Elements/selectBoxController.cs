@@ -77,7 +77,7 @@ public class selectBoxController : MonoBehaviour {
                 bool test = false;
                 Collider2D[] cos = Physics2D.OverlapPointAll(point);
                 foreach (Collider2D c in cos) {
-                    if (c.gameObject.CompareTag("Player")) {
+                    if (c.gameObject.CompareTag("Ship")) {
                         test = true;
                     }
                 }
