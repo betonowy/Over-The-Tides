@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class selectBoxController : MonoBehaviour {
