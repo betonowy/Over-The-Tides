@@ -65,36 +65,37 @@ public class CameraScript : MonoBehaviour {
             Move();
             Zoom();
         }
-
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            freeMove = !freeMove;
-        }
     }
 
     private void Move() {
+        Vector3 centerPoint = transform.position;
+
+        if (Input.GetKey(KeyCode.W)) {
+            centerPoint.y += moveSpeed * zoom;
+            freeMove = true;
+        }
+        if (Input.GetKey(KeyCode.S)) {
+            centerPoint.y -= moveSpeed * zoom;
+            freeMove = true;
+        }
+        if (Input.GetKey(KeyCode.A)) {
+            centerPoint.x -= moveSpeed * zoom;
+            freeMove = true;
+        }
+        if (Input.GetKey(KeyCode.D)) {
+            centerPoint.x += moveSpeed * zoom;
+            freeMove = true;
+        }
         if (!freeMove) {
             try {
-                Vector3 centerPoint = playerObject.transform.position;
-                centerPoint.z = -10;
-                transform.position = Vector3.SmoothDamp(transform.position, centerPoint, ref velocity, smoothTime);
+                Vector3 playercenterPoint = playerObject.transform.position;
+                playercenterPoint.z = -10;
+                transform.position = Vector3.SmoothDamp(transform.position, playercenterPoint, ref velocity, smoothTime);
             } catch {
                 freeMove = true;
             }
         } else {
-            Vector3 centerPoint = transform.position;
-            if (Input.GetKey(KeyCode.W)) {
-                centerPoint.y += moveSpeed * zoom;
-            }
-            if (Input.GetKey(KeyCode.S)) {
-                centerPoint.y -= moveSpeed * zoom;
-            }
-            if (Input.GetKey(KeyCode.A)) {
-                centerPoint.x -= moveSpeed * zoom;
-            }
-            if (Input.GetKey(KeyCode.D)) {
-                centerPoint.x += moveSpeed * zoom;
-            }
-            transform.position = centerPoint;
+            transform.position = Vector3.SmoothDamp(transform.position, centerPoint, ref velocity, smoothTime); ;
         }
     }
 
@@ -112,11 +113,19 @@ public class CameraScript : MonoBehaviour {
         check = false;
     }
 
+    public void toggleCheck() {
+        check = !check;
+    }
+
     public void increaseZoom() {
         zoom *= 1 + zoomSpeed;
     }
 
     public void decreaseZoom() {
         zoom *= 1 - zoomSpeed;
+    }
+
+    public void setFreeMove(bool val) {
+        freeMove = val;
     }
 }

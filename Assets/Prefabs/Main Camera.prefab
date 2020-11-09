@@ -97,12 +97,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: -50}
-  smoothTime: 0.1
-  minZoom: 10
+  smoothTime: 0.8
+  minZoom: 5
   maxZoom: 200
-  zoom: 20
-  zoomSpeed: 0.01
-  moveSpeed: 0.05
+  zoom: 5
+  zoomSpeed: 0.05
+  moveSpeed: 3
   minSizeY: 5
   playerViewWidth: 10
   playerViewHeight: 10

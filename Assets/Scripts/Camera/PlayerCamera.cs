@@ -42,4 +42,7 @@ public class PlayerCamera : MonoBehaviour {
     public void offCheck() {
         check = false;
     }
+    public void toggleCheck() {
+        check = !check;
+    }
 }

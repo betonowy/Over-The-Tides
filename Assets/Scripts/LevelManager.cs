@@ -27,12 +27,10 @@ public class LevelManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.Alpha1) && !lockCameraChange) {
-            mainCamera.onCheck();
-            playerCamera.offCheck();
+            mainCamera.setFreeMove(false);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && !lockCameraChange) {
-            mainCamera.offCheck();
-            playerCamera.onCheck();
+            playerCamera.toggleCheck();
         }
         if (Input.GetKey(KeyCode.R)) {
             mainCamera.increaseZoom();

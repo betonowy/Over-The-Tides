@@ -308,8 +308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 2
-  maxTurningForce: 40
-  maxPropellerForce: 300
+  maxTurningForce: 50
+  maxPropellerForce: 200
   shipLife: 100
 --- !u!1 &7063351172709882576
 GameObject:

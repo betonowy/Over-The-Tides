@@ -10,11 +10,15 @@ public class EnemyScript : MonoBehaviour {
 
     public float aiAttackDistance = 15;
     public float aiAttackAccuracyBeforeShoot = 0.9f;
-    public float aiAttackFrontBlindSpot = 0.3f;
+    public float aiAttackLongtitudalBlindSpot = 0.3f;
+
+    public float aiDefendFrontBlindSpot = 0.6f;
+    public float aiDefendRearBlindSpot = 0.5f;
 
     public float aiCrewOrderPeriod = 3;
     public float aiMovementOrderPeriod = 2;
     public float aiAttackOrderPeriod = 2;
+    public float aiFirstOrderDelay = 3;
     public float aiOrderPeriodRandomize = 0.5f;
 
     private float aiCrewOrderTime = 0;
@@ -40,6 +44,9 @@ public class EnemyScript : MonoBehaviour {
         ResetAttackTimer();
         ResetCrewTimer();
         ResetMoveTimer();
+        aiCrewOrderTime = aiFirstOrderDelay;
+        aiMovementOrderTime = aiFirstOrderDelay;
+        aiAttackOrderTime = aiFirstOrderDelay;
     }
 
     private void UpdateChildren() {
@@ -163,31 +170,33 @@ public class EnemyScript : MonoBehaviour {
 
         for (int i = 0; i < targets.Length; i++) {
             if (getDistanceToTarget(targets[i]) < aiAttackDistance / 2) {
-                if (scalarRightHandTowardsTarget(targets[i]) > aiAttackFrontBlindSpot) {
-                    shootRightTargetPriority += 2;
-                } else if (scalarRightHandTowardsTarget(targets[i]) < -aiAttackFrontBlindSpot) {
-                    shootLeftTargetPriority += 2;
+                if (scalarRightHandTowardsTarget(targets[i]) > aiAttackLongtitudalBlindSpot) {
+                    shootRightTargetPriority += 3;
+                } else if (scalarRightHandTowardsTarget(targets[i]) < -aiAttackLongtitudalBlindSpot) {
+                    shootLeftTargetPriority += 3;
                 } else {
-                    shootLeftTargetPriority += 1;
-                    shootRightTargetPriority += 1;
+                    shootLeftTargetPriority += 2;
+                    shootRightTargetPriority += 2;
                 }
             } else if (getDistanceToTarget(targets[i]) < aiAttackDistance) {
-                if (scalarRightHandTowardsTarget(targets[i]) > aiAttackFrontBlindSpot) {
-                    shootRightTargetPriority += 1;
-                } else if (scalarRightHandTowardsTarget(targets[i]) < -aiAttackFrontBlindSpot) {
-                    shootLeftTargetPriority += 1;
-                } else {
-                    shootLeftTargetPriority += 0.5f;
+                if (scalarRightHandTowardsTarget(targets[i]) > aiAttackLongtitudalBlindSpot) {
                     shootRightTargetPriority += 0.5f;
+                } else if (scalarRightHandTowardsTarget(targets[i]) < -aiAttackLongtitudalBlindSpot) {
+                    shootLeftTargetPriority += 0.5f;
+                } else {
+                    shootLeftTargetPriority += 0;
+                    shootRightTargetPriority += 0;
                 }
             }
         }
 
-        if (getDistanceToTarget(closestTarget) > aiAttackDistance) {
+        if (getDistanceToTarget(closestTarget) > aiAttackDistance ||
+            scalarTowardsTarget(closestTarget) > aiDefendRearBlindSpot ||
+            scalarTowardsTarget(closestTarget) < -aiDefendFrontBlindSpot) {
             mastTargetPriority = 12;
             steerTargetPriority = 6;
         } else {
-            mastTargetPriority = 1;
+            mastTargetPriority = 2;
             steerTargetPriority = 1;
         }
 
@@ -203,8 +212,8 @@ public class EnemyScript : MonoBehaviour {
             }
         }
 
-        int ms = Mathf.FloorToInt(mastTargetPriority * ratio);
-        int st = Mathf.FloorToInt(steerTargetPriority * ratio);
+        int ms = Mathf.RoundToInt(mastTargetPriority * ratio);
+        int st = Mathf.RoundToInt(steerTargetPriority * ratio);
         int sl = Mathf.FloorToInt(shootLeftTargetPriority * ratio);
         int sr = Mathf.FloorToInt(shootRightTargetPriority * ratio);
 
