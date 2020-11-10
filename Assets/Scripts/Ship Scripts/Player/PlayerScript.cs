@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     CameraScript pCam;
-    public MouseItem mouseItem = new MouseItem();
+
     // UI elements
     public GameObject moveTargetMark; // prefab
     private GameObject activeMoveMark;
