@@ -47,7 +47,7 @@ public class CannonScript : MonoBehaviour {
         transformedSpawnPoint *= ballSpawnDistance;
     }
 
-    void shot() {
+    public void shot() {
         if (cooldown <= 0) {
             updateSpawnPointAndVelocity();
 

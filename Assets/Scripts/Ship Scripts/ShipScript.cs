@@ -111,6 +111,8 @@ public class ShipScript : MonoBehaviour
         }
 
         cannonConstraint.locked = true;
+
+        cannons[index] = newCannon;
     }
 
     private void DestroyCannon(int index) {
