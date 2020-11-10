@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76261f23cc2372e438ae92fae3f3c55c, type: 3}
+  m_Name: PlayerEquipment
+  m_EditorClassIdentifier: 
+  savePath: 
+  Container:
+    Items:
+    - AllowedItem: 01000000
+      parent: {fileID: 0}
+      item:
+        Name: 
+        Id: -1
+        buffs: []
+      amount: 0
+    - AllowedItem: 01000000
+      parent: {fileID: 0}
+      item:
+        Name: 
+        Id: -1
+        buffs: []
+      amount: 0
+    - AllowedItem: 01000000
+      parent: {fileID: 0}
+      item:
+        Name: 
+        Id: -1
+        buffs: []
+      amount: 0
+    - AllowedItem: 01000000
+      parent: {fileID: 0}
+      item:
+        Name: 
+        Id: -1
+        buffs: []
+      amount: 0
+    - AllowedItem: 01000000
+      parent: {fileID: 0}
+      item:
+        Name: 
+        Id: -1
+        buffs: []
+      amount: 0
+    - AllowedItem: 01000000
+      parent: {fileID: 0}
+      item:
+        Name: 
+        Id: -1
+        buffs: []
+      amount: 0
+    - AllowedItem: 01000000
+      parent: {fileID: 0}
+      item:
+        Name: 
+        Id: -1
+        buffs: []
+      amount: 0
+    - AllowedItem: 01000000
+      parent: {fileID: 0}
+      item:
+        Name: 
+        Id: -1
+        buffs: []
+      amount: 0
+  database: {fileID: 11400000, guid: 53cab9e8331338c44b023f733f7d46a9, type: 2}

@@ -18,6 +18,8 @@ public class PlayerScript : MonoBehaviour
 
     private ShipScript shipScript;
 
+    public InventoryObject inventory;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,5 +87,17 @@ public class PlayerScript : MonoBehaviour
         Vector2 distance = GetVectorPlayerToTarget();
         Vector2 directVector = distance.normalized;
         return directVector;
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision) {
+        var item = collision.GetComponent<GroundItem>();
+        if(item) {
+            inventory.AddItem(new Item(item.item), 1);
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnApplicationQuit() {
+        inventory.Container.Items = new InventorySlot[24];
     }
 }

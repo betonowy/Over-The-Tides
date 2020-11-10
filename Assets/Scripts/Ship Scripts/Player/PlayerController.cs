@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour {
     private MastScript frontMastObject;
     private MastScript backMastObject;
 
+    
+
     private void Start() {
         myBody = GetComponent<Rigidbody2D>();
         pCam = FindObjectOfType<CameraScript>();
