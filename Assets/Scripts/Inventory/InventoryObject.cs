@@ -86,7 +86,7 @@ public class InventoryObject : ScriptableObject {
     }
     [ContextMenu("Clear")]
     public void Clear() {
-        Container = new Inventory();
+        Container.Clear();
     }
 }
 

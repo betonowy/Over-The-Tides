@@ -6,6 +6,9 @@ using UnityEngine;
 
 [System.Serializable]
 public class InventorySlot {
+
+    [System.NonSerialized]
+    public UserInterface parent;
     public ItemType[] AllowedItems = new ItemType[0];
     public int ID = -1;
     public Item item;

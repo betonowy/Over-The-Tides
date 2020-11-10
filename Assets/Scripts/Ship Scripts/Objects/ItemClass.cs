@@ -14,8 +14,6 @@ public abstract class ItemClass : ScriptableObject {
     public int Id;
     public Sprite uiDisplay;
     public ItemType type;
-    [TextArea(15, 20)]
-    public string description;
     public ItemBuff[] buffs;
 
     public Item CreateItem() {
