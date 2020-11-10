@@ -11,6 +11,8 @@ public class BackgroundScript : MonoBehaviour {
     public int maxDelay = 20;
 
     public float spriteScale = 1;
+    public int frameUnskip = 4;
+    private int frameCounter = 0;
 
     private float offsetScale;
 
@@ -33,7 +35,10 @@ public class BackgroundScript : MonoBehaviour {
                 advanceFrame();
             }
         } else {
-            advanceFrame();
+            if (++frameCounter > frameUnskip) {
+                advanceFrame();
+                frameCounter = 0;
+            }
         }
     }
 
