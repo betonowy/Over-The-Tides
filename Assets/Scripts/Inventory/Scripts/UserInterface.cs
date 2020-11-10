@@ -8,15 +8,16 @@ using UnityEngine.Events;
 
 public abstract class UserInterface : MonoBehaviour {
 
-    public PlayerScript player;
     public InventoryObject inventory;
     public Dictionary<GameObject, InventorySlot> slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
+
+    protected bool[] inventoryStatus;
 
     void Start() {
         for (int i = 0; i < inventory.Container.Items.Length; i++) {
             inventory.Container.Items[i].parent = this;
         }
-
+        inventoryStatus = new bool[inventory.Container.Items.Length];
         CreateSlots();
         AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(gameObject); });
         AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnExitInterface(gameObject); });
@@ -61,30 +62,36 @@ public abstract class UserInterface : MonoBehaviour {
     }
     public void OnDragStart(GameObject obj) {
 
-        if (slotsOnInterface[obj].item.Id <= -1)
-            return;
-
-        var mouseObject = new GameObject();
-        var rt = mouseObject.AddComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(50, 50);
-        mouseObject.transform.SetParent(transform.parent);
-        var img = mouseObject.AddComponent<Image>();
-        img.sprite = slotsOnInterface[obj].ItemObject.uiDisplay;
-        img.raycastTarget = false;
-        
-        MouseData.tempItemBeingDragged = mouseObject;
+        MouseData.tempItemBeingDragged = CreateTempItem(obj);
     }
+
+    public GameObject CreateTempItem(GameObject obj) {
+        GameObject tempItem = null;
+        if(slotsOnInterface[obj].item.Id >= 0) {
+            tempItem = new GameObject();
+            var rt = tempItem.AddComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(50, 50);
+            tempItem.transform.SetParent(transform.parent);
+            var img = tempItem.AddComponent<Image>();
+            img.sprite = slotsOnInterface[obj].ItemObject.uiDisplay;
+            img.raycastTarget = false;
+        }
+        return tempItem;
+    }
+
+    public abstract void checkShipInvetrory();
     
     public void OnDragEnd(GameObject obj) {
         Destroy(MouseData.tempItemBeingDragged);
 
         if (MouseData.InterfaceMouseIsOver == null) {
-            slotsOnInterface[obj].RemoveItem();
+            //slotsOnInterface[obj].RemoveItem();
             return;
         }
         if(MouseData.slotHoverdOver) {
             InventorySlot moveHoverSlotData = MouseData.InterfaceMouseIsOver.slotsOnInterface[MouseData.slotHoverdOver];
             inventory.SwapItems(slotsOnInterface[obj], moveHoverSlotData);
+            checkShipInvetrory();
         }
 
     }

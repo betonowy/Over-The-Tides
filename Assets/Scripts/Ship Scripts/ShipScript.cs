@@ -78,6 +78,9 @@ public class ShipScript : MonoBehaviour
         }
     }
 
+    public bool[] getCannonExistenceArray() {
+        return cannonExistence;
+    }
     private void UpdateCannons() {
         for (int i = 0; i < cannonPositions.Length; i++) {
             if (cannonExistence[i] && cannons[i] == null) {

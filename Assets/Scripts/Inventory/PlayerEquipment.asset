@@ -17,56 +17,48 @@ MonoBehaviour:
   Container:
     Items:
     - AllowedItems: 01000000
-      ID: 1
       item:
         Name: Cannon
         Id: 1
         buffs: []
       amount: 1
     - AllowedItems: 01000000
-      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
     - AllowedItems: 01000000
-      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
     - AllowedItems: 01000000
-      ID: 1
       item:
         Name: Cannon
         Id: 1
         buffs: []
       amount: 1
     - AllowedItems: 01000000
-      ID: 1
       item:
         Name: Cannon
         Id: 1
         buffs: []
       amount: 1
     - AllowedItems: 01000000
-      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
     - AllowedItems: 01000000
-      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
     - AllowedItems: 01000000
-      ID: 1
       item:
         Name: Cannon
         Id: 1
