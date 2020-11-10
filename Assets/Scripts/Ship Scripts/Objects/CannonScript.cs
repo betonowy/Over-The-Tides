@@ -35,7 +35,6 @@ public class CannonScript : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         cooldown -= Time.deltaTime * (float)ns.ReadyCrewCount() / (float)nodes.Length;
-        Debug.Log(cooldown);
     }
 
     void updateSpawnPointAndVelocity() {

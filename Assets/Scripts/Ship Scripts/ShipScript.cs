@@ -29,6 +29,9 @@ public class ShipScript : MonoBehaviour
     public float maxPropellerForce;
 
     public float shipLife = 100;
+
+    public Vector2[] cannonPositions;
+
     private float maxShipLife;
 
     // private GameObject healthBar;
@@ -39,54 +42,109 @@ public class ShipScript : MonoBehaviour
 
     private GameObject[] cannons;
 
+    public GameObject cannonPrefab;
+
+    private bool[] cannonExistence;
+    private bool cannonsTouched;
+    public bool iTouchedCannons;
+
     private void Start() {
+        cannonExistence = new bool[cannonPositions.Length];
+        cannons = new GameObject[cannonPositions.Length];
+
         myBody = GetComponent<Rigidbody2D>();
         maxShipLife = shipLife;
+
         steerWheelObject = transform.Find("SteerWheel").GetComponent<SteerWheelScript>();
         frontMastObject = transform.Find("Mast").GetComponent<MastScript>();
         backMastObject = transform.Find("Mastback").GetComponent<MastScript>();
+
+        initialCannons();
         UpdateCannons();
+    }
+    
+    private void initialCannons() {
+        cannonExistence[1] = true;
+        cannonExistence[2] = true;
+        cannonExistence[5] = true;
+        cannonExistence[6] = true;
+    }
+
+    public void UpdateCannonsFromInventory(int index, bool val) {
+        if (index >= 0 && index < cannonExistence.Length) {
+            cannonExistence[index] = val;
+            cannonsTouched = true;
+            iTouchedCannons = true;
+        }
     }
 
     private void UpdateCannons() {
-        int childCount = gameObject.transform.childCount;
-
-        GameObject[] children = new GameObject[childCount];
-
-        int cannonCount = 0;
-
-        for (int i = 0; i < childCount; i++) {
-            children[i] = gameObject.transform.GetChild(i).gameObject;
-            if (children[i].name.StartsWith("cannon")) {
-                cannonCount++;
+        for (int i = 0; i < cannonPositions.Length; i++) {
+            if (cannonExistence[i] && cannons[i] == null) {
+                Debug.Log("Create cannon at index: " + i);
+                CreateCannon(i);
+            } else if (!cannonExistence[i] && cannons[i] != null) {
+                Debug.Log("Destroy cannon at index: " + i);
+                DestroyCannon(i);
             }
         }
+    }
 
-        cannons = new GameObject[cannonCount];
+    private void CreateCannon(int index) {
+        GameObject newCannon = Instantiate(cannonPrefab);
+        newCannon.transform.SetParent(gameObject.transform);
 
-        for (int i = 0; i < childCount; i++) {
-            if (children[i].name.StartsWith("cannon")) {
-                cannons[--cannonCount] = children[i];
-            }
+        ParentConstraint cannonConstraint = newCannon.GetComponent<ParentConstraint>();
+        {
+            ConstraintSource source = new ConstraintSource();
+            source.sourceTransform = transform;
+            source.weight = 1.0f;
+            cannonConstraint.SetSource(0, source);
         }
+
+        cannonConstraint.SetTranslationOffset(0, cannonPositions[index]);
+
+        if (cannonPositions[index].x > 0) {
+            cannonConstraint.SetRotationOffset(0, new Vector3(0, 0, -90));
+        } else {
+            cannonConstraint.SetRotationOffset(0, new Vector3(0, 0, 90));
+        }
+
+        cannonConstraint.locked = true;
+    }
+
+    private void DestroyCannon(int index) {
+        Destroy(cannons[index]);
+        cannons[index] = null;
     }
 
     private void Update() {
         checkLife();
     }
 
+    private void LateUpdate() {
+        if(cannonsTouched) {
+            UpdateCannons();
+            cannonsTouched = false;
+        }
+    }
+
     public void ShootLeft() {
         foreach (GameObject c in cannons) {
-            if (c.GetComponent<ParentConstraint>().GetRotationOffset(0).z > 0) {
-                c.SendMessage("shot");
+            if (c != null) {
+                if (c.GetComponent<ParentConstraint>().GetRotationOffset(0).z > 0) {
+                    c.SendMessage("shot");
+                }
             }
         }
     }
 
     public void ShootRight() {
         foreach (GameObject c in cannons) {
-            if (c.GetComponent<ParentConstraint>().GetRotationOffset(0).z < 0) {
-                c.SendMessage("shot");
+            if (c != null) {
+                if (c.GetComponent<ParentConstraint>().GetRotationOffset(0).z < 0) {
+                    c.SendMessage("shot");
+                }
             }
         }
     }

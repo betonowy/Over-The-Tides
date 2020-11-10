@@ -15,10 +15,11 @@ public class PlayerScript : MonoBehaviour
     public float distanceBeforeTargetReached = 0.5f;
 
     private GameObject healthBar;
-
     private ShipScript shipScript;
 
     public InventoryObject inventory;
+
+    private bool allowMove = true;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +46,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     private void Movement() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && allowMove) {
             Vector2 mousePos = Input.mousePosition;
 
             Vector2 viewport = Camera.allCameras[0].ScreenToViewportPoint(mousePos);
@@ -99,5 +100,9 @@ public class PlayerScript : MonoBehaviour
 
     private void OnApplicationQuit() {
         inventory.Container.Items = new InventorySlot[24];
+    }
+
+    public void allowMovement(bool var) {
+        allowMove = var;
     }
 }

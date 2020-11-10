@@ -40,10 +40,10 @@ public class EnemyScript : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         ship = gameObject.GetComponent<ShipScript>();
-        UpdateChildren();
         ResetAttackTimer();
         ResetCrewTimer();
         ResetMoveTimer();
+        UpdateChildren();
         aiCrewOrderTime = aiFirstOrderDelay;
         aiMovementOrderTime = aiFirstOrderDelay;
         aiAttackOrderTime = aiFirstOrderDelay;
@@ -145,6 +145,8 @@ public class EnemyScript : MonoBehaviour {
     }
 
     void CrewOrder() {
+        UpdateChildren();
+
         float shootRightTargetPriority = 0;
         float shootLeftTargetPriority = 0;
         float mastTargetPriority;
