@@ -13,62 +13,70 @@ MonoBehaviour:
   m_Name: PlayerEquipment
   m_EditorClassIdentifier: 
   savePath: 
+  database: {fileID: 11400000, guid: 53cab9e8331338c44b023f733f7d46a9, type: 2}
   Container:
     Items:
-    - AllowedItem: 01000000
+    - AllowedItems: 
       parent: {fileID: 0}
+      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
-    - AllowedItem: 01000000
+    - AllowedItems: 
       parent: {fileID: 0}
+      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
-    - AllowedItem: 01000000
+    - AllowedItems: 
       parent: {fileID: 0}
+      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
-    - AllowedItem: 01000000
+    - AllowedItems: 
       parent: {fileID: 0}
+      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
-    - AllowedItem: 01000000
+    - AllowedItems: 
       parent: {fileID: 0}
+      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
-    - AllowedItem: 01000000
+    - AllowedItems: 
       parent: {fileID: 0}
+      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
-    - AllowedItem: 01000000
+    - AllowedItems: 
       parent: {fileID: 0}
+      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
-    - AllowedItem: 01000000
+    - AllowedItems: 
       parent: {fileID: 0}
+      ID: -1
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
-  database: {fileID: 11400000, guid: 53cab9e8331338c44b023f733f7d46a9, type: 2}

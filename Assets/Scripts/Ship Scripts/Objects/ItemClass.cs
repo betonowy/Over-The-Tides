@@ -11,11 +11,12 @@ public enum Attributes {
     Worth
 }
 public abstract class ItemClass : ScriptableObject {
+    public int Id;
     public Sprite uiDisplay;
-    public bool stackable;
     public ItemType type;
-
-    public Item data = new Item();
+    [TextArea(15, 20)]
+    public string description;
+    public ItemBuff[] buffs;
 
     public Item CreateItem() {
         Item newItem = new Item(this);
@@ -23,25 +24,23 @@ public abstract class ItemClass : ScriptableObject {
     }
 }
 
-[System.Serializable] 
+[System.Serializable]
 public class Item {
     public string Name;
-    public int Id = -1;
+    public int Id;
     public ItemBuff[] buffs;
-    
     public Item() {
         Name = "";
         Id = -1;
     }
-
     public Item(ItemClass item) {
         Name = item.name;
-        Id = item.data.Id;
-        buffs = new ItemBuff[item.data.buffs.Length];
-        for(int i=0; i<buffs.Length; i++) {
-
-            buffs[i] = new ItemBuff(item.data.buffs[i].min, item.data.buffs[i].max);
-
+        Id = item.Id;
+        buffs = new ItemBuff[item.buffs.Length];
+        for (int i = 0; i < buffs.Length; i++) {
+            buffs[i] = new ItemBuff(item.buffs[i].min, item.buffs[i].max) {
+                attribute = item.buffs[i].attribute
+            };
         }
     }
 }
