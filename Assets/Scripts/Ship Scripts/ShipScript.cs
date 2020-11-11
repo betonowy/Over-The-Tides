@@ -44,6 +44,8 @@ public class ShipScript : MonoBehaviour
 
     public GameObject cannonPrefab;
 
+    public GameObject Shipwreck;
+
     private bool[] cannonExistence;
     private bool cannonsTouched;
     public bool iTouchedCannons;
@@ -194,6 +196,7 @@ public class ShipScript : MonoBehaviour
         if (shipLife < 0) {
             //FindObjectOfType<LevelManager>().SendMessage("OnPlayerDeath");
             OnPlayerDeath();
+            make_shipwreck();
             Destroy(gameObject);
         }
     }
@@ -224,5 +227,12 @@ public class ShipScript : MonoBehaviour
     private float turnModifier() {
         NodeScript script = steerWheelObject.getNodeScript();
         return (float)script.ReadyCrewCount() / script.countNodes() * myBody.velocity.magnitude;
+    }
+
+    private void make_shipwreck()
+    {
+        GameObject newShipwreck = Instantiate(Shipwreck);
+        newShipwreck.transform.position = this.transform.position;
+        newShipwreck.transform.rotation = this.transform.rotation;
     }
 }
