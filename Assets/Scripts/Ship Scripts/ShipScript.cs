@@ -125,10 +125,7 @@ public class ShipScript : MonoBehaviour
 
     private void Update() {
         checkLife();
-    }
-
-    private void LateUpdate() {
-        if(cannonsTouched) {
+        if (cannonsTouched) {
             UpdateCannons();
             cannonsTouched = false;
         }
