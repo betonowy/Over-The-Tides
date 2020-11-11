@@ -12,8 +12,6 @@ public class DynamicInterface : UserInterface
     public int Y_SPACE_BETWEEN_ITEMS;
     public int NUMBER_OF_COLUMN;
 
-    public override void checkShipInvetrory() {}
-
     public override void CreateSlots() {
         slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
         for (int i = 0; i < inventory.Container.Items.Length; i++) {

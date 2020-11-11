@@ -10,8 +10,9 @@ public abstract class UserInterface : MonoBehaviour {
 
     public InventoryObject inventory;
     public Dictionary<GameObject, InventorySlot> slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
-    protected bool[] fixedArray;
+    public ShipScript ship;
 
+    protected bool[] fixedArray;
     protected bool[] inventoryStatus;
 
     void Start() {
@@ -31,6 +32,7 @@ public abstract class UserInterface : MonoBehaviour {
     void Update() {
 
         UpdateSlots();
+        checkShipInvetrory();
     }
     public abstract void CreateSlots();
   
@@ -64,7 +66,6 @@ public abstract class UserInterface : MonoBehaviour {
         MouseData.slotHoverdOver = null;
     }
     public void OnDragStart(GameObject obj) {
-        checkShipInvetrory();
         MouseData.tempItemBeingDragged = CreateTempItem(obj);
     }
 
@@ -82,11 +83,41 @@ public abstract class UserInterface : MonoBehaviour {
         return tempItem;
     }
 
-    public abstract void checkShipInvetrory();
-    
+    public  void checkShipInvetrory() {
+        ship = GameObject.Find("playerBoatBlue").GetComponent<ShipScript>();
+        if (ship == null) ship = GameObject.Find("playerBoatRed").GetComponent<ShipScript>();
+        if (ship == null) ship = GameObject.Find("playerBoatFFA").GetComponent<ShipScript>();
+
+        bool[] oldShipEq = ship.getCannonExistenceArray();
+        for (int i = 0; i < inventory.Container.Items.Length - 16; i++) {
+            if (inventory.Container.Items[i].item.Id == 1)
+                inventoryStatus[i] = true;
+            else
+                inventoryStatus[i] = false;
+        }
+        fixedArray = swapArray(inventoryStatus);
+    }
+
+    public bool[] GetEquiplementArray() {
+        return fixedArray;
+    }
+
+    private bool[] swapArray(bool[] arr) {
+        bool[] temp = new bool[8];
+        temp[0] = arr[0];
+        temp[4] = arr[1];
+        temp[1] = arr[2];
+        temp[5] = arr[3];
+        temp[2] = arr[4];
+        temp[6] = arr[5];
+        temp[3] = arr[6];
+        temp[7] = arr[7];
+        return temp;
+    }
+
     public void OnDragEnd(GameObject obj) {
         Destroy(MouseData.tempItemBeingDragged);
-
+        
         if (MouseData.InterfaceMouseIsOver == null) {
             //slotsOnInterface[obj].RemoveItem();
             return;
@@ -94,9 +125,8 @@ public abstract class UserInterface : MonoBehaviour {
         if(MouseData.slotHoverdOver) {
             InventorySlot moveHoverSlotData = MouseData.InterfaceMouseIsOver.slotsOnInterface[MouseData.slotHoverdOver];
             inventory.SwapItems(slotsOnInterface[obj], moveHoverSlotData);
-            checkShipInvetrory();
         }
-
+        
     }
 
     public void OnDrag(GameObject obj) {
@@ -111,9 +141,6 @@ public abstract class UserInterface : MonoBehaviour {
     public void OnEnterInterface(GameObject obj) {
         MouseData.InterfaceMouseIsOver = obj.GetComponent<UserInterface>();
     }
-
-
-
 }
 
 public static class MouseData {
