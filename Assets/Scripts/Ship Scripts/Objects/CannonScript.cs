@@ -51,7 +51,7 @@ public class CannonScript : MonoBehaviour {
             GetComponents<AudioSource>()[1].Stop();
         }
         Animate();
-        if (cooldown > 0 && cooldown < 0.843 && !reloadPlaying) {
+        if (cooldown > 0 && cooldown < 0.843 * ns.ReadyCrewCount() / nodes.Length && !reloadPlaying) {
             reloadPlaying = true;
             GetComponents<AudioSource>()[1].Play();
         }
