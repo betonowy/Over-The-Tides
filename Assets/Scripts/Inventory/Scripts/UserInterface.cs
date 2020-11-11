@@ -19,6 +19,7 @@ public abstract class UserInterface : MonoBehaviour {
         }
         inventoryStatus = new bool[inventory.Container.Items.Length];
         CreateSlots();
+        checkShipInvetrory();
         AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(gameObject); });
         AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnExitInterface(gameObject); });
         
