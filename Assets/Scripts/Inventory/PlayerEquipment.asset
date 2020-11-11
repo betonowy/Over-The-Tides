@@ -19,21 +19,21 @@ MonoBehaviour:
     - AllowedItems: 01000000
       item:
         Name: 
+        Id: -1
+        buffs: []
+      amount: 0
+    - AllowedItems: 01000000
+      item:
+        Name: Cannon
         Id: 1
         buffs: []
-      amount: 0
+      amount: 1
     - AllowedItems: 01000000
       item:
-        Name: 
-        Id: 0
+        Name: Cannon
+        Id: 1
         buffs: []
-      amount: 0
-    - AllowedItems: 01000000
-      item:
-        Name: 
-        Id: -1
-        buffs: []
-      amount: 0
+      amount: 1
     - AllowedItems: 01000000
       item:
         Name: 
@@ -48,16 +48,16 @@ MonoBehaviour:
       amount: 0
     - AllowedItems: 01000000
       item:
-        Name: 
-        Id: -1
+        Name: Cannon
+        Id: 1
         buffs: []
-      amount: 0
+      amount: 1
     - AllowedItems: 01000000
       item:
-        Name: 
-        Id: -1
+        Name: Cannon
+        Id: 1
         buffs: []
-      amount: 0
+      amount: 1
     - AllowedItems: 01000000
       item:
         Name: 
