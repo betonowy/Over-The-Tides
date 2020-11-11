@@ -7,5 +7,6 @@ public class EquipmentObject : ItemClass {
 
     public void Awake() {
         type = ItemType.Cannon;
+        data.Id = 1;
     }
 }
