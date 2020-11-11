@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f8379253571a940874657df0ca8e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiEncircleRadiusMax: 30
+  aiEncircleRadiusMax: 20
   aiEncircleRadiusMin: 15
-  aiAttackDistance: 30
+  aiAttackDistance: 16
   aiAttackAccuracyBeforeShoot: 0.8
   aiAttackLongtitudalBlindSpot: 0.8
   aiDefendFrontBlindSpot: 0.6
   aiDefendRearBlindSpot: 0.5
+  aiDefendMinimumFriendlySeparation: 12
   aiCrewOrderPeriod: 5
-  aiMovementOrderPeriod: 1
-  aiAttackOrderPeriod: 0.5
+  aiMovementOrderPeriod: 3
+  aiAttackOrderPeriod: 1
   aiFirstOrderDelay: 3
   aiOrderPeriodRandomize: 0.1
 --- !u!1001 &693250252444643592

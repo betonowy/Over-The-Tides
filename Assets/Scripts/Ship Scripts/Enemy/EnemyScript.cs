@@ -7,6 +7,7 @@ using UnityEngine.Animations;
 public class EnemyScript : MonoBehaviour {
     public float aiEncircleRadiusMax = 20;
     public float aiEncircleRadiusMin = 15;
+    public float aiEncircleAggressiveFactor = 0.05f;
 
     public float aiAttackDistance = 15;
     public float aiAttackAccuracyBeforeShoot = 0.9f;
@@ -14,6 +15,10 @@ public class EnemyScript : MonoBehaviour {
 
     public float aiDefendFrontBlindSpot = 0.6f;
     public float aiDefendRearBlindSpot = 0.5f;
+    public float aiDefendMinimumFriendlySeparation = 15f;
+    public float aiDefendMinimumEnemySeparation = 5f;
+    public float aiDefendAvoidFriendlyFactor = 0.5f;
+    public float aiDefendAvoidEnemyFactor = 0.5f;
 
     public float aiCrewOrderPeriod = 3;
     public float aiMovementOrderPeriod = 2;
@@ -152,7 +157,7 @@ public class EnemyScript : MonoBehaviour {
         float mastTargetPriority;
         float steerTargetPriority;
 
-        GameObject[] targets = getAllTargets();
+        GameObject[] targets = GetAllEnemyTargets();
 
         if (targets.Length <= 0) {
             return;
@@ -336,7 +341,7 @@ public class EnemyScript : MonoBehaviour {
     }
 
     void MoveOrder() {
-        GameObject[] targets = getAllTargets();
+        GameObject[] targets = GetAllEnemyTargets();
 
         aiPropell = false;
 
@@ -358,12 +363,39 @@ public class EnemyScript : MonoBehaviour {
 
         if (closestTarget != null) {
             aiTargetDirection = wishToGoDirection(closestTarget);
+            aiTargetDirection = (getVectorToTarget(closestTarget).normalized * aiEncircleAggressiveFactor + aiTargetDirection).normalized;
+            if (getDistanceToTarget(closestTarget) < aiDefendMinimumEnemySeparation)
+                aiTargetDirection = (-getVectorToTarget(closestTarget).normalized * aiDefendAvoidEnemyFactor + aiTargetDirection).normalized;
+            aiPropell = true;
+        }
+
+        targets = GetAllFriendlyTargets();
+
+        if (targets.Length <= 0) {
+            return;
+        }
+
+        closestTarget = null;
+
+        {
+            float minDist = aiDefendMinimumFriendlySeparation;
+            for (int i = 0; i < targets.Length; i++) {
+                float dist = getDistanceToTarget(targets[i]);
+                if (dist < minDist) {
+                    minDist = dist;
+                    closestTarget = targets[i];
+                }
+            }
+        }
+
+        if (closestTarget != null) {
+            aiTargetDirection = (-getVectorToTarget(closestTarget).normalized * 0.5f + aiTargetDirection).normalized;
             aiPropell = true;
         }
     }
 
     void AttackOrder() {
-        GameObject[] targets = getAllTargets();
+        GameObject[] targets = GetAllEnemyTargets();
 
         aiShootLeft = false;
         aiShootRight = false;
@@ -383,7 +415,7 @@ public class EnemyScript : MonoBehaviour {
         }
     }
 
-    GameObject[] getAllTargets() {
+    GameObject[] GetAllEnemyTargets() {
         GameObject[] g = GameObject.FindGameObjectsWithTag("Ship");
 
         int select = 0;
@@ -398,6 +430,28 @@ public class EnemyScript : MonoBehaviour {
 
         for (int i = 0, j = 0; i < g.Length; i++) {
             if (g[i].GetComponent<ShipScript>().team != ship.team || g[i].GetComponent<ShipScript>().team == ShipScript.teamEnum.FFA) {
+                b[j++] = g[i];
+            }
+        }
+
+        return b;
+    }
+
+    GameObject[] GetAllFriendlyTargets() {
+        GameObject[] g = GameObject.FindGameObjectsWithTag("Ship");
+
+        int select = 0;
+
+        foreach (var potentialTarget in g) {
+            if (potentialTarget.GetComponent<ShipScript>().team == ship.team && potentialTarget.GetComponent<ShipScript>().team != ShipScript.teamEnum.FFA && potentialTarget.gameObject != gameObject) {
+                select++;
+            }
+        }
+
+        GameObject[] b = new GameObject[select];
+
+        for (int i = 0, j = 0; i < g.Length; i++) {
+            if (g[i].GetComponent<ShipScript>().team == ship.team && g[i].GetComponent<ShipScript>().team != ShipScript.teamEnum.FFA && g[i].gameObject != gameObject) {
                 b[j++] = g[i];
             }
         }
