@@ -14,6 +14,7 @@ public class StaticInterface : UserInterface
     public ShipScript ship;
     public GameObject inventoryPrefab;
     public GameObject[] slots;
+    private Canvas canvas;
 
     public override void checkShipInvetrory() {
         ship = GameObject.Find("playerBoatBlue").GetComponent<ShipScript>();
@@ -27,27 +28,41 @@ public class StaticInterface : UserInterface
             else
                 inventoryStatus[i] = false;
         }
-        for (int i = 0; i < inventory.Container.Items.Length - 16; i++) {
-           // if (oldShipEq[i] != inventoryStatus[i]) { }
-        //        ship.UpdateCannonsFromInventory(i, inventoryStatus[i]);
-        }
+        fixedArray = swapArray(inventoryStatus);
     }
-    /*
-    public override void CreateSlots() {
-        slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
-        for (int i = 0; i < inventory.Container.Items.Length; i++) {
-            var obj = slots[i]; 
-            AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
-            AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
-            AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnDragStart(obj); });
-            AddEvent(obj, EventTriggerType.EndDrag, delegate { OnDragEnd(obj); });
-            AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
 
-            slotsOnInterface.Add(obj, inventory.Container.Items[i]);
-            
-        }
-    }*/
-    
+    public bool[] GetEquiplementArray() {
+        return fixedArray;
+    }
+
+    private bool[] swapArray(bool[] arr) {
+        bool[] temp = new bool[8];
+        temp[0] = arr[0] ;
+        temp[4] = arr[1];
+        temp[1] = arr[2];
+        temp[5] = arr[3];
+        temp[2] = arr[4];
+        temp[6] = arr[5];
+        temp[3] = arr[6];
+        temp[7] = arr[7];
+        return temp;
+    }
+
+    //public override void CreateSlots() {
+    //    slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
+    //    for (int i = 0; i < inventory.Container.Items.Length; i++) {
+    //        var obj = slots[i]; 
+    //        AddEvent(obj, EventTriggerType.PointerEnter, delegate { OnEnter(obj); });
+    //        AddEvent(obj, EventTriggerType.PointerExit, delegate { OnExit(obj); });
+    //        AddEvent(obj, EventTriggerType.BeginDrag, delegate { OnDragStart(obj); });
+    //        AddEvent(obj, EventTriggerType.EndDrag, delegate { OnDragEnd(obj); });
+    //        AddEvent(obj, EventTriggerType.Drag, delegate { OnDrag(obj); });
+
+    //        slotsOnInterface.Add(obj, inventory.Container.Items[i]);
+
+    //    }
+    //}
+
     public override void CreateSlots() {
         slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
         for (int i = 0; i < inventory.Container.Items.Length - 16; i++) {

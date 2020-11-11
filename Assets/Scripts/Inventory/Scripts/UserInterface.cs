@@ -10,6 +10,7 @@ public abstract class UserInterface : MonoBehaviour {
 
     public InventoryObject inventory;
     public Dictionary<GameObject, InventorySlot> slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
+    protected bool[] fixedArray;
 
     protected bool[] inventoryStatus;
 
@@ -17,7 +18,8 @@ public abstract class UserInterface : MonoBehaviour {
         for (int i = 0; i < inventory.Container.Items.Length; i++) {
             inventory.Container.Items[i].parent = this;
         }
-        inventoryStatus = new bool[inventory.Container.Items.Length];
+        inventoryStatus = new bool[inventory.Container.Items.Length - 16];
+        fixedArray = new bool[inventory.Container.Items.Length - 16];
         CreateSlots();
         checkShipInvetrory();
         AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(gameObject); });

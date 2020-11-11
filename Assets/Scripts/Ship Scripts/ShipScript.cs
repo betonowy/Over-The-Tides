@@ -47,6 +47,7 @@ public class ShipScript : MonoBehaviour
     private bool[] cannonExistence;
     private bool cannonsTouched;
     public bool iTouchedCannons;
+    private StaticInterface staticInterface;
 
     private void Start() {
         cannonExistence = new bool[cannonPositions.Length];
@@ -58,6 +59,8 @@ public class ShipScript : MonoBehaviour
         steerWheelObject = transform.Find("SteerWheel").GetComponent<SteerWheelScript>();
         frontMastObject = transform.Find("Mast").GetComponent<MastScript>();
         backMastObject = transform.Find("Mastback").GetComponent<MastScript>();
+        staticInterface = GameObject.Find("Canvas").transform.Find("CanvasInventory").transform.Find("EquipmentScreen").GetComponent<StaticInterface>();
+
 
         initialCannons();
         UpdateCannons();
@@ -123,10 +126,12 @@ public class ShipScript : MonoBehaviour
 
     private void Update() {
         checkLife();
-        if (cannonsTouched) {
-            UpdateCannons();
-            cannonsTouched = false;
-        }
+        cannonExistence = staticInterface.GetEquiplementArray();
+        UpdateCannons();
+        //if (cannonsTouched) {
+        //    UpdateCannons();
+        //    cannonsTouched = false;
+        //}
     }
 
     public void ShootLeft() {

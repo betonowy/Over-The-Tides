@@ -3183,12 +3183,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfe4e873335c620439fe536dcfb8897d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 1ea7cca0cb0e47446bc86f4d19e6a2eb, type: 2}
+  inventory: {fileID: 11400000, guid: 288fd7ced93a33749bdaef759ed39b70, type: 2}
   X_START: -73
   Y_START: 130
   X_SPACE_BETWEEN_ITEM: 150
   Y_SPACE_BETWEEN_ITEMS: 70
   NUMBER_OF_COLUMN: 2
+  ship: {fileID: 0}
+  inventoryPrefab: {fileID: 7885718912258597232, guid: 355d25d13df3caa4ea9cc46c462a0497,
+    type: 3}
   slots:
   - {fileID: 1764661196}
   - {fileID: 1349511062}
@@ -3198,9 +3201,6 @@ MonoBehaviour:
   - {fileID: 1050143395}
   - {fileID: 101477918}
   - {fileID: 754653280}
-  ship: {fileID: 0}
-  inventoryPrefab: {fileID: 7885718912258597232, guid: 355d25d13df3caa4ea9cc46c462a0497,
-    type: 3}
 --- !u!114 &1922111699
 MonoBehaviour:
   m_ObjectHideFlags: 0

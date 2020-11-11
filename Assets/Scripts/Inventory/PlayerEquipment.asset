@@ -18,16 +18,16 @@ MonoBehaviour:
     Items:
     - AllowedItems: 
       item:
-        Name: Cannon
-        Id: 1
+        Name: 
+        Id: -1
         buffs: []
-      amount: 1
+      amount: 0
     - AllowedItems: 
       item:
-        Name: Cannon
-        Id: 1
+        Name: 
+        Id: -1
         buffs: []
-      amount: 1
+      amount: 0
     - AllowedItems: 
       item:
         Name: 
