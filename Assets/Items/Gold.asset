@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51c76856f0cdebb4eacaee3c0cc5202f, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  uiDisplay: {fileID: 21300000, guid: 7fc1db9c147a85c45b1261c016350bfe, type: 3}
+  uiDisplay: {fileID: 21300000, guid: 8f01e6eeaee1cea418ba874851faccee, type: 3}
   stackable: 1
   type: 0
   data:
