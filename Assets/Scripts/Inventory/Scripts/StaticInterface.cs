@@ -9,6 +9,10 @@ public class StaticInterface : UserInterface
     public ShipScript ship;
 
     public override void checkShipInvetrory() {
+        ship = GameObject.Find("playerBoatBlue").GetComponent<ShipScript>();
+        if (ship == null) ship = GameObject.Find("playerBoatRed").GetComponent<ShipScript>();
+        if (ship == null) ship = GameObject.Find("playerBoatFFA").GetComponent<ShipScript>();
+
         bool[] oldShipEq = ship.getCannonExistenceArray();
         for (int i = 0; i < inventory.Container.Items.Length; i++) {
             if (inventory.Container.Items[i].item.Id == 1)
