@@ -128,7 +128,9 @@ public class ShipScript : MonoBehaviour
 
     private void Update() {
         checkLife();
-        cannonExistence = staticInterface.GetEquiplementArray();
+        if (GetComponent<PlayerScript>() != null) {
+            cannonExistence = staticInterface.GetEquiplementArray();
+        }
         UpdateCannons();
         //if (cannonsTouched) {
         //    UpdateCannons();

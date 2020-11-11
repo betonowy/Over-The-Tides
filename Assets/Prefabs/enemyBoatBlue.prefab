@@ -16,14 +16,14 @@ MonoBehaviour:
   aiEncircleRadiusMin: 15
   aiEncircleAggressiveFactor: 0.04
   aiRightHandBias: 0.5
-  aiAttackDistance: 16
+  aiAttackDistance: 17
   aiAttackAccuracyBeforeShoot: 0.8
-  aiAttackLongtitudalBlindSpot: 0.8
+  aiAttackLongtitudalBlindSpot: 0.7
   aiDefendFrontBlindSpot: 0.6
   aiDefendRearBlindSpot: 0.5
   aiDefendMinimumFriendlySeparation: 12
   aiDefendMinimumEnemySeparation: 10
-  aiDefendAvoidFriendlyFactor: 0.5
+  aiDefendAvoidFriendlyFactor: 1
   aiDefendAvoidEnemyFactor: 0.5
   aiCrewOrderPeriod: 3
   aiMovementOrderPeriod: 1

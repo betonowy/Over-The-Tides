@@ -84,9 +84,16 @@ public abstract class UserInterface : MonoBehaviour {
     }
 
     public  void checkShipInvetrory() {
-        if(GameObject.Find("playerBoatBlue").GetComponent<ShipScript>() != null) ship = GameObject.Find("playerBoatBlue").GetComponent<ShipScript>();
-        if (ship == null) ship = GameObject.Find("playerBoatRed").GetComponent<ShipScript>();
-        if (ship == null) ship = GameObject.Find("playerBoatFFA").GetComponent<ShipScript>();
+        try {
+            ship = GameObject.Find("playerBoatBlue").GetComponent<ShipScript>();
+        } catch { }
+        try {
+            if (ship == null) ship = GameObject.Find("playerBoatRed").GetComponent<ShipScript>();
+        } catch { }
+        try {
+            if (ship == null) ship = GameObject.Find("playerBoatFFA").GetComponent<ShipScript>();
+        } catch { }
+        if (ship == null) return;
 
         bool[] oldShipEq = ship.getCannonExistenceArray();
         for (int i = 0; i < inventory.Container.Items.Length - 16; i++) {
