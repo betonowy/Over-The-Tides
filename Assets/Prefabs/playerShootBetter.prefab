@@ -133,6 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4515fdaed5b1a154ab3b154efb668524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 10
+  lifeTime: 8
   dieVelocityRatio: 0.5
   damageMultipier: 30

@@ -23,7 +23,8 @@ public class Projectile : MonoBehaviour {
         }
 
         if (rb.velocity.magnitude < initialVelocity.magnitude * dieVelocityRatio) {
-            DestroyProjectile();
+            if (lifeTime > 2)
+                lifeTime = 2;
         }
     }
 

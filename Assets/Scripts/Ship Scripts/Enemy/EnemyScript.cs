@@ -9,6 +9,8 @@ public class EnemyScript : MonoBehaviour {
     public float aiEncircleRadiusMin = 15;
     public float aiEncircleAggressiveFactor = 0.05f;
 
+    public float aiRightHandBias = 0.2f;
+
     public float aiAttackDistance = 15;
     public float aiAttackAccuracyBeforeShoot = 0.9f;
     public float aiAttackLongtitudalBlindSpot = 0.3f;
@@ -49,9 +51,9 @@ public class EnemyScript : MonoBehaviour {
         ResetCrewTimer();
         ResetMoveTimer();
         UpdateChildren();
-        aiCrewOrderTime = aiFirstOrderDelay;
-        aiMovementOrderTime = aiFirstOrderDelay;
-        aiAttackOrderTime = aiFirstOrderDelay;
+        aiCrewOrderTime = aiFirstOrderDelay + Random.Range(0, aiOrderPeriodRandomize);
+        aiMovementOrderTime = aiFirstOrderDelay + Random.Range(0, aiOrderPeriodRandomize);
+        aiAttackOrderTime = aiFirstOrderDelay + Random.Range(0, aiOrderPeriodRandomize);
     }
 
     private void UpdateChildren() {
@@ -485,6 +487,10 @@ public class EnemyScript : MonoBehaviour {
         return Vector2.Dot(getRightHandDirection(), getVectorToTarget(g).normalized);
     }
 
+    float scalarRightHandTowardsTargetSkewed(GameObject g, float bias) {
+        return Vector2.Dot((getRightHandDirection() + getMyDirection() * bias).normalized, getVectorToTarget(g).normalized);
+    }
+
     float linearDecision(float input, float thresholdOne, float thresholdZero) {
         if (thresholdOne == thresholdZero) {
             if (input >= thresholdOne) return 1;
@@ -509,7 +515,7 @@ public class EnemyScript : MonoBehaviour {
         Vector2 directVector = distance.normalized;
         Vector2 encirclingVector;
 
-        if (scalarRightHandTowardsTarget(g) > 0) encirclingVector = new Vector2(-directVector.y, directVector.x);
+        if (scalarRightHandTowardsTargetSkewed(g, aiRightHandBias) > 0) encirclingVector = new Vector2(-directVector.y, directVector.x);
         else encirclingVector = new Vector2(directVector.y, -directVector.x);
 
         return proportionalOfVectors(linearDecision(distance.magnitude, aiEncircleRadiusMax, aiEncircleRadiusMin), encirclingVector, directVector);
