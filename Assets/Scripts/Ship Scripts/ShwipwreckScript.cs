@@ -33,18 +33,18 @@ public class ShwipwreckScript : MonoBehaviour
     private void match_cannon()
     {
         GameObject cnn = Instantiate(cannonToPick);
-        cnn.transform.SetParent(gameObject.transform);
-        cnn.GetComponent<BoxCollider2D>().size = boxCollider.size;
-        cnn.GetComponent<BoxCollider2D>().transform.Translate(pos);
+        //cnn.transform.SetParent(gameObject.transform);
+        //cnn.GetComponent<BoxCollider2D>().size = boxCollider.size;
+        //cnn.GetComponent<BoxCollider2D>().transform.Translate(pos);
         cnn.transform.position = gameObject.transform.position;
     }
 
     private void match_gold()
     {
         GameObject gld = Instantiate(GoldToPick);
-        gld.transform.SetParent(gameObject.transform);
-        gld.GetComponent<BoxCollider2D>().size = boxCollider.size;
-        gld.GetComponent<BoxCollider2D>().transform.Translate(pos);
+        //gld.transform.SetParent(gameObject.transform);
+        //gld.GetComponent<BoxCollider2D>().size = boxCollider.size;
+        //gld.GetComponent<BoxCollider2D>().transform.Translate(pos);
         gld.transform.position = gameObject.transform.position;
     }
 }
