@@ -6,7 +6,6 @@ using UnityEditor;
 using System.Runtime.Serialization;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
- 
 public class InventoryObject : ScriptableObject {
     public string savePath;
     public ItemDatabaseObject database;
