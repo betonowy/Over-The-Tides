@@ -4394,7 +4394,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfe4e873335c620439fe536dcfb8897d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 1ea7cca0cb0e47446bc86f4d19e6a2eb, type: 2}
+  inventory: {fileID: 0}
+  X_START: 0
+  Y_START: 0
+  X_SPACE_BETWEEN_ITEM: 0
+  Y_SPACE_BETWEEN_ITEMS: 0
+  NUMBER_OF_COLUMN: 0
+  ship: {fileID: 0}
+  inventoryPrefab: {fileID: 0}
   slots:
   - {fileID: 1764661196}
   - {fileID: 1349511062}
@@ -4404,7 +4411,6 @@ MonoBehaviour:
   - {fileID: 1050143395}
   - {fileID: 101477918}
   - {fileID: 754653280}
-  ship: {fileID: 0}
 --- !u!114 &1922111699
 MonoBehaviour:
   m_ObjectHideFlags: 0

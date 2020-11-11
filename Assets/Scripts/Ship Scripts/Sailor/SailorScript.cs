@@ -18,6 +18,8 @@ public class SailorScript : MonoBehaviour {
     private bool changeSprite;
     public float walkSpeed;
 
+    private AudioSource audioSteps;
+
     private NodeClass assignedNode;
 
     // Start is called before the first frame update
@@ -28,6 +30,7 @@ public class SailorScript : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = newSprite_Front_White;
         changeSprite = false;
+        audioSteps = GetComponents<AudioSource>()[0];
     }
 
     // Update is called once per frame
@@ -60,6 +63,10 @@ public class SailorScript : MonoBehaviour {
         Vector2 stepVector = walkDir.normalized * walkSpeed * Time.deltaTime;
         if (walkDir.magnitude > stepVector.magnitude) {
             shipPosition += stepVector;
+            if (!audioSteps.isPlaying) {
+                audioSteps.pitch = Random.Range(0.95f, 1.05f);
+                audioSteps.Play();
+            }
         } else {
             shipPosition = targetShipPosition;
         }

@@ -32,6 +32,8 @@ public class Projectile : MonoBehaviour {
         if (!collision.gameObject.name.StartsWith("playerShootBetter")) {
             collision.gameObject.SendMessage("Damage", damageMultipier * rb.velocity.magnitude / initialVelocity.magnitude);
             DestroyProjectile();
+        } else {
+            GetComponent<AudioSource>().Play();
         }
     }
 

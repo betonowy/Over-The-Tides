@@ -18,8 +18,18 @@ public class CannonScript : MonoBehaviour {
     private Vector2 spawnVelocityVector = new Vector2();
     private float cooldown = 0;
 
+    public Sprite[] animation;
+    public float[] animationTiming;
+    private float frameTime = 0;
+    private int frameIndex = 0;
+    private int lastIndex = 0;
+    private bool triggerAnimation = false;
+
     private NodeScript ns;
     private Rigidbody2D cannonRB;
+    private SpriteRenderer mySprite;
+    private bool reloadPlaying = false;
+    private bool reloadHesitate = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -30,11 +40,41 @@ public class CannonScript : MonoBehaviour {
             ns.CreateRelativeNode(nodes[i]);
         }
         cooldown = cooldownTime;
+        mySprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update() {
         cooldown -= Time.deltaTime * (float)ns.ReadyCrewCount() / (float)nodes.Length;
+        reloadHesitate = ns.ReadyCrewCount() == 0;
+        if (reloadHesitate && cooldown > 0) {
+            GetComponents<AudioSource>()[1].Stop();
+        }
+        Animate();
+        if (cooldown > 0 && cooldown < 0.843 && !reloadPlaying) {
+            reloadPlaying = true;
+            GetComponents<AudioSource>()[1].Play();
+        }
+        if (!GetComponents<AudioSource>()[1].isPlaying) {
+            reloadPlaying = false;
+        }
+    }
+
+    void Animate() {
+        if (frameIndex != 0 || triggerAnimation) {
+            triggerAnimation = false;
+            frameTime -= Time.deltaTime;
+            if (frameTime < 0) {
+                if (++frameIndex >= animation.Length) {
+                    frameIndex = 0;
+                }
+                frameTime = animationTiming[frameIndex];
+            }
+        }
+        if (lastIndex != frameIndex) {
+            mySprite.sprite = animation[frameIndex];
+            lastIndex = frameIndex;
+        }
     }
 
     void updateSpawnPointAndVelocity() {
@@ -50,7 +90,7 @@ public class CannonScript : MonoBehaviour {
     public void shot() {
         if (cooldown <= 0) {
             updateSpawnPointAndVelocity();
-
+            triggerAnimation = true;
             GameObject spawnedBall = Instantiate(ballTemplate, gameObject.transform.position, gameObject.transform.rotation);
             Rigidbody2D ballRigidbody = spawnedBall.GetComponent<Rigidbody2D>();
 
@@ -58,7 +98,7 @@ public class CannonScript : MonoBehaviour {
             ballRigidbody.velocity = spawnVelocityVector;
 
             spawnedBall.SendMessage("SetInitialSpeed", spawnVelocityVector);
-            gameObject.GetComponent<AudioSource>().Play();
+            gameObject.GetComponents<AudioSource>()[0].Play();
             cooldown = cooldownTime;
         }
     }
