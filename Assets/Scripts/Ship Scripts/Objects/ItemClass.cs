@@ -34,7 +34,11 @@ public class Item {
     public Item(ItemClass item) {
         Name = item.name;
         Id = item.data.Id;
-        buffs = new ItemBuff[item.data.buffs.Length];
+        try {
+            buffs = new ItemBuff[item.data.buffs.Length];
+        } catch {
+
+        }
         for (int i = 0; i < buffs.Length; i++) {
             buffs[i] = new ItemBuff(item.data.buffs[i].min, item.data.buffs[i].max) {
                 attribute = item.data.buffs[i].attribute

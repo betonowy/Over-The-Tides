@@ -62,7 +62,7 @@ public abstract class UserInterface : MonoBehaviour {
         MouseData.slotHoverdOver = null;
     }
     public void OnDragStart(GameObject obj) {
-
+        checkShipInvetrory();
         MouseData.tempItemBeingDragged = CreateTempItem(obj);
     }
 
