@@ -84,10 +84,8 @@ public class ShipScript : MonoBehaviour
     private void UpdateCannons() {
         for (int i = 0; i < cannonPositions.Length; i++) {
             if (cannonExistence[i] && cannons[i] == null) {
-                Debug.Log("Create cannon at index: " + i);
                 CreateCannon(i);
             } else if (!cannonExistence[i] && cannons[i] != null) {
-                Debug.Log("Destroy cannon at index: " + i);
                 DestroyCannon(i);
             }
         }
@@ -200,7 +198,10 @@ public class ShipScript : MonoBehaviour
     }
 
     public void OnPlayerDeath() {
-
+        if (gameObject.GetComponent<PlayerScript>() != null) {
+            FindObjectOfType<CameraScript>().offCheck();
+            FindObjectOfType<PlayerCamera>().offCheck();
+        }
     }
 
     private bool steerWheelManned() {

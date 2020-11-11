@@ -111,6 +111,9 @@ public class CameraScript : MonoBehaviour {
 
     public void offCheck() {
         check = false;
+        var a = cam.rect;
+        a.width = 1;
+        cam.rect = a;
     }
 
     public void toggleCheck() {

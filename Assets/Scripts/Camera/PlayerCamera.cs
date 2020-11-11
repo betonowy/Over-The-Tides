@@ -12,23 +12,26 @@ public class PlayerCamera : MonoBehaviour {
         cam.enabled = false;
     }
 
-    private void LateUpdate() {
-        var temp = cam.rect;
-        temp.width = widthMod / ((float)Screen.width / Screen.height);
-        temp.x = 1 - temp.width;
-        cam.rect = temp;
-        temp = Camera.allCameras[0].rect;
+    private void Update() {
+        try {
+            var temp = cam.rect;
+            temp.width = widthMod / ((float)Screen.width / Screen.height);
+            temp.x = 1 - temp.width;
+            cam.rect = temp;
+            temp = Camera.allCameras[0].rect;
 
-        if (check) {
-            cam.enabled = true;
-            temp.width = 1 - cam.rect.width;
-        } else {
-            cam.enabled = false;
-            temp.width = 1;
+            if (check) {
+                cam.enabled = true;
+                temp.width = 1 - cam.rect.width;
+            } else {
+                cam.enabled = false;
+                temp.width = 1;
+            }
+
+            Camera.allCameras[0].rect = temp;
+        } catch {
+            offCheck();
         }
-
-        Camera.allCameras[0].rect = temp;
-        
     }
 
     public bool getCheck() {
