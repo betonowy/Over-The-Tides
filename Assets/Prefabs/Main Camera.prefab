@@ -100,7 +100,7 @@ MonoBehaviour:
   smoothTime: 0.8
   minZoom: 5
   maxZoom: 200
-  zoom: 5
+  zoom: 20
   zoomSpeed: 0.05
   moveSpeed: 3
   minSizeY: 5
