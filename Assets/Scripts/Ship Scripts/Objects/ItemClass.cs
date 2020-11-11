@@ -39,11 +39,13 @@ public class Item {
         } catch {
 
         }
-        for (int i = 0; i < buffs.Length; i++) {
-            buffs[i] = new ItemBuff(item.data.buffs[i].min, item.data.buffs[i].max) {
-                attribute = item.data.buffs[i].attribute
-            };
-        }
+        try {
+            for (int i = 0; i < buffs.Length; i++) {
+                buffs[i] = new ItemBuff(item.data.buffs[i].min, item.data.buffs[i].max) {
+                    attribute = item.data.buffs[i].attribute
+                };
+            }
+        } catch { }
     }
 }
 
