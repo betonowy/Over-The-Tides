@@ -19,6 +19,9 @@ public class PlayerScript : MonoBehaviour
 
     public InventoryObject inventory;
 
+    public bool rectDenied;
+    public Rect[] deniedRects;
+
     private bool allowMove = true;
 
     // Start is called before the first frame update
@@ -49,20 +52,29 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && allowMove) {
             Vector2 mousePos = Input.mousePosition;
 
-            Vector2 viewport = Camera.allCameras[0].ScreenToViewportPoint(mousePos);
-            bool insideViewport = true;
-            if (viewport.x > 1f || viewport.x < 0f || viewport.y > 1f || viewport.y < 0f)
-                insideViewport = false;
+            bool allow = true;
 
-            if (insideViewport) {
-                targetPosition = Camera.allCameras[0].ScreenToWorldPoint(mousePos);
-                targetPosition.z = gameObject.transform.position.z;
-                reachedTarget = false;
-                if (activeMoveMark != null) {
-                    Destroy(activeMoveMark);
+            if (rectDenied) {
+                if (MouseInDeniedRect())
+                    allow = false;
+            }
+
+            if (allow) {
+                Vector2 viewport = Camera.allCameras[0].ScreenToViewportPoint(mousePos);
+                bool insideViewport = true;
+                if (viewport.x > 1f || viewport.x < 0f || viewport.y > 1f || viewport.y < 0f)
+                    insideViewport = false;
+
+                if (insideViewport) {
+                    targetPosition = Camera.allCameras[0].ScreenToWorldPoint(mousePos);
+                    targetPosition.z = gameObject.transform.position.z;
+                    reachedTarget = false;
+                    if (activeMoveMark != null) {
+                        Destroy(activeMoveMark);
+                    }
+                    activeMoveMark = Instantiate(moveTargetMark);
+                    activeMoveMark.transform.position = targetPosition;
                 }
-                activeMoveMark = Instantiate(moveTargetMark);
-                activeMoveMark.transform.position = targetPosition;
             }
         }
 
@@ -78,6 +90,15 @@ public class PlayerScript : MonoBehaviour
                 activeMoveMark = null;
             }
         }
+    }
+
+    private bool MouseInDeniedRect() {
+        Vector2 viewport = Camera.allCameras[0].ScreenToViewportPoint(Input.mousePosition);
+        foreach (Rect dr in deniedRects) {
+            if (dr.Contains(viewport))
+                return true;
+        }
+        return false;
     }
 
     Vector2 GetVectorPlayerToTarget() {
