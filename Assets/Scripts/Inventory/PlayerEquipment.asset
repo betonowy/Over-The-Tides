@@ -16,49 +16,49 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: 53cab9e8331338c44b023f733f7d46a9, type: 2}
   Container:
     Items:
-    - AllowedItems: 
+    - AllowedItems: 01000000
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
-    - AllowedItems: 
+    - AllowedItems: 01000000
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
-    - AllowedItems: 
+    - AllowedItems: 01000000
       item:
         Name: 
-        Id: -1
-        buffs: []
-      amount: 0
-    - AllowedItems: 
-      item:
-        Name: Cannon
         Id: 1
         buffs: []
       amount: 1
-    - AllowedItems: 
+    - AllowedItems: 01000000
+      item:
+        Name: 
+        Id: 1
+        buffs: []
+      amount: 1
+    - AllowedItems: 01000000
+      item:
+        Name: 
+        Id: 1
+        buffs: []
+      amount: 1
+    - AllowedItems: 01000000
+      item:
+        Name: 
+        Id: 1
+        buffs: []
+      amount: 1
+    - AllowedItems: 01000000
       item:
         Name: 
         Id: -1
         buffs: []
       amount: 0
-    - AllowedItems: 
-      item:
-        Name: 
-        Id: -1
-        buffs: []
-      amount: 0
-    - AllowedItems: 
-      item:
-        Name: 
-        Id: -1
-        buffs: []
-      amount: 0
-    - AllowedItems: 
+    - AllowedItems: 01000000
       item:
         Name: 
         Id: -1
