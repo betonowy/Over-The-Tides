@@ -58,6 +58,7 @@ public class CannonScript : MonoBehaviour {
             ballRigidbody.velocity = spawnVelocityVector;
 
             spawnedBall.SendMessage("SetInitialSpeed", spawnVelocityVector);
+            gameObject.GetComponent<AudioSource>().Play();
             cooldown = cooldownTime;
         }
     }

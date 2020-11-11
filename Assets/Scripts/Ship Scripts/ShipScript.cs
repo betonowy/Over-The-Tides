@@ -182,6 +182,7 @@ public class ShipScript : MonoBehaviour
     }
 
     public void Damage(float value) {
+        gameObject.GetComponents<AudioSource>()[1].Play();
         shipLife -= value;
     }
 
