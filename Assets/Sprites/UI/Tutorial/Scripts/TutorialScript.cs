@@ -48,7 +48,6 @@ public class TutorialScript : MonoBehaviour
             flag = true;
         }
     }
-
     private void Update() {
         if (!playerScriptCaptured) {
             ps = FindObjectOfType<PlayerScript>();
@@ -58,17 +57,17 @@ public class TutorialScript : MonoBehaviour
                 Rect newRect = new Rect();
                 float ratio = (float)Screen.height / Screen.width;
                 // tutorial window
-                newRect.width = 0.47f * ratio;
-                newRect.height = 0.53f;
-                newRect.x = 0.07f * ratio;
+                newRect.width = 290f / Screen.width;
+                newRect.height = 330f / Screen.height;
+                newRect.x = 30f / Screen.width;
                 newRect.y = 0.5f - newRect.height / 2;
                 newRects[0] = newRect;
 
                 // hide button
-                newRect.width = 0.16f * ratio;
-                newRect.height = 0.1f;
-                newRect.x = 0.04f * ratio;
-                newRect.y = 0.03f;
+                newRect.width = 100f / Screen.width;
+                newRect.height = 50f / Screen.height;
+                newRect.x = 20f / Screen.width;
+                newRect.y = 20f / Screen.height;
                 newRects[1] = newRect;
 
                 ps.deniedRects = newRects;
