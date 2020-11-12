@@ -39,12 +39,30 @@ public class LevelManager : MonoBehaviour {
         if (Input.GetKey(KeyCode.F)) {
             mainCamera.decreaseZoom();
         }
+
+        GameObject[] ship = GameObject.FindGameObjectsWithTag("Ship");
+        bool reds = false;
+        bool blues = false;
+        foreach (GameObject s in ship) {
+            if (s.GetComponent<ShipScript>().team == ShipScript.teamEnum.teamRed) {
+                reds = true;
+            } else if (s.GetComponent<ShipScript>().team == ShipScript.teamEnum.teamBlue) {
+                blues = true;
+            }
+        }
+        if (!reds || !blues && !(!reds && !blues) || ship.Length <= 1) {
+            OnGameEnd();
+        }
     }
 
     void OnPlayerDeath() {
         lockCameraChange = true;
         mainCamera.onCheck();
         playerCamera.offCheck();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    void OnGameEnd() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
