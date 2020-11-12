@@ -52,7 +52,7 @@ public class LevelManager : MonoBehaviour {
                 blues = true;
             }
         }
-        if (!reds || !blues && !(!reds && !blues) || ship.Length <= 1 && nextSceneAfterTDM) {
+        if (nextSceneAfterTDM && ((!reds || !blues ) && !(!reds && !blues) || ship.Length <= 1 )) {
             OnGameEnd();
         }
     }
