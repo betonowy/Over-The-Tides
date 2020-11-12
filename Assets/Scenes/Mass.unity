@@ -2095,6 +2095,11 @@ PrefabInstance:
       propertyPath: m_TranslationOffsets.Array.data[0].y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3199688616622515834, guid: 37724890664820743a1c7c6669506ea4,
+        type: 3}
+      propertyPath: BypassEffects
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4451032485439480874, guid: 37724890664820743a1c7c6669506ea4,
         type: 3}
       propertyPath: m_LocalPosition.y

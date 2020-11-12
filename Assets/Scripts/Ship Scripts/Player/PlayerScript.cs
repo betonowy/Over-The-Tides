@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour
     // UI elements
     public GameObject moveTargetMark; // prefab
     private GameObject activeMoveMark;
+    public LevelManager levelManager;
 
     public Vector3 targetPosition;
     public bool reachedTarget = true;
