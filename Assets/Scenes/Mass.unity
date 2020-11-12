@@ -3165,6 +3165,7 @@ MonoBehaviour:
     type: 3}
   mainCameraPrefab: {fileID: 4581306014267745841, guid: 891437326261d4c459240fc03afe6a94,
     type: 3}
+  nextSceneAfterTDM: 1
 --- !u!4 &1320427436
 Transform:
   m_ObjectHideFlags: 0

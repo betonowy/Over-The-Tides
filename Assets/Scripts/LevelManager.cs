@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour {
 
     private bool lockCameraChange = false;
 
+    public bool nextSceneAfterTDM = false;
+
     // Start is called before the first frame update
     void Start() {
         playerCamera = Instantiate(playerCameraPrefab);
@@ -50,7 +52,7 @@ public class LevelManager : MonoBehaviour {
                 blues = true;
             }
         }
-        if (!reds || !blues && !(!reds && !blues) || ship.Length <= 1) {
+        if (!reds || !blues && !(!reds && !blues) || ship.Length <= 1 && nextSceneAfterTDM) {
             OnGameEnd();
         }
     }
