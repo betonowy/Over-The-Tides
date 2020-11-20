@@ -35,10 +35,10 @@ public class LevelManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha2) && !lockCameraChange) {
             playerCamera.toggleCheck();
         }
-        if (Input.GetKey(KeyCode.R)) {
+        if (Input.mouseScrollDelta.y > 0) {
             mainCamera.increaseZoom();
         }
-        if (Input.GetKey(KeyCode.F)) {
+        if (Input.mouseScrollDelta.y < 0) {
             mainCamera.decreaseZoom();
         }
 

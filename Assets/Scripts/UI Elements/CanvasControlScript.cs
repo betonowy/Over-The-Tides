@@ -14,7 +14,7 @@ public class CanvasControlScript : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.I)) {
+        if (Input.GetKeyDown(KeyCode.R)) {
             if (!inv)
                 Show();
             else
