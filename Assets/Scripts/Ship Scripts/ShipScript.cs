@@ -39,6 +39,8 @@ public class ShipScript : MonoBehaviour
     private SteerWheelScript steerWheelObject;
     private MastScript frontMastObject;
     private MastScript backMastObject;
+    private PaddleScript paddlesObject;
+    private RepairbenchScript repairbenchObject;
 
     private GameObject[] cannons;
 
@@ -61,6 +63,8 @@ public class ShipScript : MonoBehaviour
         steerWheelObject = transform.Find("SteerWheel").GetComponent<SteerWheelScript>();
         frontMastObject = transform.Find("Mast").GetComponent<MastScript>();
         backMastObject = transform.Find("Mastback").GetComponent<MastScript>();
+        paddlesObject = transform.Find("Paddles").GetComponent<PaddleScript>();
+        repairbenchObject = transform.Find("Repairbench").GetComponent<RepairbenchScript>();
         staticInterface = GameObject.Find("Canvas").transform.Find("CanvasInventory").transform.Find("EquipmentScreen").GetComponent<StaticInterface>();
 
 
@@ -132,6 +136,7 @@ public class ShipScript : MonoBehaviour
             cannonExistence = staticInterface.GetEquiplementArray();
         }
         UpdateCannons();
+        repair_ship();
         //if (cannonsTouched) {
         //    UpdateCannons();
         //    cannonsTouched = false;
@@ -223,7 +228,9 @@ public class ShipScript : MonoBehaviour
     private float speedModifier() {
         float maxMastManned = frontMastObject.getNodes().countNodes() + backMastObject.getNodes().countNodes();
         float currentlyManned = frontMastObject.getNodes().ReadyCrewCount() + backMastObject.getNodes().ReadyCrewCount();
-        return currentlyManned / maxMastManned;
+        float maxPaddleManned = paddlesObject.getNodeScript().countNodes();
+        float currentlyMannedPaddles = paddlesObject.getNodeScript().ReadyCrewCount();
+        return currentlyManned / maxMastManned + currentlyMannedPaddles / maxPaddleManned;
     }
 
     private float turnModifier() {
@@ -231,10 +238,21 @@ public class ShipScript : MonoBehaviour
         return (float)script.ReadyCrewCount() / script.countNodes() * myBody.velocity.magnitude;
     }
 
-    private void make_shipwreck()
-    {
+    private void make_shipwreck() {
         GameObject newShipwreck = Instantiate(Shipwreck);
         newShipwreck.transform.position = this.transform.position;
         newShipwreck.transform.rotation = this.transform.rotation;
+    }
+
+    public PaddleScript getPaddleObject() {
+        return paddlesObject;
+    }
+    
+    private void repair_ship() {
+        float maxMannedRepair = repairbenchObject.getNodeScript().countNodes();
+        float currentlyMannedRepair = repairbenchObject.getNodeScript().ReadyCrewCount();
+        if (currentlyMannedRepair > 0 && shipLife < 50) {
+            shipLife += currentlyMannedRepair * 0.1f / maxMannedRepair;
+        }
     }
 }
