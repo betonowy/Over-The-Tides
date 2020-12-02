@@ -11,10 +11,10 @@ public class LevelManager : MonoBehaviour {
     private CameraScript mainCamera;
 
     public TimerScript timerScript;
-    
     private bool lockCameraChange = false;
-
     public bool nextSceneAfterTDM = false;
+
+    private HordeMan hordeManager;
 
     // Start is called before the first frame update
     void Start() {
@@ -27,6 +27,7 @@ public class LevelManager : MonoBehaviour {
             playerCamera.transform.SetParent(GameObject.Find("playerBoatRed").transform);
         }
         mainCamera = Instantiate(mainCameraPrefab);
+        hordeManager = gameObject.GetComponent<HordeMan>();
     }
 
     // Update is called once per frame
@@ -55,7 +56,8 @@ public class LevelManager : MonoBehaviour {
                 blues = true;
             }
         }
-        if (nextSceneAfterTDM && ((!reds || !blues ) && !(!reds && !blues) || ship.Length <= 1 )) {
+
+        if (nextSceneAfterTDM && GamemodeConditions() && ((!reds || !blues ) && !(!reds && !blues) || ship.Length <= 1 )) {
             OnGameEnd();
         }
     }
@@ -65,6 +67,13 @@ public class LevelManager : MonoBehaviour {
         mainCamera.onCheck();
         playerCamera.offCheck();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    bool GamemodeConditions() {
+        if (hordeManager) {
+            return hordeManager.EndGameCondition();
+        }
+        return true;
     }
 
     void OnGameEnd() {

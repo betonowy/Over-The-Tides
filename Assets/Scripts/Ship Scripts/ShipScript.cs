@@ -68,11 +68,11 @@ public class ShipScript : MonoBehaviour
         staticInterface = GameObject.Find("Canvas").transform.Find("CanvasInventory").transform.Find("EquipmentScreen").GetComponent<StaticInterface>();
 
 
-        initialCannons();
+        InitialCannons();
         UpdateCannons();
     }
     
-    private void initialCannons() {
+    private void InitialCannons() {
         cannonExistence[1] = true;
         cannonExistence[2] = true;
         cannonExistence[5] = true;
@@ -131,12 +131,12 @@ public class ShipScript : MonoBehaviour
     }
 
     private void Update() {
-        checkLife();
+        CheckLife();
         if (GetComponent<PlayerScript>() != null) {
             cannonExistence = staticInterface.GetEquiplementArray();
         }
         UpdateCannons();
-        repair_ship();
+        RepairShip();
         //if (cannonsTouched) {
         //    UpdateCannons();
         //    cannonsTouched = false;
@@ -179,17 +179,17 @@ public class ShipScript : MonoBehaviour
 
     public void Turn(bool direction) {
         if (direction) {
-            myBody.AddTorque(maxTurningForce * Time.deltaTime * turnModifier());
+            myBody.AddTorque(maxTurningForce * Time.deltaTime * TurnModifier());
         } else {
-            myBody.AddTorque(-maxTurningForce * Time.deltaTime * turnModifier());
+            myBody.AddTorque(-maxTurningForce * Time.deltaTime * TurnModifier());
         }
     }
 
     public void Propeller(bool direction) {
         if (direction) {
-            myBody.AddForce(GetMyDirection() * maxPropellerForce * Time.deltaTime * speedModifier());
+            myBody.AddForce(GetMyDirection() * maxPropellerForce * Time.deltaTime * SpeedModifier());
         } else {
-            myBody.AddForce(-GetMyDirection() * maxPropellerForce * Time.deltaTime * speedModifier());
+            myBody.AddForce(-GetMyDirection() * maxPropellerForce * Time.deltaTime * SpeedModifier());
         }
     }
 
@@ -198,11 +198,11 @@ public class ShipScript : MonoBehaviour
         shipLife -= value;
     }
 
-    private void checkLife() {
+    private void CheckLife() {
         OnCheckLife();
         if (shipLife < 0) {
             OnPlayerDeath();
-            make_shipwreck();
+            MakeShipwreck();
             Destroy(gameObject);
         }
     }
@@ -219,13 +219,13 @@ public class ShipScript : MonoBehaviour
         }
     }
 
-    private bool steerWheelManned() {
+    private bool SteerWheelManned() {
         if (steerWheelObject.getNodeScript().ReadyCrewCount() > 0)
             return true;
         return false;
     }
 
-    private float speedModifier() {
+    private float SpeedModifier() {
         float maxMastManned = frontMastObject.getNodes().countNodes() + backMastObject.getNodes().countNodes();
         float currentlyManned = frontMastObject.getNodes().ReadyCrewCount() + backMastObject.getNodes().ReadyCrewCount();
         float maxPaddleManned = paddlesObject.getNodeScript().countNodes();
@@ -233,26 +233,26 @@ public class ShipScript : MonoBehaviour
         return currentlyManned / maxMastManned + currentlyMannedPaddles / maxPaddleManned;
     }
 
-    private float turnModifier() {
+    private float TurnModifier() {
         NodeScript script = steerWheelObject.getNodeScript();
         return (float)script.ReadyCrewCount() / script.countNodes() * myBody.velocity.magnitude;
     }
 
-    private void make_shipwreck() {
+    private void MakeShipwreck() {
         GameObject newShipwreck = Instantiate(Shipwreck);
         newShipwreck.transform.position = this.transform.position;
         newShipwreck.transform.rotation = this.transform.rotation;
     }
 
-    public PaddleScript getPaddleObject() {
+    public PaddleScript GetPaddleObject () {
         return paddlesObject;
     }
     
-    private void repair_ship() {
+    private void RepairShip() {
         float maxMannedRepair = repairbenchObject.getNodeScript().countNodes();
         float currentlyMannedRepair = repairbenchObject.getNodeScript().ReadyCrewCount();
         if (currentlyMannedRepair > 0 && shipLife < 50) {
-            shipLife += currentlyMannedRepair * 0.1f / maxMannedRepair;
+            shipLife += currentlyMannedRepair * 0.005f / maxMannedRepair;
         }
     }
 }

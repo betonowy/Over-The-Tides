@@ -42,9 +42,9 @@ public class PlayerScript : MonoBehaviour
     }
 
     void Shooting() {
-        if (Input.GetKey(KeyCode.Q) && shipScript.getPaddleObject().getNodeScript().ReadyCrewCount() == 0)
+        if (Input.GetKey(KeyCode.Q) && shipScript.GetPaddleObject().getNodeScript().ReadyCrewCount() == 0)
             shipScript.ShootLeft();
-        if (Input.GetKey(KeyCode.E) && shipScript.getPaddleObject().getNodeScript().ReadyCrewCount() == 0)
+        if (Input.GetKey(KeyCode.E) && shipScript.GetPaddleObject().getNodeScript().ReadyCrewCount() == 0)
             shipScript.ShootRight();
     }
 
