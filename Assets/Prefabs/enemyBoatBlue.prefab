@@ -25,6 +25,7 @@ MonoBehaviour:
   aiDefendMinimumEnemySeparation: 10
   aiDefendAvoidFriendlyFactor: 1
   aiDefendAvoidEnemyFactor: 0.5
+  aiDefendTeammateMaxDistance: 15
   aiCrewOrderPeriod: 3
   aiMovementOrderPeriod: 1
   aiAttackOrderPeriod: 1

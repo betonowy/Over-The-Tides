@@ -2155,7 +2155,7 @@ MonoBehaviour:
   - {x: -120, y: 0}
   - {x: 0, y: 120}
   - {x: 0, y: -120}
-  minimumSpace: 10
+  minimumSpace: 15
   checkForSpawnTime: 5
   basicEnemyPrefab: {fileID: 79346669921403992, guid: 29b44decaaccfae4bb40e1f357b806c9,
     type: 3}
@@ -2525,6 +2525,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 729321821, guid: 276eed61739550e4182a192a1f8a8bdc, type: 3}
+      propertyPath: aiDefendTeammateMaxDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7753222845505479523, guid: 276eed61739550e4182a192a1f8a8bdc,
         type: 3}
       propertyPath: m_LocalPosition.y

@@ -21,6 +21,8 @@ public class EnemyScript : MonoBehaviour {
     public float aiDefendMinimumEnemySeparation = 5f;
     public float aiDefendAvoidFriendlyFactor = 0.5f;
     public float aiDefendAvoidEnemyFactor = 0.5f;
+    public float aiDefendTeammateMaxDistance = 15;
+    public float aiDefendTeammateRatio = 0.3f;
 
     public float aiCrewOrderPeriod = 3;
     public float aiMovementOrderPeriod = 2;
@@ -41,7 +43,9 @@ public class EnemyScript : MonoBehaviour {
     private GameObject[] cannons;
     private GameObject[] masts;
     private GameObject[] steers;
-
+    private GameObject bench;
+    private GameObject crowsnest;
+    private GameObject paddles;
     private ShipScript ship;
 
     // Start is called before the first frame update
@@ -76,6 +80,12 @@ public class EnemyScript : MonoBehaviour {
                 steerCount++;
             } else if (children[i].name.StartsWith("Sailor")) {
                 sailorCount++;
+            } else if (children[i].name.StartsWith("Paddles")) {
+                paddles = children[i];
+            } else if (children[i].name.StartsWith("Crow")) {
+                crowsnest = children[i];
+            } else if (children[i].name.StartsWith("Repair")) {
+                bench = children[i];
             }
         }
 
@@ -161,52 +171,53 @@ public class EnemyScript : MonoBehaviour {
 
         GameObject[] targets = GetAllEnemyTargets();
 
-        if (targets.Length <= 0) {
-            return;
-        }
-
-        GameObject closestTarget = targets[0];
-        {
-            float minDist = getDistanceToTarget(targets[0]);
-            for (int i = 1; i < targets.Length; i++) {
-                float dist = getDistanceToTarget(targets[i]);
-                if (dist < minDist) {
-                    minDist = dist;
-                    closestTarget = targets[i];
+        if (targets.Length > 0) {
+            GameObject closestTarget = targets[0];
+            {
+                float minDist = getDistanceToTarget(targets[0]);
+                for (int i = 1; i < targets.Length; i++) {
+                    float dist = getDistanceToTarget(targets[i]);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        closestTarget = targets[i];
+                    }
                 }
             }
-        }
 
-        for (int i = 0; i < targets.Length; i++) {
-            if (getDistanceToTarget(targets[i]) < aiAttackDistance / 2) {
-                if (scalarRightHandTowardsTarget(targets[i]) > aiAttackLongtitudalBlindSpot) {
-                    shootRightTargetPriority += 3;
-                } else if (scalarRightHandTowardsTarget(targets[i]) < -aiAttackLongtitudalBlindSpot) {
-                    shootLeftTargetPriority += 3;
-                } else {
-                    shootLeftTargetPriority += 2;
-                    shootRightTargetPriority += 2;
-                }
-            } else if (getDistanceToTarget(targets[i]) < aiAttackDistance) {
-                if (scalarRightHandTowardsTarget(targets[i]) > aiAttackLongtitudalBlindSpot) {
-                    shootRightTargetPriority += 0.5f;
-                } else if (scalarRightHandTowardsTarget(targets[i]) < -aiAttackLongtitudalBlindSpot) {
-                    shootLeftTargetPriority += 0.5f;
-                } else {
-                    shootLeftTargetPriority += 0;
-                    shootRightTargetPriority += 0;
+            for (int i = 0; i < targets.Length; i++) {
+                if (getDistanceToTarget(targets[i]) < aiAttackDistance / 2) {
+                    if (scalarRightHandTowardsTarget(targets[i]) > aiAttackLongtitudalBlindSpot) {
+                        shootRightTargetPriority += 3;
+                    } else if (scalarRightHandTowardsTarget(targets[i]) < -aiAttackLongtitudalBlindSpot) {
+                        shootLeftTargetPriority += 3;
+                    } else {
+                        shootLeftTargetPriority += 2;
+                        shootRightTargetPriority += 2;
+                    }
+                } else if (getDistanceToTarget(targets[i]) < aiAttackDistance) {
+                    if (scalarRightHandTowardsTarget(targets[i]) > aiAttackLongtitudalBlindSpot) {
+                        shootRightTargetPriority += 0.5f;
+                    } else if (scalarRightHandTowardsTarget(targets[i]) < -aiAttackLongtitudalBlindSpot) {
+                        shootLeftTargetPriority += 0.5f;
+                    } else {
+                        shootLeftTargetPriority += 0;
+                        shootRightTargetPriority += 0;
+                    }
                 }
             }
-        }
 
-        if (getDistanceToTarget(closestTarget) > aiAttackDistance ||
-            scalarTowardsTarget(closestTarget) > aiDefendRearBlindSpot ||
-            scalarTowardsTarget(closestTarget) < -aiDefendFrontBlindSpot) {
-            mastTargetPriority = 12;
-            steerTargetPriority = 6;
+            if (getDistanceToTarget(closestTarget) > aiAttackDistance ||
+                scalarTowardsTarget(closestTarget) > aiDefendRearBlindSpot ||
+                scalarTowardsTarget(closestTarget) < -aiDefendFrontBlindSpot) {
+                mastTargetPriority = 12;
+                steerTargetPriority = 6;
+            } else {
+                mastTargetPriority = 2;
+                steerTargetPriority = 1;
+            }
         } else {
-            mastTargetPriority = 2;
-            steerTargetPriority = 1;
+            mastTargetPriority = 4;
+            steerTargetPriority = 2;
         }
 
         float prioritySummary = mastTargetPriority + steerTargetPriority + shootLeftTargetPriority + shootRightTargetPriority;
@@ -347,31 +358,32 @@ public class EnemyScript : MonoBehaviour {
 
         aiPropell = false;
 
-        if (targets.Length <= 0) {
-            return;
-        }
+        GameObject closestTarget = null;
 
-        GameObject closestTarget = targets[0];
-        {
-            float minDist = getDistanceToTarget(targets[0]);
-            for (int i = 1; i < targets.Length; i++) {
-                float dist = getDistanceToTarget(targets[i]);
-                if (dist < minDist) {
-                    minDist = dist;
-                    closestTarget = targets[i];
+        if (targets.Length > 0) {
+            closestTarget = targets[0];
+            {
+                float minDist = getDistanceToTarget(targets[0]);
+                for (int i = 1; i < targets.Length; i++) {
+                    float dist = getDistanceToTarget(targets[i]);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        closestTarget = targets[i];
+                    }
                 }
+            }
+
+            if (closestTarget != null) {
+                aiTargetDirection = wishToGoDirection(closestTarget);
+                aiTargetDirection = (getVectorToTarget(closestTarget).normalized * aiEncircleAggressiveFactor + aiTargetDirection).normalized;
+                if (getDistanceToTarget(closestTarget) < aiDefendMinimumEnemySeparation)
+                    aiTargetDirection = (-getVectorToTarget(closestTarget).normalized * aiDefendAvoidEnemyFactor + aiTargetDirection).normalized;
+                aiPropell = true;
             }
         }
 
-        if (closestTarget != null) {
-            aiTargetDirection = wishToGoDirection(closestTarget);
-            aiTargetDirection = (getVectorToTarget(closestTarget).normalized * aiEncircleAggressiveFactor + aiTargetDirection).normalized;
-            if (getDistanceToTarget(closestTarget) < aiDefendMinimumEnemySeparation)
-                aiTargetDirection = (-getVectorToTarget(closestTarget).normalized * aiDefendAvoidEnemyFactor + aiTargetDirection).normalized;
-            aiPropell = true;
-        }
-
         targets = GetAllFriendlyTargets();
+        Debug.Log("Friendly: " + targets.Length);
 
         if (targets.Length <= 0) {
             return;
@@ -394,10 +406,29 @@ public class EnemyScript : MonoBehaviour {
             aiTargetDirection = (-getVectorToTarget(closestTarget).normalized * 0.5f + aiTargetDirection).normalized;
             aiPropell = true;
         }
+
+        GameObject farthestTarget = targets[0];
+        float maxDist = getDistanceToTarget(targets[0]);
+        {
+            for (int i = 1; i < targets.Length; i++) {
+                float dist = getDistanceToTarget(targets[i]);
+                if (dist > maxDist) {
+                    maxDist = dist;
+                    farthestTarget = targets[i];
+                }
+            }
+        }
+
+        Vector2 friendlyDirection = getVectorToTarget(farthestTarget);
+
+        if (maxDist > aiDefendTeammateMaxDistance) {
+            aiTargetDirection = (getVectorToTarget(farthestTarget).normalized * aiDefendTeammateRatio + aiTargetDirection).normalized;
+            aiPropell = true;
+        }
     }
 
     void AttackOrder() {
-        GameObject[] targets = GetAllEnemyTargets();
+        GameObject[] targets = GetAllTargets();
 
         aiShootLeft = false;
         aiShootRight = false;
@@ -406,13 +437,24 @@ public class EnemyScript : MonoBehaviour {
             return;
         }
 
+        float minDist = aiAttackDistance;
+
         foreach (GameObject target in targets) {
-            if (getDistanceToTarget(target) < aiAttackDistance) {
+            float dist = getDistanceToTarget(target);
+            if (dist < minDist) {
+                minDist = dist;
                 float scalar = scalarRightHandTowardsTarget(target);
-                if (scalar > aiAttackAccuracyBeforeShoot)
-                    aiShootRight = true;
-                else if (scalar < -aiAttackAccuracyBeforeShoot)
-                    aiShootLeft = true;
+                if (scalar > aiAttackAccuracyBeforeShoot) {
+                    if (target.GetComponent<ShipScript>().team != ship.team || target.GetComponent<ShipScript>().team == ShipScript.teamEnum.FFA)
+                        aiShootRight = true;
+                    else
+                        aiShootRight = false;
+                } else if (scalar < -aiAttackAccuracyBeforeShoot) {
+                    if (target.GetComponent<ShipScript>().team != ship.team || target.GetComponent<ShipScript>().team == ShipScript.teamEnum.FFA)
+                        aiShootLeft = true;
+                    else
+                        aiShootLeft = false;
+                }
             }
         }
     }
@@ -423,7 +465,7 @@ public class EnemyScript : MonoBehaviour {
         int select = 0;
 
         foreach (var potentialTarget in g) {
-            if(potentialTarget.GetComponent<ShipScript>().team != ship.team || potentialTarget.GetComponent<ShipScript>().team == ShipScript.teamEnum.FFA) {
+            if (potentialTarget.GetComponent<ShipScript>().team != ship.team || potentialTarget.GetComponent<ShipScript>().team == ShipScript.teamEnum.FFA) {
                 select++;
             }
         }
@@ -443,9 +485,8 @@ public class EnemyScript : MonoBehaviour {
         GameObject[] g = GameObject.FindGameObjectsWithTag("Ship");
 
         int select = 0;
-
         foreach (var potentialTarget in g) {
-            if (potentialTarget.GetComponent<ShipScript>().team == ship.team && potentialTarget.GetComponent<ShipScript>().team != ShipScript.teamEnum.FFA && potentialTarget.gameObject != gameObject) {
+            if (potentialTarget.GetComponent<ShipScript>().team == ship.team && potentialTarget != gameObject) {
                 select++;
             }
         }
@@ -453,7 +494,28 @@ public class EnemyScript : MonoBehaviour {
         GameObject[] b = new GameObject[select];
 
         for (int i = 0, j = 0; i < g.Length; i++) {
-            if (g[i].GetComponent<ShipScript>().team == ship.team && g[i].GetComponent<ShipScript>().team != ShipScript.teamEnum.FFA && g[i].gameObject != gameObject) {
+            if (g[i].GetComponent<ShipScript>().team == ship.team && g[i] != gameObject) {
+                b[j++] = g[i];
+            }
+        }
+
+        return b;
+    }
+
+    GameObject[] GetAllTargets() {
+        GameObject[] g = GameObject.FindGameObjectsWithTag("Ship");
+
+        int select = 0;
+        foreach (var potentialTarget in g) {
+            if (potentialTarget != gameObject) {
+                select++;
+            }
+        }
+
+        GameObject[] b = new GameObject[select];
+
+        for (int i = 0, j = 0; i < g.Length; i++) {
+            if (g[i] != gameObject) {
                 b[j++] = g[i];
             }
         }
