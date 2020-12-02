@@ -57,8 +57,8 @@ public class TutorialScript : MonoBehaviour
                 Rect newRect = new Rect();
                 float ratio = (float)Screen.height / Screen.width;
                 // tutorial window
-                newRect.width = 290f / Screen.width;
-                newRect.height = 330f / Screen.height;
+                newRect.width = 480f / Screen.width;
+                newRect.height = 500f / Screen.height;
                 newRect.x = 30f / Screen.width;
                 newRect.y = 0.5f - newRect.height / 2;
                 newRects[0] = newRect;

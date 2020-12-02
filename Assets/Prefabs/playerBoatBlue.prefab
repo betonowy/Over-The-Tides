@@ -17,6 +17,9 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   reachedTarget: 1
   distanceBeforeTargetReached: 3
+  inventory: {fileID: 11400000, guid: 6d8d9e44bf23d1249a537ad5cc9648eb, type: 2}
+  rectDenied: 0
+  deniedRects: []
 --- !u!1001 &6900409637626855163
 PrefabInstance:
   m_ObjectHideFlags: 0
