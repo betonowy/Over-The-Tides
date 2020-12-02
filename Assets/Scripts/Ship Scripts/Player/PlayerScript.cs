@@ -19,6 +19,8 @@ public class PlayerScript : MonoBehaviour
 
     public InventoryObject inventory;
 
+    public Quest quest;
+
     public bool rectDenied;
     public Rect[] deniedRects;
 
