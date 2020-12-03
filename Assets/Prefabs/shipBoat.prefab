@@ -1610,6 +1610,11 @@ PrefabInstance:
       propertyPath: targetShipPosition.y
       value: -0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 9043490851812856318, guid: 7427f8ea3c601db43acce1d4212ba0d7,
+        type: 3}
+      propertyPath: whoIsIt
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7427f8ea3c601db43acce1d4212ba0d7, type: 3}
 --- !u!4 &2783855669940887690 stripped
@@ -1705,6 +1710,11 @@ PrefabInstance:
       propertyPath: targetShipPosition.y
       value: -0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 9043490851812856318, guid: 7427f8ea3c601db43acce1d4212ba0d7,
+        type: 3}
+      propertyPath: whoIsIt
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7427f8ea3c601db43acce1d4212ba0d7, type: 3}
 --- !u!4 &1998766951582235403 stripped
@@ -1789,6 +1799,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetShipPosition.y
       value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043490851812856318, guid: 7427f8ea3c601db43acce1d4212ba0d7,
+        type: 3}
+      propertyPath: whoIsIt
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7427f8ea3c601db43acce1d4212ba0d7, type: 3}

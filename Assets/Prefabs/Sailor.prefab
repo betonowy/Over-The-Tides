@@ -120,10 +120,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipPosition: {x: 0, y: 0}
   targetShipPosition: {x: 0, y: 0}
-  newSprite_Front_Green: {fileID: 21300000, guid: 4572562464389b4458632661f4d9b666,
-    type: 3}
-  newSprite_Front_White: {fileID: 21300000, guid: aea122cace5f4d94887577fa47f5310f,
-    type: 3}
+  newSpriteFrontGreen:
+  - {fileID: 21300000, guid: 4572562464389b4458632661f4d9b666, type: 3}
+  - {fileID: 21300000, guid: 9fa729d5b206c08408abfcf6af056e7c, type: 3}
+  - {fileID: 21300000, guid: 31309cd7d2cbd0b4cb1b5a5802265f51, type: 3}
+  newSpriteFrontWhite:
+  - {fileID: 21300000, guid: aea122cace5f4d94887577fa47f5310f, type: 3}
+  - {fileID: 21300000, guid: a3e3647802870654a95c976e6d1321c8, type: 3}
+  - {fileID: 21300000, guid: 4eea42243b8315b40b1aa9dc593b5433, type: 3}
+  whoIsIt: 0
   walkSpeed: 1
 --- !u!61 &4267069526462277668
 BoxCollider2D:

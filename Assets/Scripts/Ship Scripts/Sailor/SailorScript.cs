@@ -12,8 +12,9 @@ public class SailorScript : MonoBehaviour {
     public Vector2 targetShipPosition;
 
     private SpriteRenderer spriteRenderer;
-    public Sprite newSprite_Front_Green;
-    public Sprite newSprite_Front_White;
+    public Sprite[] newSpriteFrontGreen;
+    public Sprite[] newSpriteFrontWhite;
+    public int whoIsIt;
 
     private bool changeSprite;
     public float walkSpeed;
@@ -28,7 +29,7 @@ public class SailorScript : MonoBehaviour {
         ship = transform.parent.gameObject.GetComponent<ShipScript>();
         shipBody = ship.gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = newSprite_Front_White;
+        spriteRenderer.sprite = newSpriteFrontWhite[whoIsIt];
         changeSprite = false;
         audioSteps = GetComponents<AudioSource>()[0];
     }
@@ -43,9 +44,9 @@ public class SailorScript : MonoBehaviour {
         }
         
         if(!changeSprite)
-            spriteRenderer.sprite = newSprite_Front_White;
+            spriteRenderer.sprite = newSpriteFrontWhite[whoIsIt];
         if (changeSprite)
-            spriteRenderer.sprite = newSprite_Front_Green;
+            spriteRenderer.sprite = newSpriteFrontGreen[whoIsIt];
     }
 
     private void stayOnShip() {
