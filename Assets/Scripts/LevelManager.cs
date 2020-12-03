@@ -16,6 +16,12 @@ public class LevelManager : MonoBehaviour {
 
     private HordeMan hordeManager;
 
+    public ItemDatabaseObject database;
+
+    public Quest quest;
+
+    public PlayerScript player;
+
     // Start is called before the first frame update
     void Start() {
         playerCamera = Instantiate(playerCameraPrefab);
@@ -28,6 +34,7 @@ public class LevelManager : MonoBehaviour {
         }
         mainCamera = Instantiate(mainCameraPrefab);
         hordeManager = gameObject.GetComponent<HordeMan>();
+
     }
 
     // Update is called once per frame
@@ -59,6 +66,24 @@ public class LevelManager : MonoBehaviour {
 
         if (nextSceneAfterTDM && GamemodeConditions() && ((!reds || !blues ) && !(!reds && !blues) || ship.Length <= 1 )) {
             OnGameEnd();
+        }
+    }
+
+    public void SetQuest(Quest playerQuest) {
+        quest = playerQuest;
+    }
+
+    void OnEnemyDeath(ShipScript ship) {
+        if (ship == null)
+            Debug.Log("nulls");
+        if (quest.isActive) {
+            if (ship.GetComponent<ShipScript>().team == ShipScript.teamEnum.teamRed) {
+                quest.goal.EnemyKilled();
+            }
+            if(quest.goal.IsReached()) {
+                player.createCannon();
+                quest.Complete();
+            }
         }
     }
 

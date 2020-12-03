@@ -17,8 +17,10 @@ public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiv
 
     public Item FindItem(int id) {
         for (int i = 0; i < Items.Length; i++) {
-            if(Items[i].data.Id == id) 
-                return Items[i].data;  
+            if (Items[i].data.Id == id) {
+                Debug.Log(Items[i].type);
+                return Items[i].data;
+            }
         }
         return null;
     }

@@ -202,6 +202,7 @@ public class ShipScript : MonoBehaviour
         OnCheckLife();
         if (shipLife < 0) {
             OnPlayerDeath();
+            OnEnemyDeath();
             MakeShipwreck();
             Destroy(gameObject);
         }
@@ -210,7 +211,10 @@ public class ShipScript : MonoBehaviour
     public void OnCheckLife() {
 
     }
+    public void OnEnemyDeath() {
+        FindObjectOfType<LevelManager>().SendMessage("OnEnemyDeath", this);
 
+    }
     public void OnPlayerDeath() {
         if (gameObject.GetComponent<PlayerScript>() != null) {
             FindObjectOfType<LevelManager>().SendMessage("OnPlayerDeath");

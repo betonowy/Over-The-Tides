@@ -21,10 +21,14 @@ public class PlayerScript : MonoBehaviour
 
     public Quest quest;
 
+    public GameObject cannonToPick;
+
     public bool rectDenied;
     public Rect[] deniedRects;
 
     private bool allowMove = true;
+
+    Vector3 pos;
 
     // Start is called before the first frame update
     void Start()
@@ -119,6 +123,15 @@ public class PlayerScript : MonoBehaviour
             inventory.AddItem(new Item(item.item), 1);
             Destroy(collision.gameObject);
         }
+    }
+
+    public void AddItems(Item item, int amount) {
+        inventory.AddItem(item, amount);
+    }
+
+    public void createCannon() {
+        GameObject cnn = Instantiate(cannonToPick, gameObject.transform.position, gameObject.transform.rotation);
+        cnn.transform.position = gameObject.transform.position;
     }
 
     private void OnApplicationQuit() {

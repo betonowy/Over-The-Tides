@@ -13,4 +13,9 @@ public class Quest {
     public int amount;
 
     public QuestGoal goal;
+
+    public void Complete() {
+        isActive = false;
+        Debug.Log("Quest Completed");
+    }
 }
