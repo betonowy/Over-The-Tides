@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using System.Threading;
 
 public class LevelManager : MonoBehaviour {
     public PlayerCamera playerCameraPrefab;
@@ -19,8 +21,10 @@ public class LevelManager : MonoBehaviour {
     public ItemDatabaseObject database;
 
     public Quest quest;
-
+    
+    //delete later
     public PlayerScript player;
+    public GameObject text;
 
     // Start is called before the first frame update
     void Start() {
@@ -34,6 +38,7 @@ public class LevelManager : MonoBehaviour {
         }
         mainCamera = Instantiate(mainCameraPrefab);
         hordeManager = gameObject.GetComponent<HordeMan>();
+
 
     }
 
@@ -53,6 +58,11 @@ public class LevelManager : MonoBehaviour {
             mainCamera.decreaseZoom();
         }
 
+        //delete later
+        if (Input.GetKey(KeyCode.R))
+            text.SetActive(false);
+        //
+
         GameObject[] ship = GameObject.FindGameObjectsWithTag("Ship");
         bool reds = false;
         bool blues = false;
@@ -68,7 +78,7 @@ public class LevelManager : MonoBehaviour {
             OnGameEnd();
         }
     }
-
+    //delete later
     public void SetQuest(Quest playerQuest) {
         quest = playerQuest;
     }
@@ -81,8 +91,10 @@ public class LevelManager : MonoBehaviour {
                 quest.goal.EnemyKilled();
             }
             if(quest.goal.IsReached()) {
+                //delete later
                 player.createCannon();
                 quest.Complete();
+                text.SetActive(true);
             }
         }
     }
