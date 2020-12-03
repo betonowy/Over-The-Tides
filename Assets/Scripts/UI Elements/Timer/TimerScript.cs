@@ -8,19 +8,27 @@ using System;
 public class TimerScript : MonoBehaviour
 {
     private float timeModifier = 1f;
-    public float countdownTime;
+    private float countdownTime;
     public TextMeshProUGUI countdownDisplay;
+
+    public HordeMan hordeMan;
+
     private void Start() {
+        countdownTime = hordeMan.GetCountdown();
         StartCoroutine(CountdownToStart());
     }
 
     IEnumerator CountdownToStart() {
-        while (countdownTime >= 0f) {
-            TimeSpan t = TimeSpan.FromSeconds(countdownTime);
-            countdownDisplay.text = t.Minutes+ ":" + t.Seconds;
+        while (true) {
+            if (countdownTime >= 0) {
+                TimeSpan t = TimeSpan.FromSeconds(countdownTime);
+                countdownDisplay.text = t.Minutes + ":" + t.Seconds;
 
-            yield return new WaitForSeconds(1f);
-            countdownTime--;
+                yield return new WaitForSeconds(1f);
+                countdownTime--;
+            } else {
+                countdownTime = hordeMan.GetCountdown();
+            }
         }
         
     }

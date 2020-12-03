@@ -8,7 +8,7 @@ public class HordeMan : MonoBehaviour {
     public int increment = 1;
     public int timeBetween = 600;
     public Vector2[] spawnPoints;
-    private float currentTime = 10;
+    private float currentTime = 120;
     public float minimumSpace = 10;
     public float checkForSpawnTime = 5;
     private float currentSpawnTime = 0;
@@ -97,7 +97,7 @@ public class HordeMan : MonoBehaviour {
         return false;
     }
 
-    float GetCountdown() {
+    public float GetCountdown() {
         return currentTime;
     }
 
