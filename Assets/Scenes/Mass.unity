@@ -2133,8 +2133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b30c2a9f174e5459a04315594d43b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownTime: 1297
   countdownDisplay: {fileID: 1907127083}
+  hordeMan: {fileID: 1320427439}
 --- !u!1 &811582042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,7 +2623,7 @@ MonoBehaviour:
   quest:
     isActive: 0
     title: Save us
-    description: Kill all pirates
+    description: Kill two pirates
     itemReward:
       Name: 
       Id: 1
@@ -2631,7 +2631,7 @@ MonoBehaviour:
     amount: 1
     goal:
       goalType: 0
-      requiredAmount: 1
+      requiredAmount: 2
       currentAmount: 0
   player: {fileID: 1173824227}
   titeText: {fileID: 276669626}
@@ -3058,6 +3058,7 @@ MonoBehaviour:
       goalType: 0
       requiredAmount: 0
       currentAmount: 0
+  player: {fileID: 1173824227}
 --- !u!4 &1320427436
 Transform:
   m_ObjectHideFlags: 0
