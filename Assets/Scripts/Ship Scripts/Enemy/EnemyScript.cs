@@ -30,6 +30,8 @@ public class EnemyScript : MonoBehaviour {
     public float aiFirstOrderDelay = 3;
     public float aiOrderPeriodRandomize = 0.5f;
 
+    public float aiAvoidStaticObjectsRadius = 10f;
+
     private float aiCrewOrderTime = 0;
     private float aiMovementOrderTime = 0;
     private float aiAttackOrderTime = 0;
@@ -385,45 +387,55 @@ public class EnemyScript : MonoBehaviour {
         targets = GetAllFriendlyTargets();
         Debug.Log("Friendly: " + targets.Length);
 
-        if (targets.Length <= 0) {
-            return;
+        if (targets.Length > 0) {
+            closestTarget = null;
+
+            {
+                float minDist = aiDefendMinimumFriendlySeparation;
+                for (int i = 0; i < targets.Length; i++) {
+                    float dist = getDistanceToTarget(targets[i]);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        closestTarget = targets[i];
+                    }
+                }
+            }
+
+            if (closestTarget != null) {
+                aiTargetDirection = (-getVectorToTarget(closestTarget).normalized * 0.5f + aiTargetDirection).normalized;
+                aiPropell = true;
+            }
+
+            GameObject farthestTarget = targets[0];
+            float maxDist = getDistanceToTarget(targets[0]);
+            {
+                for (int i = 1; i < targets.Length; i++) {
+                    float dist = getDistanceToTarget(targets[i]);
+                    if (dist > maxDist) {
+                        maxDist = dist;
+                        farthestTarget = targets[i];
+                    }
+                }
+            }
+
+            Vector2 friendlyDirection = getVectorToTarget(farthestTarget);
+
+            if (maxDist > aiDefendTeammateMaxDistance) {
+                aiTargetDirection = (getVectorToTarget(farthestTarget).normalized * aiDefendTeammateRatio + aiTargetDirection).normalized;
+                aiPropell = true;
+            }
         }
 
-        closestTarget = null;
-
-        {
-            float minDist = aiDefendMinimumFriendlySeparation;
-            for (int i = 0; i < targets.Length; i++) {
-                float dist = getDistanceToTarget(targets[i]);
+        targets = GetStaticObjects();
+        if (targets.Length > 0) {
+            float minDist = aiAvoidStaticObjectsRadius;
+            foreach (GameObject target in targets) {
+                float dist = getDistanceToTarget(target);
                 if (dist < minDist) {
                     minDist = dist;
-                    closestTarget = targets[i];
+                    aiTargetDirection = (-getVectorToTarget(target).normalized + aiTargetDirection).normalized;
                 }
             }
-        }
-
-        if (closestTarget != null) {
-            aiTargetDirection = (-getVectorToTarget(closestTarget).normalized * 0.5f + aiTargetDirection).normalized;
-            aiPropell = true;
-        }
-
-        GameObject farthestTarget = targets[0];
-        float maxDist = getDistanceToTarget(targets[0]);
-        {
-            for (int i = 1; i < targets.Length; i++) {
-                float dist = getDistanceToTarget(targets[i]);
-                if (dist > maxDist) {
-                    maxDist = dist;
-                    farthestTarget = targets[i];
-                }
-            }
-        }
-
-        Vector2 friendlyDirection = getVectorToTarget(farthestTarget);
-
-        if (maxDist > aiDefendTeammateMaxDistance) {
-            aiTargetDirection = (getVectorToTarget(farthestTarget).normalized * aiDefendTeammateRatio + aiTargetDirection).normalized;
-            aiPropell = true;
         }
     }
 
@@ -500,6 +512,10 @@ public class EnemyScript : MonoBehaviour {
         }
 
         return b;
+    }
+
+    GameObject[] GetStaticObjects() {
+        return GameObject.FindGameObjectsWithTag("StaticObject");
     }
 
     GameObject[] GetAllTargets() {

@@ -26,11 +26,13 @@ MonoBehaviour:
   aiDefendAvoidFriendlyFactor: 1
   aiDefendAvoidEnemyFactor: 0.5
   aiDefendTeammateMaxDistance: 15
+  aiDefendTeammateRatio: 0.3
   aiCrewOrderPeriod: 3
   aiMovementOrderPeriod: 1
   aiAttackOrderPeriod: 1
   aiFirstOrderDelay: 3
   aiOrderPeriodRandomize: 0.1
+  aiAvoidStaticObjectsRadius: 14
 --- !u!1001 &693250252444643592
 PrefabInstance:
   m_ObjectHideFlags: 0

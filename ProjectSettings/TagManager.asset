@@ -9,6 +9,7 @@ TagManager:
   - SailorUse
   - Ship
   - Item
+  - StaticObject
   layers:
   - Default
   - TransparentFX
