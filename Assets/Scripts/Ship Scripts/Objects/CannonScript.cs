@@ -24,6 +24,7 @@ public class CannonScript : MonoBehaviour {
     private int frameIndex = 0;
     private int lastIndex = 0;
     private bool triggerAnimation = false;
+    public Sprite readyToFire;
 
     private NodeScript ns;
     private Rigidbody2D cannonRB;
@@ -54,6 +55,7 @@ public class CannonScript : MonoBehaviour {
         if (cooldown > 0 && cooldown < 0.843 * ns.ReadyCrewCount() / nodes.Length && !reloadPlaying) {
             reloadPlaying = true;
             GetComponents<AudioSource>()[1].Play();
+            ChangeIfReady();
         }
         if (!GetComponents<AudioSource>()[1].isPlaying) {
             reloadPlaying = false;
@@ -101,5 +103,10 @@ public class CannonScript : MonoBehaviour {
             gameObject.GetComponents<AudioSource>()[0].Play();
             cooldown = cooldownTime;
         }
+    }
+
+    public void ChangeIfReady()
+    {
+        mySprite.sprite = readyToFire;
     }
 }
