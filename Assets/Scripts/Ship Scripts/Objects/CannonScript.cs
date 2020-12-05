@@ -61,6 +61,8 @@ public class CannonScript : MonoBehaviour {
         if (cooldown > 0 && cooldown < 0.843 * ns.ReadyCrewCount() / nodes.Length && !reloadPlaying) {
             reloadPlaying = true;
             GetComponents<AudioSource>()[1].Play();
+        }
+        if (cooldown < 0) {
             ChangeIfReady();
             ChangeIndicatorGreen();
         }
