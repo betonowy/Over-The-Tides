@@ -15,11 +15,13 @@ public class PortScript : MonoBehaviour
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI rewardText;
 
-    public ItemDatabaseObject database;
+    public TextMeshProUGUI completedText;
 
     public void OnTriggerEnter2D(Collider2D collision) {
         if(collision.name == "playerBoatBlue") {
             QuestWindow.SetActive(true);
+            titeText.text = quest.title;
+            descriptionText.text = quest.description;
         }
     }
 
@@ -31,15 +33,13 @@ public class PortScript : MonoBehaviour
     }
 
     private void Start() {
-        // quest.itemReward = database.FindItem(1);
+        titeText.text = quest.title;
+        descriptionText.text = quest.description;
     }
 
     private void Update() {
         if (Input.GetKey(KeyCode.J) && QuestWindow.activeSelf == true) {
             QuestLog.SetActive(true);
-            titeText.text = quest.title;
-            descriptionText.text = quest.description;
-            rewardText.text = "Reward: one cannon";
         }
     }
 
@@ -47,7 +47,7 @@ public class PortScript : MonoBehaviour
         QuestLog.SetActive(false);
         quest.isActive = true;
         player.quest = quest;
-        FindObjectOfType<LevelManager>().SendMessage("SetQuest", quest);
+        FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
     }
 
     public Quest GetQuest() {

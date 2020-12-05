@@ -9,8 +9,8 @@ public class Quest {
 
     public string title;
     public string description;
-    public Item itemReward;
-    public int amount;
+    public string completed;
+    public string reward;
 
     public QuestGoal goal;
 

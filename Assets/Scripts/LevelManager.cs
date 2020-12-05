@@ -20,12 +20,6 @@ public class LevelManager : MonoBehaviour {
 
     public ItemDatabaseObject database;
 
-    public Quest quest;
-    
-    //delete later
-    public PlayerScript player;
-    public GameObject text;
-
     // Start is called before the first frame update
     void Start() {
         playerCamera = Instantiate(playerCameraPrefab);
@@ -58,11 +52,6 @@ public class LevelManager : MonoBehaviour {
             mainCamera.decreaseZoom();
         }
 
-        //delete later
-        if (Input.GetKey(KeyCode.R))
-            text.SetActive(false);
-        //
-
         GameObject[] ship = GameObject.FindGameObjectsWithTag("Ship");
         bool reds = false;
         bool blues = false;
@@ -76,26 +65,6 @@ public class LevelManager : MonoBehaviour {
 
         if (nextSceneAfterTDM && GamemodeConditions() && ((!reds || !blues ) && !(!reds && !blues) || ship.Length <= 1 )) {
             OnGameEnd();
-        }
-    }
-    //delete later
-    public void SetQuest(Quest playerQuest) {
-        quest = playerQuest;
-    }
-
-    void OnEnemyDeath(ShipScript ship) {
-        if (ship == null)
-            Debug.Log("nulls");
-        if (quest.isActive) {
-            if (ship.GetComponent<ShipScript>().team == ShipScript.teamEnum.teamRed) {
-                quest.goal.EnemyKilled();
-            }
-            if(quest.goal.IsReached()) {
-                //delete later
-                player.createCannon();
-                quest.Complete();
-                text.SetActive(true);
-            }
         }
     }
 
