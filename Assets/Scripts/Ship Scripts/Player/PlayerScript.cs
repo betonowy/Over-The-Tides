@@ -19,8 +19,6 @@ public class PlayerScript : MonoBehaviour
     private ShipScript shipScript;
 
     public InventoryObject inventory;
-
-    public Quest quest;
     
     public GameObject cannonToPick;
 

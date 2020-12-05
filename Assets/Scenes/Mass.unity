@@ -3057,16 +3057,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba170d4f6deb3f47891da71048db2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quest:
-    isActive: 0
-    title: 
-    description: 
-    completed: 
-    reward: 
-    goal:
-      goalType: 0
-      requiredAmount: 0
-      currentAmount: 0
+  ports:
+  - {fileID: 400989043}
   player: {fileID: 1173824227}
   text: {fileID: 1214289583}
 --- !u!1 &1322901717

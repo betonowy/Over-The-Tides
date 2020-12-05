@@ -18,10 +18,13 @@ public class PortScript : MonoBehaviour
     public TextMeshProUGUI rewardText;
     public TextMeshProUGUI completedText;
 
+    private bool isCompleted = false;
+
     public void OnTriggerEnter2D(Collider2D collision) {
         if(collision.name == "playerBoatBlue") {
             questUI.transform.Find("QuestWindow").gameObject.SetActive(true);
             questWindow = GameObject.Find("QuestWindow");
+
         }
     }
 
@@ -42,6 +45,7 @@ public class PortScript : MonoBehaviour
         if (Input.GetKey(KeyCode.J) && questWindow.activeSelf == true) {
             questWindow.transform.Find("QuestLog").gameObject.SetActive(true);
             questLog = GameObject.Find("QuestLog");
+    
             titeText = questLog.transform.Find("Title").GetComponent<TextMeshProUGUI>();
             descriptionText = questLog.transform.Find("Description").GetComponent<TextMeshProUGUI>();
             rewardText = questLog.transform.Find("Reward").GetComponent<TextMeshProUGUI>();
@@ -50,14 +54,20 @@ public class PortScript : MonoBehaviour
             descriptionText.text = quest.description;
             rewardText.text = quest.reward;
             completedText.text = quest.completed;
+            
+            if(isCompleted) {
+                player.GenerateReward(rewardText.text);
+                titeText.gameObject.SetActive(false);
+                descriptionText.gameObject.SetActive(false);
+                rewardText.gameObject.SetActive(false);
+                completedText.gameObject.SetActive(true);
+            }
         }
     }
 
     public void AcceptQuest() {
         questLog.SetActive(false);
         quest.isActive = true;
-        player.quest = quest;
-        combatManager.SendMessage("SetQuest", quest);
         //FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
     }
 
@@ -67,5 +77,9 @@ public class PortScript : MonoBehaviour
 
     public void closeQuestLog() {
         questLog.SetActive(false);
+    }
+
+    public void QuestCompleted() {
+        isCompleted = true;
     }
 }
