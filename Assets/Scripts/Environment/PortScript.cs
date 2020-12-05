@@ -5,8 +5,9 @@ using TMPro;
 
 public class PortScript : MonoBehaviour
 {
-    public GameObject QuestWindow;
-    public GameObject QuestLog;
+    public GameObject questUI;
+    public GameObject questWindow;
+    public GameObject questLog;
 
     public Quest quest;
     public PlayerScript player;
@@ -14,37 +15,44 @@ public class PortScript : MonoBehaviour
     public TextMeshProUGUI titeText;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI rewardText;
-
     public TextMeshProUGUI completedText;
 
     public void OnTriggerEnter2D(Collider2D collision) {
         if(collision.name == "playerBoatBlue") {
-            QuestWindow.SetActive(true);
-            titeText.text = quest.title;
-            descriptionText.text = quest.description;
+            questUI.transform.Find("QuestWindow").gameObject.SetActive(true);
+            questWindow = GameObject.Find("QuestWindow");
         }
     }
 
     public void OnTriggerExit2D(Collider2D collision) {
         if (collision.name == "playerBoatBlue") {
-            QuestWindow.SetActive(false);
-            QuestLog.SetActive(false);
+            questWindow.SetActive(false);
+            questLog.SetActive(false);
         }
     }
 
     private void Start() {
-        titeText.text = quest.title;
-        descriptionText.text = quest.description;
+        questUI = GameObject.Find("QuestUI");
+
     }
 
     private void Update() {
-        if (Input.GetKey(KeyCode.J) && QuestWindow.activeSelf == true) {
-            QuestLog.SetActive(true);
+        if (Input.GetKey(KeyCode.J) && questWindow.activeSelf == true) {
+            questWindow.transform.Find("QuestLog").gameObject.SetActive(true);
+            questLog = GameObject.Find("QuestLog");
+            titeText = questLog.transform.Find("Title").GetComponent<TextMeshProUGUI>();
+            descriptionText = questLog.transform.Find("Description").GetComponent<TextMeshProUGUI>();
+            rewardText = questLog.transform.Find("Reward").GetComponent<TextMeshProUGUI>();
+            completedText = questLog.transform.Find("Completed").GetComponent<TextMeshProUGUI>();
+            titeText.text = quest.title;
+            descriptionText.text = quest.description;
+            rewardText.text = quest.reward;
+            completedText.text = quest.completed;
         }
     }
 
     public void AcceptQuest() {
-        QuestLog.SetActive(false);
+        questLog.SetActive(false);
         quest.isActive = true;
         player.quest = quest;
         FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
@@ -55,6 +63,6 @@ public class PortScript : MonoBehaviour
     }
 
     public void closeQuestLog() {
-        QuestLog.SetActive(false);
+        questLog.SetActive(false);
     }
 }

@@ -22,12 +22,16 @@ public class QuestGiverScript : MonoBehaviour
             case 0: {
                 port.quest.title = "Save Us";
                 port.quest.description = "later";
+                port.quest.reward = "Reward: cannon 1";
+                port.quest.completed = "Thanks!";
                 break;
             }
             case 1: {
-                port.quest.description = "New ship";
-                port.quest.title = "later";
-                break;
+               port.quest.title = "later";
+               port.quest.description = "New ship";
+               port.quest.reward = "Reward: ship 1";
+               port.quest.completed = "Thanks!";
+               break;
             }
         }
     }

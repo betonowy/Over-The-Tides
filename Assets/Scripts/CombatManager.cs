@@ -9,16 +9,6 @@ public class CombatManager : MonoBehaviour
     public PlayerScript player;
     public GameObject text;
 
-    void Start()
-    {
-        
-    }
-
-    void Update() {        
-        if (Input.GetKey(KeyCode.R))
-            quest.Complete();
-    }
-
     public void SetQuest(Quest playerQuest) {
         quest = playerQuest;
     }
@@ -39,6 +29,7 @@ public class CombatManager : MonoBehaviour
                 player.createCannon();
                 quest.Complete();
                 text.SetActive(true);
+                StartCoroutine(ShowMessage());
             }
         }
     }

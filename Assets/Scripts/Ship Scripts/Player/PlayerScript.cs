@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class PlayerScript : MonoBehaviour
     public InventoryObject inventory;
 
     public Quest quest;
-
+    
     public GameObject cannonToPick;
 
     public bool rectDenied;
@@ -38,7 +39,7 @@ public class PlayerScript : MonoBehaviour
         healthBar = GameObject.Find("Health bar");
         healthBar.SendMessage("setMaxHealth", shipScript.shipLife);
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -132,6 +133,27 @@ public class PlayerScript : MonoBehaviour
     public void createCannon() {
         GameObject cnn = Instantiate(cannonToPick, gameObject.transform.position, gameObject.transform.rotation);
         cnn.transform.position = gameObject.transform.position;
+    }
+
+    private void CreateItems(string item, int amount) {
+        if (item == "cannon") {
+            for(int i=0; i<amount; i++) {
+                GameObject cnn = Instantiate(cannonToPick, gameObject.transform.position, gameObject.transform.rotation);
+                cnn.transform.position = gameObject.transform.position;
+            }
+            return;
+        } else if(item == "gold") {
+            for (int i = 0; i < amount; i++) {
+               // GameObject gold = Instantiate(goldToPick, gameObject.transform.position, gameObject.transform.rotation);
+             //   gold.transform.position = gameObject.transform.position;
+            }
+            return;
+        }
+    }
+
+    public void GenerateReward(string s) {
+        string[] words = s.Split(' ');
+        CreateItems(words[1], Int16.Parse(words[2]));
     }
 
     private void OnApplicationQuit() {
