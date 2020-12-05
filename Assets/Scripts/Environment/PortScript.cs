@@ -11,6 +11,7 @@ public class PortScript : MonoBehaviour
 
     public Quest quest;
     public PlayerScript player;
+    public CombatManager combatManager;
 
     public TextMeshProUGUI titeText;
     public TextMeshProUGUI descriptionText;
@@ -33,7 +34,8 @@ public class PortScript : MonoBehaviour
 
     private void Start() {
         questUI = GameObject.Find("QuestUI");
-
+        player = GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>();
+        combatManager = GameObject.Find("LevelManager").GetComponent<CombatManager>();
     }
 
     private void Update() {
@@ -55,7 +57,8 @@ public class PortScript : MonoBehaviour
         questLog.SetActive(false);
         quest.isActive = true;
         player.quest = quest;
-        FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
+        combatManager.SendMessage("SetQuest", quest);
+        //FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
     }
 
     public Quest GetQuest() {

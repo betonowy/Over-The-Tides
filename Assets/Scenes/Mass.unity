@@ -268,7 +268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &118356616
 RectTransform:
   m_ObjectHideFlags: 0
@@ -523,7 +523,7 @@ RectTransform:
   - {fileID: 848403903}
   - {fileID: 472553409}
   - {fileID: 785476566}
-  - {fileID: 1442235037}
+  - {fileID: 392670303}
   - {fileID: 1214289584}
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -1031,6 +1031,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 355d25d13df3caa4ea9cc46c462a0497, type: 3}
+--- !u!1 &392670302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 392670303}
+  m_Layer: 5
+  m_Name: QuestUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &392670303
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392670302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1442235037}
+  m_Father: {fileID: 131839278}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &400989043 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
@@ -1741,7 +1777,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 400989043}
         m_MethodName: AcceptQuest
         m_Mode: 1
         m_Arguments:
@@ -2677,6 +2713,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 980340372}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1173824227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 991902234, guid: 37724890664820743a1c7c6669506ea4,
+    type: 3}
+  m_PrefabInstance: {fileID: 853742752}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49adc19520996340a5acd178b6900da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1214289583
 GameObject:
   m_ObjectHideFlags: 0
@@ -2720,6 +2768,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
+        type: 3}
+      propertyPath: QuestWindow
+      value: 
+      objectReference: {fileID: 1442235036}
+    - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
+        type: 3}
+      propertyPath: QuestLog
+      value: 
+      objectReference: {fileID: 118356615}
     - target: {fileID: 3042633284931110069, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
       propertyPath: m_Name
@@ -2796,6 +2854,7 @@ GameObject:
   - component: {fileID: 1320427438}
   - component: {fileID: 1320427439}
   - component: {fileID: 1320427440}
+  - component: {fileID: 1320427441}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -2986,6 +3045,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ports:
   - {fileID: 400989043}
+--- !u!114 &1320427441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320427434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba170d4f6deb3f47891da71048db2cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quest:
+    isActive: 0
+    title: 
+    description: 
+    completed: 
+    reward: 
+    goal:
+      goalType: 0
+      requiredAmount: 0
+      currentAmount: 0
+  player: {fileID: 1173824227}
+  text: {fileID: 1214289583}
 --- !u!1 &1322901717
 GameObject:
   m_ObjectHideFlags: 0
@@ -3294,7 +3377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1442235037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3302,14 +3385,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442235036}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 609841650}
   - {fileID: 118356616}
-  m_Father: {fileID: 131839278}
-  m_RootOrder: 4
+  m_Father: {fileID: 392670303}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3932,7 +4015,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 400989043}
         m_MethodName: closeQuestLog
         m_Mode: 1
         m_Arguments:
@@ -4720,7 +4803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2107530651
 RectTransform:
   m_ObjectHideFlags: 0

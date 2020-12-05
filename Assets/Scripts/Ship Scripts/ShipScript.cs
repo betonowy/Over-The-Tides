@@ -214,7 +214,7 @@ public class ShipScript : MonoBehaviour
 
     }
     public void OnEnemyDeath() {
-        FindObjectOfType<LevelManager>().SendMessage("OnEnemyDeath", this);
+        FindObjectOfType<CombatManager>().SendMessage("OnEnemyDeath", this);
 
     }
     public void OnPlayerDeath() {
