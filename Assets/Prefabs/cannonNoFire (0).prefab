@@ -138,13 +138,11 @@ MonoBehaviour:
   - 0.05
   - 0.2
   - 0.15
-  cannonRecoil:
-  - 0
-  - 0.15
-  - 0.3
-  - 0.15
-  - 0
   readyToFire: {fileID: 21300000, guid: 9318dafa40e994c47abe0b3bcb706fff, type: 3}
+  cannonIndicator: {fileID: 8431311116293248322, guid: 608cc6a4b2fee3a4389ccdf69328fffb,
+    type: 3}
+  redIndi: {fileID: 21300000, guid: 335d17fe1c76641428532abec8d95105, type: 3}
+  greenIndi: {fileID: 21300000, guid: bca40cd6069d21a4693981e153c3dc92, type: 3}
 --- !u!1773428102 &3276126805382000791
 ParentConstraint:
   m_ObjectHideFlags: 0

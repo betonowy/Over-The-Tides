@@ -116,8 +116,10 @@ public class ShipScript : MonoBehaviour
 
         if (cannonPositions[index].x > 0) {
             cannonConstraint.SetRotationOffset(0, new Vector3(0, 0, -90));
+            newCannon.SendMessage("CreateIndicator", false);
         } else {
             cannonConstraint.SetRotationOffset(0, new Vector3(0, 0, 90));
+            newCannon.SendMessage("CreateIndicator", true);
         }
 
         cannonConstraint.locked = true;

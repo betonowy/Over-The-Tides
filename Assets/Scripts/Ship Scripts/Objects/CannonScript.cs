@@ -25,6 +25,11 @@ public class CannonScript : MonoBehaviour {
     private int lastIndex = 0;
     private bool triggerAnimation = false;
     public Sprite readyToFire;
+    public GameObject cannonIndicator;
+    public Sprite redIndi;
+    public Sprite greenIndi;
+    private SpriteRenderer indiRenderer;
+    private GameObject cnnIndi;
 
     private NodeScript ns;
     private Rigidbody2D cannonRB;
@@ -41,7 +46,8 @@ public class CannonScript : MonoBehaviour {
             ns.CreateRelativeNode(nodes[i]);
         }
         cooldown = cooldownTime;
-        mySprite = GetComponent<SpriteRenderer>();
+        mySprite = GetComponent<SpriteRenderer>(); 
+        indiRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -56,6 +62,7 @@ public class CannonScript : MonoBehaviour {
             reloadPlaying = true;
             GetComponents<AudioSource>()[1].Play();
             ChangeIfReady();
+            ChangeIndicatorGreen();
         }
         if (!GetComponents<AudioSource>()[1].isPlaying) {
             reloadPlaying = false;
@@ -102,11 +109,32 @@ public class CannonScript : MonoBehaviour {
             spawnedBall.SendMessage("SetInitialSpeed", spawnVelocityVector);
             gameObject.GetComponents<AudioSource>()[0].Play();
             cooldown = cooldownTime;
+            ChangeIndicatorRed();
         }
     }
 
-    public void ChangeIfReady()
-    {
+    public void ChangeIfReady() {
         mySprite.sprite = readyToFire;
+    }
+
+    public void CreateIndicator(bool pos)
+    {
+        cnnIndi = Instantiate(cannonIndicator);
+        cnnIndi.transform.SetParent(gameObject.transform);
+        cnnIndi.transform.rotation = gameObject.transform.rotation;
+        if (pos) {
+            cnnIndi.transform.position = gameObject.transform.position + new Vector3((float)-0.2, (float)0.25, 0);
+        } else {
+            cnnIndi.transform.position = gameObject.transform.position + new Vector3((float)-0.2, (float)-0.25, 0);
+        }
+    }
+
+    public void ChangeIndicatorRed() {
+        cnnIndi.GetComponent<SpriteRenderer>().sprite = redIndi;
+    }
+
+    public void ChangeIndicatorGreen()
+    {
+        cnnIndi.GetComponent<SpriteRenderer>().sprite = greenIndi;
     }
 }
