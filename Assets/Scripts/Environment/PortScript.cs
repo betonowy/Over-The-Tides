@@ -59,15 +59,13 @@ public class PortScript : MonoBehaviour
             rewardText.text = quest.reward;
             completedText.text = quest.completed;
             
-            if(isCompleted) {
-                if (flag) {
-                    player.GenerateReward(rewardText.text);
-                    titeText.gameObject.SetActive(false);
-                    descriptionText.gameObject.SetActive(false);
-                    rewardText.gameObject.SetActive(false);
-                    completedText.gameObject.SetActive(true);
-                    flag = false;
-                }
+            if(isCompleted && quest.goal.goalType != GoalType.Gathering) {
+                player.GenerateReward(rewardText.text);
+                titeText.gameObject.SetActive(false);
+                descriptionText.gameObject.SetActive(false);
+                rewardText.gameObject.SetActive(false);
+                completedText.gameObject.SetActive(true);
+                flag = false;
             }
         }
     }
@@ -99,6 +97,11 @@ public class PortScript : MonoBehaviour
                 quest.Complete();
                 questInteface.RemoveAll();
                 QuestCompleted();
+                player.GenerateReward(rewardText.text);
+                titeText.gameObject.SetActive(false);
+                descriptionText.gameObject.SetActive(false);
+                rewardText.gameObject.SetActive(false);
+                completedText.gameObject.SetActive(true);
             }
 
         }
