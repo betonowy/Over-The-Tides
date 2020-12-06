@@ -8,6 +8,7 @@ public class PortScript : MonoBehaviour
     public GameObject questUI;
     public GameObject questWindow;
     public GameObject questLog;
+    public GameObject questGath;
 
     public Quest quest;
     public PlayerScript player;
@@ -58,8 +59,15 @@ public class PortScript : MonoBehaviour
             descriptionText.text = quest.description;
             rewardText.text = quest.reward;
             completedText.text = quest.completed;
-            
-            if(isCompleted && quest.goal.goalType != GoalType.Gathering) {
+
+            questLog.transform.Find("GatherContaniner").gameObject.SetActive(true);
+            questGath = GameObject.Find("GatherContaniner");
+            if (quest.goal.goalType == GoalType.Gathering)
+                questGath.SetActive(true);
+            else
+                questGath.SetActive(false);
+
+            if (isCompleted && quest.goal.goalType != GoalType.Gathering) {
                 player.GenerateReward(rewardText.text);
                 titeText.gameObject.SetActive(false);
                 descriptionText.gameObject.SetActive(false);
