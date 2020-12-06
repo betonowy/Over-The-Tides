@@ -83,6 +83,10 @@ public abstract class UserInterface : MonoBehaviour {
         return tempItem;
     }
 
+    public void RemoveAll() {
+        inventory.Clear();
+    }
+
     public  void checkShipInvetrory() {
         try {
             ship = GameObject.Find("playerBoatBlue").GetComponent<ShipScript>();
@@ -126,7 +130,7 @@ public abstract class UserInterface : MonoBehaviour {
         Destroy(MouseData.tempItemBeingDragged);
         
         if (MouseData.InterfaceMouseIsOver == null) {
-            //slotsOnInterface[obj].RemoveItem();
+            slotsOnInterface[obj].RemoveItem();
             return;
         }
         if(MouseData.slotHoverdOver) {

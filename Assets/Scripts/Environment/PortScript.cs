@@ -18,7 +18,11 @@ public class PortScript : MonoBehaviour
     public TextMeshProUGUI rewardText;
     public TextMeshProUGUI completedText;
 
+    public QuestInteface questInteface;
+    public InventoryObject inventory;
+
     private bool isCompleted = false;
+    private bool flag = true;
 
     public void OnTriggerEnter2D(Collider2D collision) {
         if(collision.name == "playerBoatBlue") {
@@ -56,11 +60,14 @@ public class PortScript : MonoBehaviour
             completedText.text = quest.completed;
             
             if(isCompleted) {
-                player.GenerateReward(rewardText.text);
-                titeText.gameObject.SetActive(false);
-                descriptionText.gameObject.SetActive(false);
-                rewardText.gameObject.SetActive(false);
-                completedText.gameObject.SetActive(true);
+                if (flag) {
+                    player.GenerateReward(rewardText.text);
+                    titeText.gameObject.SetActive(false);
+                    descriptionText.gameObject.SetActive(false);
+                    rewardText.gameObject.SetActive(false);
+                    completedText.gameObject.SetActive(true);
+                    flag = false;
+                }
             }
         }
     }
@@ -81,5 +88,19 @@ public class PortScript : MonoBehaviour
 
     public void QuestCompleted() {
         isCompleted = true;
+    }
+
+    public void GiveItems() {
+        InventorySlot inventorySlot = inventory.FindItemOnInventory(quest.item);
+        int i = inventorySlot.amount;
+        if (inventorySlot != null) {
+            if(i == quest.goal.requiredAmount) {
+                Debug.Log("UDAŁO SIE");
+                quest.Complete();
+                questInteface.RemoveAll();
+                QuestCompleted();
+            }
+
+        }
     }
 }
