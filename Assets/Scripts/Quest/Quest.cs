@@ -11,6 +11,7 @@ public class Quest {
     public string description;
     public string completed;
     public string reward;
+    public Item item;
 
     public QuestGoal goal;
 

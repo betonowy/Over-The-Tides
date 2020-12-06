@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76261f23cc2372e438ae92fae3f3c55c, type: 3}
-  m_Name: PlayerInventory
+  m_Name: QuestInventory
   m_EditorClassIdentifier: 
-  savePath: /inventory.Save
+  savePath: 
   database: {fileID: 11400000, guid: 53cab9e8331338c44b023f733f7d46a9, type: 2}
   Container:
     Items:
