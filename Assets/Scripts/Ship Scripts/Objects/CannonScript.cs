@@ -11,6 +11,7 @@ public class CannonScript : MonoBehaviour {
     public float ballSpeed = 2;
     public float cooldownTime = 3;
     public float power = 20;
+    public CannonAnimation spriteSubobject;
 
     public Vector2[] nodes;
 
@@ -18,12 +19,6 @@ public class CannonScript : MonoBehaviour {
     private Vector2 spawnVelocityVector = new Vector2();
     private float cooldown = 0;
 
-    public Sprite[] animation;
-    public float[] animationTiming;
-    private float frameTime = 0;
-    private int frameIndex = 0;
-    private int lastIndex = 0;
-    private bool triggerAnimation = false;
     public Sprite readyToFire;
     public GameObject cannonIndicator;
     public Sprite redIndi;
@@ -33,9 +28,10 @@ public class CannonScript : MonoBehaviour {
 
     private NodeScript ns;
     private Rigidbody2D cannonRB;
-    private SpriteRenderer mySprite;
     private bool reloadPlaying = false;
     private bool reloadHesitate = false;
+
+    private AnimationV1 shootingAnimation;
 
     // Start is called before the first frame update
     void Start() {
@@ -46,8 +42,9 @@ public class CannonScript : MonoBehaviour {
             ns.CreateRelativeNode(nodes[i]);
         }
         cooldown = cooldownTime;
-        mySprite = GetComponent<SpriteRenderer>(); 
+        GetComponent<SpriteRenderer>().sprite = null; // to change
         indiRenderer = GetComponent<SpriteRenderer>();
+        shootingAnimation = GetComponent<AnimationV1>(); // to change
     }
 
     // Update is called once per frame
@@ -57,13 +54,13 @@ public class CannonScript : MonoBehaviour {
         if (reloadHesitate && cooldown > 0) {
             GetComponents<AudioSource>()[1].Stop();
         }
-        Animate();
+        Animate(); // to change
         if (cooldown > 0 && cooldown < 0.843 * ns.ReadyCrewCount() / nodes.Length && !reloadPlaying) {
             reloadPlaying = true;
             GetComponents<AudioSource>()[1].Play();
         }
         if (cooldown < 0) {
-            ChangeIfReady();
+            ChangeIfReady(); // to change
             ChangeIndicatorGreen();
         }
         if (!GetComponents<AudioSource>()[1].isPlaying) {
@@ -72,20 +69,7 @@ public class CannonScript : MonoBehaviour {
     }
 
     void Animate() {
-        if (frameIndex != 0 || triggerAnimation) {
-            triggerAnimation = false;
-            frameTime -= Time.deltaTime;
-            if (frameTime < 0) {
-                if (++frameIndex >= animation.Length) {
-                    frameIndex = 0;
-                }
-                frameTime = animationTiming[frameIndex];
-            }
-        }
-        if (lastIndex != frameIndex) {
-            mySprite.sprite = animation[frameIndex];
-            lastIndex = frameIndex;
-        }
+        
     }
 
     void updateSpawnPointAndVelocity() {
@@ -100,8 +84,8 @@ public class CannonScript : MonoBehaviour {
 
     public void shot() {
         if (cooldown <= 0) {
+            spriteSubobject.AnimateShoot();
             updateSpawnPointAndVelocity();
-            triggerAnimation = true;
             GameObject spawnedBall = Instantiate(ballTemplate, gameObject.transform.position, gameObject.transform.rotation);
             Rigidbody2D ballRigidbody = spawnedBall.GetComponent<Rigidbody2D>();
 
@@ -116,7 +100,7 @@ public class CannonScript : MonoBehaviour {
     }
 
     public void ChangeIfReady() {
-        mySprite.sprite = readyToFire;
+        spriteSubobject.AnimateReady();
     }
 
     public void CreateIndicator(bool pos)
