@@ -6,6 +6,7 @@ public class ShwipwreckScript : MonoBehaviour
 {
     public GameObject cannonToPick;
     public GameObject GoldToPick;
+    public GameObject plankToPick;
     Vector3 pos;
 
     BoxCollider2D boxCollider;
@@ -13,22 +14,26 @@ public class ShwipwreckScript : MonoBehaviour
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-        match_cannon();
         match_gold();
+        match_plank();
         pos = boxCollider.transform.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Ship")
+        if (collision.gameObject.name == "playerBoatBlue")
             Destroy(gameObject);
     }
+    
+    private void match_plank() {
+        for (int i = 0; i < Random.Range(5, 15); i++) {
+            GameObject obj = Instantiate(plankToPick, gameObject.transform.position, gameObject.transform.rotation);
+            obj.GetComponent<BoxCollider2D>().size = boxCollider.size;
+            obj.GetComponent<BoxCollider2D>().transform.Translate(pos);
+            obj.transform.position = gameObject.transform.position;
+        }
+    }
+
 
     private void match_cannon()
     {
@@ -40,11 +45,11 @@ public class ShwipwreckScript : MonoBehaviour
 
     private void match_gold()
     {
-
-
-        GameObject gld = Instantiate(GoldToPick, gameObject.transform.position, gameObject.transform.rotation);
-        gld.GetComponent<BoxCollider2D>().size = boxCollider.size;
-        gld.GetComponent<BoxCollider2D>().transform.Translate(pos);
-        gld.transform.position = gameObject.transform.position;
+        for(int i = 0; i< Random.Range(10, 20); i++) {  
+            GameObject gld = Instantiate(GoldToPick, gameObject.transform.position, gameObject.transform.rotation);
+            gld.GetComponent<BoxCollider2D>().size = boxCollider.size;
+            gld.GetComponent<BoxCollider2D>().transform.Translate(pos);
+            gld.transform.position = gameObject.transform.position;
+        }
     }
 }
