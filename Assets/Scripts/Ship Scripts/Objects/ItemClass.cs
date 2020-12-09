@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum ItemType {
     Gold,
-    Cannon
+    Cannon,
+    Plank
 }
 
 public enum Attributes {
