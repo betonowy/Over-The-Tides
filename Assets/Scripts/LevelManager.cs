@@ -23,12 +23,16 @@ public class LevelManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         playerCamera = Instantiate(playerCameraPrefab);
-        if (GameObject.Find("playerBoatFFA") != null) {
-            playerCamera.transform.SetParent(GameObject.Find("playerBoatFFA").transform);
-        } else if (GameObject.Find("playerBoatBlue") != null) {
-            playerCamera.transform.SetParent(GameObject.Find("playerBoatBlue").transform);
-        } else if (GameObject.Find("playerBoatRed") != null) {
-            playerCamera.transform.SetParent(GameObject.Find("playerBoatRed").transform);
+        GameObject player;
+        if ((player = GameObject.Find("playerBoatFFA")) != null) {
+            playerCamera.transform.SetParent(player.transform);
+            player.GetComponent<ShipScript>().MakeLeader();
+        } else if ((player = GameObject.Find("playerBoatBlue")) != null) {
+            playerCamera.transform.SetParent(player.transform);
+            player.GetComponent<ShipScript>().MakeLeader();
+        } else if ((player = GameObject.Find("playerBoatRed")) != null) {
+            playerCamera.transform.SetParent(player.transform);
+            player.GetComponent<ShipScript>().MakeLeader();
         }
         mainCamera = Instantiate(mainCameraPrefab);
         hordeManager = gameObject.GetComponent<HordeMan>();
@@ -63,7 +67,7 @@ public class LevelManager : MonoBehaviour {
             }
         }
 
-        if (nextSceneAfterTDM && GamemodeConditions() && ((!reds || !blues ) && !(!reds && !blues) || ship.Length <= 1 )) {
+        if (nextSceneAfterTDM && GamemodeConditions() && ((!reds || !blues) && !(!reds && !blues) || ship.Length <= 1)) {
             OnGameEnd();
         }
     }

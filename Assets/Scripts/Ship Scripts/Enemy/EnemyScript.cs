@@ -23,6 +23,8 @@ public class EnemyScript : MonoBehaviour {
     public float aiDefendAvoidEnemyFactor = 0.5f;
     public float aiDefendTeammateMaxDistance = 15;
     public float aiDefendTeammateRatio = 0.3f;
+    public float aiDefendLeaderFollowDistance = 10;
+    public float aiDefendLeaderFollowRatio = 0.8f;
 
     public float aiCrewOrderPeriod = 3;
     public float aiMovementOrderPeriod = 2;
@@ -50,9 +52,20 @@ public class EnemyScript : MonoBehaviour {
     private GameObject paddles;
     private ShipScript ship;
 
+    private BaseStrat teamStrat;
+
     // Start is called before the first frame update
     void Start() {
         ship = gameObject.GetComponent<ShipScript>();
+
+        teamStrat = FFAStrat.strat;
+
+        if (ship.team == ShipScript.teamEnum.teamRed) {
+            teamStrat = RedStrat.strat;
+        } else if (ship.team == ShipScript.teamEnum.teamBlue) {
+            teamStrat = BlueStrat.strat;
+        }
+
         ResetAttackTimer();
         ResetCrewTimer();
         ResetMoveTimer();
@@ -357,8 +370,9 @@ public class EnemyScript : MonoBehaviour {
 
     void MoveOrder() {
         GameObject[] targets = GetAllEnemyTargets();
-
         aiPropell = false;
+
+        if (teamStrat.moveOrder == BaseStrat.MoveType.STOP) return;
 
         GameObject closestTarget = null;
 
@@ -385,7 +399,6 @@ public class EnemyScript : MonoBehaviour {
         }
 
         targets = GetAllFriendlyTargets();
-        Debug.Log("Friendly: " + targets.Length);
 
         if (targets.Length > 0) {
             closestTarget = null;
@@ -402,7 +415,7 @@ public class EnemyScript : MonoBehaviour {
             }
 
             if (closestTarget != null) {
-                aiTargetDirection = (-getVectorToTarget(closestTarget).normalized * 0.5f + aiTargetDirection).normalized;
+                aiTargetDirection = (-getVectorToTarget(closestTarget).normalized * aiDefendAvoidFriendlyFactor + aiTargetDirection).normalized;
                 aiPropell = true;
             }
 
@@ -423,6 +436,16 @@ public class EnemyScript : MonoBehaviour {
             if (maxDist > aiDefendTeammateMaxDistance) {
                 aiTargetDirection = (getVectorToTarget(farthestTarget).normalized * aiDefendTeammateRatio + aiTargetDirection).normalized;
                 aiPropell = true;
+            }
+
+            if (teamStrat.moveOrder == BaseStrat.MoveType.FOLLOW) {
+                GameObject leader = GetLeader();
+                if (leader != null) {
+                    Vector2 leaderDirection = getVectorToTarget(leader);
+                    if (leaderDirection.magnitude > aiDefendLeaderFollowDistance) {
+                        aiTargetDirection = (leaderDirection.normalized * aiDefendLeaderFollowRatio + aiTargetDirection).normalized;
+                    }
+                }
             }
         }
 
@@ -491,6 +514,18 @@ public class EnemyScript : MonoBehaviour {
         }
 
         return b;
+    }
+
+    GameObject GetLeader() {
+        GameObject[] g = GameObject.FindGameObjectsWithTag("Ship");
+
+        foreach (var potentialTarget in g) {
+            ShipScript potShip = potentialTarget.GetComponent<ShipScript>();
+            if (potShip.team == ship.team && potShip.isLeader) {
+                return potentialTarget;
+            }
+        }
+        return null;
     }
 
     GameObject[] GetAllFriendlyTargets() {

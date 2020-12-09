@@ -53,6 +53,8 @@ public class ShipScript : MonoBehaviour
     public bool iTouchedCannons;
     private StaticInterface staticInterface;
 
+    public bool isLeader { get; private set; } = false;
+
     private void Start() {
         cannonExistence = new bool[cannonPositions.Length];
         cannons = new GameObject[cannonPositions.Length];
@@ -260,5 +262,20 @@ public class ShipScript : MonoBehaviour
         if (currentlyMannedRepair > 0 && shipLife < 50) {
             shipLife += currentlyMannedRepair * 0.005f / maxMannedRepair;
         }
+    }
+
+    public void MakeLeader() {
+        GameObject[] g = GameObject.FindGameObjectsWithTag("Ship");
+        foreach (GameObject go in g) {
+            ShipScript ship = go.GetComponent<ShipScript>();
+            if (ship.team == team) {
+                ship.CancelLeader();
+            }
+        }
+        isLeader = true;
+    }
+
+    public void CancelLeader() {
+        isLeader = false;
     }
 }
