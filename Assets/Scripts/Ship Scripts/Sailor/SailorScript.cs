@@ -25,7 +25,7 @@ public class SailorScript : MonoBehaviour {
     public Sprite[] newSpriteFrontWhite;
     public int whoIsIt;
 
-    public SailorType sailorType { get; set; } = SailorType.SAILOR_DEFAULT;
+    public SailorType sailorType = SailorType.SAILOR_DEFAULT;
 
     private bool changeSprite;
     public float walkSpeed;
