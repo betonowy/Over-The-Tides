@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4ea9727bd0b8d4995a3510532b9fee, type: 3}
   m_Name: Plank
   m_EditorClassIdentifier: 
-  uiDisplay: {fileID: 0}
-  stackable: 0
+  uiDisplay: {fileID: 21300000, guid: 721b75c7be0d38442873b2eeace8890d, type: 3}
+  stackable: 1
   type: 2
   data:
     Name: 
-    Id: -1
+    Id: 2
     buffs: []
