@@ -21,6 +21,8 @@ public class PlayerScript : MonoBehaviour
     public InventoryObject inventory;
     
     public GameObject cannonToPick;
+    public GameObject goldToPick;
+    public GameObject plankToPick;
 
     public bool rectDenied;
     public Rect[] deniedRects;
@@ -29,7 +31,6 @@ public class PlayerScript : MonoBehaviour
 
     Vector3 pos;
 
-    // Start is called before the first frame update
     void Start()
     {
         shipScript = gameObject.GetComponent<ShipScript>();
@@ -142,8 +143,15 @@ public class PlayerScript : MonoBehaviour
             return;
         } else if(item == "gold") {
             for (int i = 0; i < amount; i++) {
-               // GameObject gold = Instantiate(goldToPick, gameObject.transform.position, gameObject.transform.rotation);
-             //   gold.transform.position = gameObject.transform.position;
+                GameObject gold = Instantiate(goldToPick, gameObject.transform.position, gameObject.transform.rotation);
+                gold.transform.position = gameObject.transform.position;
+            }
+            return;
+        } else if (item == "plank") {
+            for (int i = 0; i < amount; i++) {
+                Debug.Log(amount);
+                GameObject plank = Instantiate(plankToPick, gameObject.transform.position, gameObject.transform.rotation);
+                plank.transform.position = gameObject.transform.position;
             }
             return;
         }
