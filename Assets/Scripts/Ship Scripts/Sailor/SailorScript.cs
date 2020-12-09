@@ -6,9 +6,9 @@ public class SailorScript : MonoBehaviour {
 
     public enum SailorType {
         SAILOR_DEFAULT,
-        SAILOR_PLEASE_VIOLATE_ME,
-        SAILOR_YES_PLEASE_HOLD_ME_IN_YOUR_ARMS,
-        SAILOR_I_DONT_WANT_TO_LIVE_ANYMORE,
+        SAILOR_STEERWHELE,
+        SAILOR_CANNON_GUNNER,
+        SAILOR_PADDLE,
         SAILOR_O_O_O_O_OO_OONI_CHAAAN
     }
 
@@ -23,7 +23,6 @@ public class SailorScript : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
     public Sprite[] newSpriteFrontGreen;
     public Sprite[] newSpriteFrontWhite;
-    public int whoIsIt;
 
     public SailorType sailorType = SailorType.SAILOR_DEFAULT;
 
@@ -40,7 +39,7 @@ public class SailorScript : MonoBehaviour {
         ship = transform.parent.gameObject.GetComponent<ShipScript>();
         shipBody = ship.gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = newSpriteFrontWhite[whoIsIt];
+        spriteRenderer.sprite = newSpriteFrontWhite[(int)sailorType];
         changeSprite = false;
         audioSteps = GetComponents<AudioSource>()[0];
     }
@@ -55,9 +54,9 @@ public class SailorScript : MonoBehaviour {
         }
         
         if(!changeSprite)
-            spriteRenderer.sprite = newSpriteFrontWhite[whoIsIt];
+            spriteRenderer.sprite = newSpriteFrontWhite[(int)sailorType];
         if (changeSprite)
-            spriteRenderer.sprite = newSpriteFrontGreen[whoIsIt];
+            spriteRenderer.sprite = newSpriteFrontGreen[(int)sailorType];
     }
 
     private void stayOnShip() {

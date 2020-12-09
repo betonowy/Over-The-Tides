@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballTemplate: {fileID: 3531933280094005140, guid: 93af975eac52f6b4ebaac92304cfbdd8,
     type: 3}
+  sailorCompatibility: 2
   ballSpawnDistance: 0.2
   ballSpeed: 4.5
   cooldownTime: 3

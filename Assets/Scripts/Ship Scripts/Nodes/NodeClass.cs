@@ -9,7 +9,7 @@ public class NodeClass {
     private GameObject parentObject;
     private GameObject assignedSailor = null;
 
-    public float compatibilityBoost = 2;
+    public float compatibilityBoost = 1.35f;
     public float baseEffect = 1;
 
     private const float epsilonPosition = 0.1f;
