@@ -6,6 +6,7 @@ using UnityEngine.Animations;
 public class CannonScript : MonoBehaviour {
 
     public GameObject ballTemplate;
+    public SailorScript.SailorType sailorCompatibility = SailorScript.SailorType.SAILOR_DEFAULT;
 
     public float ballSpawnDistance = 0.2f;
     public float ballSpeed = 2;
@@ -37,6 +38,7 @@ public class CannonScript : MonoBehaviour {
     void Start() {
         cannonRB = GetComponent<Rigidbody2D>();
         ns = gameObject.AddComponent<NodeScript>();
+        ns.sailorCompatibleType = sailorCompatibility;
         ns.SetParent(gameObject);
         for (int i = 0; i < nodes.Length; i++) {
             ns.CreateRelativeNode(nodes[i]);

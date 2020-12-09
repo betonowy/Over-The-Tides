@@ -9,13 +9,16 @@ public class NodeClass {
     private GameObject parentObject;
     private GameObject assignedSailor = null;
 
+    public float compatibilityBoost = 2;
+    public float baseEffect = 1;
+
     private const float epsilonPosition = 0.1f;
     public NodeClass(Vector2 relPos, GameObject parent) {
         position = relPos;
         parentObject = parent;
     }
 
-    public bool SailorReady() {
+    public float SailorReady(SailorScript.SailorType compatibility) {
         try {
             if (assignedSailor != null) {
                 Vector2 setPosition = parentObject.transform.position;
@@ -25,11 +28,14 @@ public class NodeClass {
                 setPosition += relative;
                 Vector2 flatPos = assignedSailor.transform.position;
                 if ((flatPos - setPosition).magnitude < epsilonPosition) {
-                    return true;
+                    if (compatibility == assignedSailor.GetComponent<SailorScript>().sailorType)
+                        return baseEffect * compatibilityBoost;
+                    else
+                        return baseEffect;
                 }
             }
         } catch { }
-        return false;
+        return 0;
     }
 
     public GameObject GetAssignedSailor() {

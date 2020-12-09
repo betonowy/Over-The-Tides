@@ -9,13 +9,13 @@ public class NodeScript : MonoBehaviour
     GameObject parentGameObject;
     ArrayList nodes;
 
-    public int ReadyCrewCount() {
-        int count = 0;
+    public SailorScript.SailorType sailorCompatibleType { get; set; } = SailorScript.SailorType.SAILOR_DEFAULT;
+
+    public float ReadyCrewCount() {
+        float count = 0;
         for (int i = 0; i < nodes.Count; i++) {
             NodeClass current = (NodeClass)nodes[i];
-            if (current.SailorReady()) {
-                count++;
-            }
+            count += current.SailorReady(sailorCompatibleType);
         }
         return count;
     }

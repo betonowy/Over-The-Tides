@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SailorScript : MonoBehaviour {
+
+    public enum SailorType {
+        SAILOR_DEFAULT,
+        SAILOR_PLEASE_VIOLATE_ME,
+        SAILOR_YES_PLEASE_HOLD_ME_IN_YOUR_ARMS,
+        SAILOR_I_DONT_WANT_TO_LIVE_ANYMORE,
+        SAILOR_O_O_O_O_OO_OONI_CHAAAN
+    }
+
     Rigidbody2D rBody;
     ShipScript ship;
     private float alpha;
@@ -15,6 +24,8 @@ public class SailorScript : MonoBehaviour {
     public Sprite[] newSpriteFrontGreen;
     public Sprite[] newSpriteFrontWhite;
     public int whoIsIt;
+
+    public SailorType sailorType { get; set; } = SailorType.SAILOR_DEFAULT;
 
     private bool changeSprite;
     public float walkSpeed;

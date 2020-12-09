@@ -5,6 +5,7 @@ using UnityEngine;
 public class RepairbenchScript : MonoBehaviour
 {
     public Vector2[] nodes;
+    public SailorScript.SailorType sailorCompatibility = SailorScript.SailorType.SAILOR_DEFAULT;
 
     NodeScript ns;
 
@@ -12,6 +13,7 @@ public class RepairbenchScript : MonoBehaviour
     void Start()
     {
         ns = gameObject.AddComponent<NodeScript>();
+        ns.sailorCompatibleType = sailorCompatibility;
         ns.SetParent(gameObject);
         for (int i = 0; i < nodes.Length; i++) {
             ns.CreateRelativeNode(nodes[i]);
