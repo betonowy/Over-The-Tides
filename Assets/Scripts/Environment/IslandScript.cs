@@ -38,11 +38,13 @@ public class IslandScript : MonoBehaviour {
             descriptionText.text = desc;
             rewardText.text = rewa;
 
-            if (isCompleted && flag) {
-                player.GenerateReward(rewardText.text);
-                flag = false;
-            }
         }
+
+        if (isCompleted && flag) {
+            player.GenerateReward(rewardText.text);
+            flag = false;
+        }
+
     }
 
     public void OnTriggerEnter2D(Collider2D collision) {
@@ -61,6 +63,7 @@ public class IslandScript : MonoBehaviour {
 
     public void Accept() {
         isCompleted = true;
+        islandLog.SetActive(false);
     }
 
     public void Quit() {
