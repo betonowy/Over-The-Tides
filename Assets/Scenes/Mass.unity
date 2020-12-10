@@ -228,6 +228,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemyBoatBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 7753222846931324632, guid: 276eed61739550e4182a192a1f8a8bdc,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8673d7c7b3d0d5b41bceec95630b56ae,
+        type: 3}
     - target: {fileID: 7753222846931324635, guid: 276eed61739550e4182a192a1f8a8bdc,
         type: 3}
       propertyPath: m_LocalPosition.y
