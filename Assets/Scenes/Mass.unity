@@ -2569,6 +2569,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3857275045837263762, guid: e785c6d1c34cec649aed4b18aa5633f9,
         type: 3}
+    - target: {fileID: 991902234, guid: 37724890664820743a1c7c6669506ea4, type: 3}
+      propertyPath: shipToSpawn
+      value: 
+      objectReference: {fileID: 7753222846033376264, guid: 276eed61739550e4182a192a1f8a8bdc,
+        type: 3}
     - target: {fileID: 1203056546778323910, guid: 37724890664820743a1c7c6669506ea4,
         type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
@@ -3651,7 +3656,7 @@ PrefabInstance:
     - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
       propertyPath: quest.item.Id
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
@@ -3664,6 +3669,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: f598141bda272c24c934497144db7dd7,
         type: 2}
+    - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
+        type: 3}
+      propertyPath: quest.goal.requiredAmount
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3042633284931110069, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
       propertyPath: m_Name
