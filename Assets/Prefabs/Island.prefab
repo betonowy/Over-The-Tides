@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1587512777257254851}
   - component: {fileID: 1587512777257254849}
   - component: {fileID: 1587512777257254850}
+  - component: {fileID: 6283420520145289283}
   m_Layer: 0
   m_Name: Island
   m_TagString: Untagged
@@ -101,6 +102,8 @@ MonoBehaviour:
   acceptBtn: {fileID: 0}
   descriptionText: {fileID: 0}
   rewardText: {fileID: 0}
+  desc: 
+  rewa: 
 --- !u!61 &1587512777257254850
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -127,3 +130,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 25, y: 25}
   m_EdgeRadius: 0
+--- !u!60 &6283420520145289283
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587512777257254848}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 10, y: 9.99}
+    newSize: {x: 10, y: 9.99}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.6806259, y: -3.704853}
+      - {x: 2.821991, y: -3.5551996}
+      - {x: 3.9901962, y: -2.8621979}
+      - {x: 3.5465546, y: 0.19040298}
+      - {x: 2.5825043, y: 1.9407005}
+      - {x: 1.4535985, y: 3.4257984}
+      - {x: -1.5646782, y: 3.6640797}
+      - {x: -2.8426456, y: 2.7083435}
+      - {x: -4.3848763, y: 0.56588936}
+      - {x: -4.2888775, y: -0.7424431}

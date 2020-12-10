@@ -7,11 +7,13 @@ public class Projectile : MonoBehaviour {
     public float dieVelocityRatio = 0.5f;
     public float damageMultipier = 10;
     private Vector2 initialVelocity;
+    private float lateSpeed;
 
     private Rigidbody2D rb;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        lateSpeed = rb.velocity.magnitude;
     }
 
     // Update is called once per frame
@@ -28,9 +30,13 @@ public class Projectile : MonoBehaviour {
         }
     }
 
+    private void LateUpdate() {
+        lateSpeed = rb.velocity.magnitude;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision) {
         if (!collision.gameObject.name.StartsWith("playerShootBetter")) {
-            collision.gameObject.SendMessage("Damage", damageMultipier * rb.velocity.magnitude / initialVelocity.magnitude);
+            collision.gameObject.SendMessage("Damage", damageMultipier * lateSpeed / initialVelocity.magnitude);
             DestroyProjectile();
         } else {
             GetComponent<AudioSource>().Play();

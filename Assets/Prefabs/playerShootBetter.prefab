@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 8
   dieVelocityRatio: 0.5
-  damageMultipier: 30
+  damageMultipier: 5
 --- !u!82 &8865067080355888898
 AudioSource:
   m_ObjectHideFlags: 0
