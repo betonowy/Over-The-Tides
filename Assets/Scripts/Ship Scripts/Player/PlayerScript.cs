@@ -23,6 +23,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject cannonToPick;
     public GameObject goldToPick;
     public GameObject plankToPick;
+    public GameObject shipToSpawn;
 
     public bool rectDenied;
     public Rect[] deniedRects;
@@ -149,9 +150,16 @@ public class PlayerScript : MonoBehaviour
             return;
         } else if (item == "plank") {
             for (int i = 0; i < amount; i++) {
-                Debug.Log(amount);
                 GameObject plank = Instantiate(plankToPick, gameObject.transform.position, gameObject.transform.rotation);
                 plank.transform.position = gameObject.transform.position;
+            }
+            return;
+        }
+        else if (item == "ship") {
+            for (int i = 0; i < amount; i++) {
+                Vector3 v = new Vector3(0,0,0);
+                GameObject ship = Instantiate(shipToSpawn, v, gameObject.transform.rotation);
+               // ship.transform.position = gameObject.transform.position;
             }
             return;
         }
