@@ -20,7 +20,7 @@
         FOCUS_REPAIR
     }
 
-    public MoveType moveOrder = MoveType.FOLLOW;
+    public MoveType moveOrder = MoveType.DEFAULT;
     public AttackType attackOrder = AttackType.DEFAULT;
     public CrewType crewOrder = CrewType.DEFAULT;
 }
