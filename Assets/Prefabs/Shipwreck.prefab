@@ -82,7 +82,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!50 &1438795246459381747
 Rigidbody2D:
@@ -147,3 +147,4 @@ MonoBehaviour:
     type: 3}
   GoldToPick: {fileID: 6042411509195909903, guid: 159126577e3d28c4996f47f322ca8602,
     type: 3}
+  plankToPick: {fileID: 0}

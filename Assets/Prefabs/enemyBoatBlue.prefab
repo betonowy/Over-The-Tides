@@ -27,6 +27,8 @@ MonoBehaviour:
   aiDefendAvoidEnemyFactor: 0.7
   aiDefendTeammateMaxDistance: 20
   aiDefendTeammateRatio: 0.1
+  aiDefendLeaderFollowDistance: 10
+  aiDefendLeaderFollowRatio: 0.8
   aiCrewOrderPeriod: 3
   aiMovementOrderPeriod: 1
   aiAttackOrderPeriod: 1
@@ -131,6 +133,11 @@ PrefabInstance:
       propertyPath: team
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7063351172608460046, guid: b619e411afde747419c2d86f69e66192,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7063351172608460047, guid: b619e411afde747419c2d86f69e66192,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -192,6 +199,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 8673d7c7b3d0d5b41bceec95630b56ae,
         type: 3}
+    - target: {fileID: 7063351172709882590, guid: b619e411afde747419c2d86f69e66192,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7063351173153395307, guid: b619e411afde747419c2d86f69e66192,
         type: 3}
       propertyPath: m_LocalPosition.y

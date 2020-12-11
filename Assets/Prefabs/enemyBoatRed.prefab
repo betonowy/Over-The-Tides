@@ -42,6 +42,11 @@ PrefabInstance:
       propertyPath: team
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7753222846033376262, guid: 276eed61739550e4182a192a1f8a8bdc,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7753222846033376263, guid: 276eed61739550e4182a192a1f8a8bdc,
         type: 3}
       propertyPath: m_LocalPosition.x

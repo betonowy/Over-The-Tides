@@ -20,8 +20,8 @@ TagManager:
   - 
   - 
   - Combat
-  - FogOfWar
-  - 
+  - FogOfWarMain
+  - FogOfWarSecondary
   - 
   - 
   - 
@@ -58,4 +58,7 @@ TagManager:
     locked: 0
   - name: High Mast
     uniqueID: 3670588765
+    locked: 0
+  - name: FogOfWar
+    uniqueID: 2528666195
     locked: 0
