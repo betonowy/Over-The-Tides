@@ -9,7 +9,7 @@
     {
         Tags
         {
-            "Queue" = "Transparent + 1"
+            "Queue" = "Transparent+1"
         }
         Pass
         {

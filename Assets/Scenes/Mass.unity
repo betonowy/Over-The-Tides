@@ -244,6 +244,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemyBoatBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 7753222846931324630, guid: 276eed61739550e4182a192a1f8a8bdc,
+        type: 3}
+      propertyPath: m_TranslationAtRest.y
+      value: 0.27000046
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753222846931324630, guid: 276eed61739550e4182a192a1f8a8bdc,
+        type: 3}
+      propertyPath: m_TranslationOffsets.Array.data[0].y
+      value: 0.27000046
+      objectReference: {fileID: 0}
     - target: {fileID: 7753222846931324632, guid: 276eed61739550e4182a192a1f8a8bdc,
         type: 3}
       propertyPath: m_Sprite
@@ -611,6 +621,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: enemyBoatBlue (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753222846931324630, guid: 276eed61739550e4182a192a1f8a8bdc,
+        type: 3}
+      propertyPath: m_TranslationAtRest.y
+      value: 0.27000046
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753222846931324630, guid: 276eed61739550e4182a192a1f8a8bdc,
+        type: 3}
+      propertyPath: m_TranslationOffsets.Array.data[0].y
+      value: 0.27000046
       objectReference: {fileID: 0}
     - target: {fileID: 7753222846931324635, guid: 276eed61739550e4182a192a1f8a8bdc,
         type: 3}
@@ -2629,7 +2649,7 @@ PrefabInstance:
     - target: {fileID: 4451032485439480874, guid: 37724890664820743a1c7c6669506ea4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4451032485816151184, guid: 37724890664820743a1c7c6669506ea4,
         type: 3}
@@ -2704,7 +2724,7 @@ PrefabInstance:
     - target: {fileID: 4451032486705578280, guid: 37724890664820743a1c7c6669506ea4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4451032486705578283, guid: 37724890664820743a1c7c6669506ea4,
         type: 3}
@@ -4519,6 +4539,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemyBoatBlue (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7753222846931324630, guid: 276eed61739550e4182a192a1f8a8bdc,
+        type: 3}
+      propertyPath: m_TranslationAtRest.y
+      value: 0.27000046
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753222846931324630, guid: 276eed61739550e4182a192a1f8a8bdc,
+        type: 3}
+      propertyPath: m_TranslationOffsets.Array.data[0].y
+      value: 0.27000046
+      objectReference: {fileID: 0}
     - target: {fileID: 7753222846931324635, guid: 276eed61739550e4182a192a1f8a8bdc,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -4719,6 +4749,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: enemyBoatBlue (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753222846931324630, guid: 276eed61739550e4182a192a1f8a8bdc,
+        type: 3}
+      propertyPath: m_TranslationAtRest.y
+      value: 0.27000046
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753222846931324630, guid: 276eed61739550e4182a192a1f8a8bdc,
+        type: 3}
+      propertyPath: m_TranslationOffsets.Array.data[0].y
+      value: 0.27000046
       objectReference: {fileID: 0}
     - target: {fileID: 7753222846931324635, guid: 276eed61739550e4182a192a1f8a8bdc,
         type: 3}
@@ -5562,7 +5602,7 @@ PrefabInstance:
     - target: {fileID: 6147558423278507383, guid: 991e3da970a51bb41872e1c4df6be20f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 991e3da970a51bb41872e1c4df6be20f, type: 3}
@@ -7092,6 +7132,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FogOfWarMask
+      objectReference: {fileID: 0}
+    - target: {fileID: 6147558423278507383, guid: 991e3da970a51bb41872e1c4df6be20f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 991e3da970a51bb41872e1c4df6be20f, type: 3}
