@@ -54,18 +54,6 @@ public class PortScript : MonoBehaviour
             questWindow.transform.Find("QuestLog").gameObject.SetActive(true);
             questLog = GameObject.Find("QuestLog");
             questLog.SetActive(true);
-            //titeText = questLog.transform.Find("Title").GetComponent<TextMeshProUGUI>();
-            //descriptionText = questLog.transform.Find("Description").GetComponent<TextMeshProUGUI>();
-            //rewardText = questLog.transform.Find("Reward").GetComponent<TextMeshProUGUI>();
-            //completedText = questLog.transform.Find("Completed").GetComponent<TextMeshProUGUI>();
-
-            //titeText.text = quest.title;
-            //descriptionText.text = quest.description;
-            //rewardText.text = quest.reward;
-            //completedText.text = quest.completed;
-            //titeText.text = title;
-            //descriptionText.text = desc;
-            //rewardText.text = reward;
 
             questLog.transform.Find("GatherContaniner").gameObject.SetActive(true);
             questGath = GameObject.Find("GatherContaniner");
@@ -85,6 +73,8 @@ public class PortScript : MonoBehaviour
         questLog.SetActive(false);
         quest.isActive = true;
         FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
+        if (quest.title == "Priate ship")
+            Debug.Log("Special quest");
     }
 
     public Quest GetQuest() {
