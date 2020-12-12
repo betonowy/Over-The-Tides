@@ -62,12 +62,12 @@ public class QuestGiverScript : MonoBehaviour {
         switch(i) {
             case 0: {
                 island.desc = "As your ship docks to the as it appears to be deserted island, you can see couple of tress which you decide to cut down.";
-                island.rewa = "You man did a great job and you collected 15 planks.";
+                island.rewa = "Reward: plank 15";
                 break;
             }
             case 1: {
                 island.desc = "Asn.";
-                island.rewa = "Reward: 1 plank";
+                island.rewa = "Reward: plank 1";
                 break;
             }
         }
