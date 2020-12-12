@@ -13,23 +13,26 @@ public class PortScript : MonoBehaviour
     public Quest quest;
     public PlayerScript player;
     public CombatManager combatManager;
+    public QuestGiverScript questGiver;
 
-    public TextMeshProUGUI titeText;
-    public TextMeshProUGUI descriptionText;
-    public TextMeshProUGUI rewardText;
-    public TextMeshProUGUI completedText;
+    //public TextMeshProUGUI titeText;
+    //public TextMeshProUGUI descriptionText;
+    //public TextMeshProUGUI rewardText;
+    //public TextMeshProUGUI completedText;
 
     public QuestInteface questInteface;
     public InventoryObject inventory;
 
     private bool isCompleted = false;
-    private bool flag = true;
+
+    private bool reward;
 
     public void OnTriggerEnter2D(Collider2D collision) {
         if(collision.name == "playerBoatBlue") {
             questUI.transform.Find("QuestWindow").gameObject.SetActive(true);
             questWindow = GameObject.Find("QuestWindow");
-
+            questWindow.SetActive(true);
+            questGiver.SetPortText(this);
         }
     }
 
@@ -47,18 +50,22 @@ public class PortScript : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetKey(KeyCode.J) && questWindow.activeSelf == true) {
+        if (Input.GetKeyDown(KeyCode.J) && questWindow.activeSelf == true) {
             questWindow.transform.Find("QuestLog").gameObject.SetActive(true);
             questLog = GameObject.Find("QuestLog");
-    
-            titeText = questLog.transform.Find("Title").GetComponent<TextMeshProUGUI>();
-            descriptionText = questLog.transform.Find("Description").GetComponent<TextMeshProUGUI>();
-            rewardText = questLog.transform.Find("Reward").GetComponent<TextMeshProUGUI>();
-            completedText = questLog.transform.Find("Completed").GetComponent<TextMeshProUGUI>();
-            titeText.text = quest.title;
-            descriptionText.text = quest.description;
-            rewardText.text = quest.reward;
-            completedText.text = quest.completed;
+            questLog.SetActive(true);
+            //titeText = questLog.transform.Find("Title").GetComponent<TextMeshProUGUI>();
+            //descriptionText = questLog.transform.Find("Description").GetComponent<TextMeshProUGUI>();
+            //rewardText = questLog.transform.Find("Reward").GetComponent<TextMeshProUGUI>();
+            //completedText = questLog.transform.Find("Completed").GetComponent<TextMeshProUGUI>();
+
+            //titeText.text = quest.title;
+            //descriptionText.text = quest.description;
+            //rewardText.text = quest.reward;
+            //completedText.text = quest.completed;
+            //titeText.text = title;
+            //descriptionText.text = desc;
+            //rewardText.text = reward;
 
             questLog.transform.Find("GatherContaniner").gameObject.SetActive(true);
             questGath = GameObject.Find("GatherContaniner");
@@ -68,12 +75,8 @@ public class PortScript : MonoBehaviour
                 questGath.SetActive(false);
 
             if (isCompleted && quest.goal.goalType != GoalType.Gathering) {
-                player.GenerateReward(rewardText.text);
-                titeText.gameObject.SetActive(false);
-                descriptionText.gameObject.SetActive(false);
-                rewardText.gameObject.SetActive(false);
-                completedText.gameObject.SetActive(true);
-                flag = false;
+                player.GenerateReward(quest.reward);
+                questGiver.SetCompltedPortText(this);
             }
         }
     }
@@ -81,7 +84,7 @@ public class PortScript : MonoBehaviour
     public void AcceptQuest() {
         questLog.SetActive(false);
         quest.isActive = true;
-        //FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
+        FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
     }
 
     public Quest GetQuest() {
@@ -100,18 +103,14 @@ public class PortScript : MonoBehaviour
         InventorySlot inventorySlot = inventory.FindItemOnInventory(quest.item);
         int i = inventorySlot.amount;
         if (inventorySlot != null) {
-            if(i == quest.goal.requiredAmount) {
-                Debug.Log("UDAŁO SIE");
+            if (i == quest.goal.requiredAmount) {
+                Debug.Log(quest.reward);
+                player.GenerateReward(quest.reward);
                 quest.Complete();
                 questInteface.RemoveAll();
                 QuestCompleted();
-                player.GenerateReward(rewardText.text);
-                titeText.gameObject.SetActive(false);
-                descriptionText.gameObject.SetActive(false);
-                rewardText.gameObject.SetActive(false);
-                completedText.gameObject.SetActive(true);
+                questGiver.SetCompltedPortText(this);
             }
-
         }
     }
 }

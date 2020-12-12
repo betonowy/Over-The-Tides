@@ -216,7 +216,7 @@ PrefabInstance:
     - target: {fileID: 7753222846033376263, guid: 276eed61739550e4182a192a1f8a8bdc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7753222846033376263, guid: 276eed61739550e4182a192a1f8a8bdc,
         type: 3}
@@ -1892,6 +1892,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1031862646}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &592113011 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1988688185}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614fa457cf2c9ca4492da469bfedcafe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &609841649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2669,11 +2681,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 273192526, guid: 37724890664820743a1c7c6669506ea4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1027202345, guid: 37724890664820743a1c7c6669506ea4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1032980812, guid: 37724890664820743a1c7c6669506ea4, type: 3}
       propertyPath: m_IsActive
@@ -2681,11 +2693,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1032980813, guid: 37724890664820743a1c7c6669506ea4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 15
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1032980813, guid: 37724890664820743a1c7c6669506ea4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 15
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1032980814, guid: 37724890664820743a1c7c6669506ea4, type: 3}
       propertyPath: m_IsCustomRangeActive
@@ -3953,7 +3965,7 @@ PrefabInstance:
     - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
       propertyPath: quest.item.Id
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
@@ -3969,8 +3981,13 @@ PrefabInstance:
     - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
       propertyPath: quest.goal.requiredAmount
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
+        type: 3}
+      propertyPath: questGiver
+      value: 
+      objectReference: {fileID: 1320427440}
     - target: {fileID: 3042633284931110069, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
       propertyPath: m_Name
@@ -4423,8 +4440,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ports:
   - {fileID: 400989043}
+  - {fileID: 592113011}
   islands:
   - {fileID: 1394617869}
+  titeText: {fileID: 276669626}
+  descriptionText: {fileID: 1764392640}
+  rewardText: {fileID: 718129891}
+  completedText: {fileID: 2107530652}
 --- !u!114 &1320427441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6466,6 +6488,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
+        type: 3}
+      propertyPath: questGiver
+      value: 
+      objectReference: {fileID: 1320427440}
+    - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
+        type: 3}
+      propertyPath: questInteface
+      value: 
+      objectReference: {fileID: 1936080590}
+    - target: {fileID: 3042633284931110068, guid: 0ec4da39168e5774c892fa35d28590b4,
+        type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: f598141bda272c24c934497144db7dd7,
+        type: 2}
     - target: {fileID: 3042633284931110069, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
       propertyPath: m_Name
@@ -6474,12 +6512,12 @@ PrefabInstance:
     - target: {fileID: 3042633284931110074, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -87
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 3042633284931110074, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 403
+      value: 23.2
       objectReference: {fileID: 0}
     - target: {fileID: 3042633284931110074, guid: 0ec4da39168e5774c892fa35d28590b4,
         type: 3}
@@ -7400,7 +7438,7 @@ PrefabInstance:
     - target: {fileID: 1955150105826379117, guid: d5f58759571bf8141b336c01b86f6263,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5f58759571bf8141b336c01b86f6263, type: 3}
@@ -7415,6 +7453,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MinimapCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542201819783300726, guid: 7de371e056ddb16488a66e8c4a97f7e5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5542201819783300746, guid: 7de371e056ddb16488a66e8c4a97f7e5,
         type: 3}
@@ -7488,7 +7531,7 @@ PrefabInstance:
     - target: {fileID: 7311327748428473612, guid: 7444d77217d3784409fda698e3b0e145,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7311327748428473614, guid: 7444d77217d3784409fda698e3b0e145,
         type: 3}
@@ -7617,7 +7660,7 @@ PrefabInstance:
     - target: {fileID: 8785217999069349071, guid: 009321f619cc77247b94bbf0d17006da,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 009321f619cc77247b94bbf0d17006da, type: 3}
