@@ -174,7 +174,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41016573943558364}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.3, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
@@ -476,6 +476,7 @@ GameObject:
   - component: {fileID: 7063351172608460042}
   - component: {fileID: 2892478142025911894}
   - component: {fileID: 8332993952375068801}
+  - component: {fileID: 729321821}
   m_Layer: 8
   m_Name: shipBoat
   m_TagString: Ship
@@ -557,7 +558,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!50 &7063351172608460033
 Rigidbody2D:
@@ -623,7 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad9579cb2b453c04aaad7c03690b1f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 2
+  team: 1
   maxTurningForce: 50
   maxPropellerForce: 200
   shipLife: 100
@@ -833,6 +834,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &729321821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7063351172608460032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f8379253571a940874657df0ca8e7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiEncircleRadiusMax: 20
+  aiEncircleRadiusMin: 15
+  aiEncircleAggressiveFactor: 0.04
+  aiRightHandBias: 0.5
+  aiAttackDistance: 20
+  aiAttackAccuracyBeforeShoot: 0.8
+  aiAttackLongtitudalBlindSpot: 0.7
+  aiDefendFrontBlindSpot: 0.6
+  aiDefendRearBlindSpot: 0.5
+  aiDefendMinimumFriendlySeparation: 15
+  aiDefendMinimumEnemySeparation: 10
+  aiDefendAvoidFriendlyFactor: 1
+  aiDefendAvoidEnemyFactor: 0.7
+  aiDefendTeammateMaxDistance: 20
+  aiDefendTeammateRatio: 0.1
+  aiDefendLeaderFollowDistance: 10
+  aiDefendLeaderFollowRatio: 0.8
+  aiCrewOrderPeriod: 3
+  aiMovementOrderPeriod: 1
+  aiAttackOrderPeriod: 1
+  aiFirstOrderDelay: 3
+  aiOrderPeriodRandomize: 0.1
+  aiAvoidStaticObjectsRadius: 14
 --- !u!1 &7063351172709882576
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,7 +943,7 @@ SpriteRenderer:
   m_SortingLayerID: -624378531
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f5f4b817efec6764bb9aed6e7aa81966, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8673d7c7b3d0d5b41bceec95630b56ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -915,7 +951,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!114 &7063351172709882591
@@ -1174,7 +1210,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7997498065237837671}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.7, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
