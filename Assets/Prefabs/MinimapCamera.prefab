@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5542201819783300746}
   - component: {fileID: 5542201819783300725}
-  - component: {fileID: 5542201819783300727}
-  - component: {fileID: 5542201819783300724}
+  - component: {fileID: 1805604911140262528}
   m_Layer: 0
   m_Name: MinimapCamera
   m_TagString: Untagged
@@ -76,15 +75,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5542201819783300727
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5542201819783300726}
-  m_Enabled: 0
---- !u!114 &5542201819783300724
+--- !u!114 &1805604911140262528
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,17 +84,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5542201819783300726}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58a4861c67e3da545ba0e166f59027f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 65ed62a8b0bdd2e4fb30c1c92de3aad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: -50}
-  smoothTime: 0.8
-  minZoom: 5
-  maxZoom: 200
-  zoom: 130
-  zoomSpeed: 0.05
-  moveSpeed: 3
-  minSizeY: 5
-  playerViewWidth: 10
-  playerViewHeight: 10
-  quad: {fileID: 3273917730491042743, guid: 7482bde666a018845b2d5f2e09e335d7, type: 3}
