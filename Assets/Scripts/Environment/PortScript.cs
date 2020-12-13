@@ -23,7 +23,7 @@ public class PortScript : MonoBehaviour
     public QuestInteface questInteface;
     public InventoryObject inventory;
 
-    private bool isCompleted = false;
+    public bool isCompleted = false;
 
     private bool reward;
 
@@ -35,7 +35,7 @@ public class PortScript : MonoBehaviour
             questGiver.SetQuest(this);
             questGiver.SetPortText(this);
             questGiver.SetPort(this);
-            questGiver.SetInvetorySlot(inventory.FindItemOnInventory(quest.item));
+          //  questGiver.SetInvetorySlot();
 
         }
     }
@@ -66,10 +66,7 @@ public class PortScript : MonoBehaviour
             else
                 questGath.SetActive(false);
 
-            if (isCompleted && quest.goal.goalType != GoalType.Gathering) {
-                player.GenerateReward(quest.reward);
-                questGiver.SetCompltedPortText(this);
-            }
+            questGiver.CheckQuest();
         }
     }
 

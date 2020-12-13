@@ -12,6 +12,7 @@ public class QuestGiverScript : MonoBehaviour {
 
     private PortScript port;
     private InventorySlot inventorySlot;
+    public InventoryObject inventory;
 
     public TextMeshProUGUI titeText;
     public TextMeshProUGUI descriptionText;
@@ -22,6 +23,9 @@ public class QuestGiverScript : MonoBehaviour {
     public TextMeshProUGUI rewardIslandText;
 
     public GameObject enemyShipToSpawn;
+
+    public GameObject acceptButton;
+    public GameObject completeButton;
 
     private void Start() {
         FillPorts();
@@ -88,6 +92,18 @@ public class QuestGiverScript : MonoBehaviour {
         descriptionText.text = port.quest.description;
         rewardText.text = port.quest.reward;
         completedText.text = port.quest.completed;
+        if(port.isCompleted == true) {
+            titeText.gameObject.SetActive(false);
+            descriptionText.gameObject.SetActive(false);
+            rewardText.gameObject.SetActive(false);
+            completedText.gameObject.SetActive(true);
+        } else {
+            titeText.gameObject.SetActive(true);
+            descriptionText.gameObject.SetActive(true);
+            rewardText.gameObject.SetActive(true);
+            completedText.gameObject.SetActive(false);
+        }
+
     }
 
     public void SetCompltedPortText(PortScript port) {
@@ -106,11 +122,12 @@ public class QuestGiverScript : MonoBehaviour {
         port = p;
     }
 
-    public void SetInvetorySlot(InventorySlot slot) {
-        inventorySlot = slot;
+    public void SetInvetorySlot() {
+        inventorySlot = inventory.FindItemOnInventory(quest.item);
     }
 
     public void GiveItems() {
+        InventorySlot inventorySlot = inventory.FindItemOnInventory(quest.item);
         int i = inventorySlot.amount;
         if (inventorySlot != null) {
             if (i == port.quest.goal.requiredAmount) {
@@ -140,6 +157,15 @@ public class QuestGiverScript : MonoBehaviour {
         }
     }
 
+    public void CheckQuest() {
+        if (port.isCompleted && quest.goal.goalType != GoalType.Gathering) {
+            port.player.GenerateReward(quest.reward);
+            SetCompltedPortText(port);
+            acceptButton.SetActive(false);
+            completeButton.SetActive(true);
+        }
+    }
+
     public void SetQuest(PortScript port) {
         quest = port.quest;
     }
@@ -148,6 +174,12 @@ public class QuestGiverScript : MonoBehaviour {
         quest.isActive = true;
         FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
         SpecialQuestAction();
+        acceptButton.SetActive(false);
+        completeButton.SetActive(true);
+    }
+
+    public void CompleteButtonAction() {
+        GameObject.Find("QuestLog").gameObject.SetActive(false);
     }
 
     public void SpecialQuestAction() {

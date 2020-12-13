@@ -67,6 +67,13 @@ public class LevelManager : MonoBehaviour {
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.P)) {
+            foreach (GameObject s in ship) {
+                if (s.GetComponent<ShipScript>().team == ShipScript.teamEnum.teamRed)
+                    s.SendMessage("Damage", 100);
+            }
+        }
+
         if (nextSceneAfterTDM && GamemodeConditions() && ((!reds || !blues) && !(!reds && !blues) || ship.Length <= 1)) {
             OnGameEnd();
         }

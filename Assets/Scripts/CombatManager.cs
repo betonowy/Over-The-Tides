@@ -23,6 +23,7 @@ public class CombatManager : MonoBehaviour
                     port.quest.goal.EnemyKilled();
                 if(port.quest.goal.IsReached()) {
                     port.quest.Complete();
+                    port.isCompleted = true;
                     text.SetActive(true);
                     StartCoroutine(ShowMessage());
                 }

@@ -1762,7 +1762,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 489410757}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1320427440}
+        m_MethodName: CompleteButtonAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &489410757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4657,6 +4668,7 @@ MonoBehaviour:
   - {fileID: 796383106}
   islands:
   - {fileID: 1394617869}
+  inventory: {fileID: 11400000, guid: f598141bda272c24c934497144db7dd7, type: 2}
   titeText: {fileID: 276669626}
   descriptionText: {fileID: 1764392640}
   rewardText: {fileID: 718129891}
@@ -4665,6 +4677,8 @@ MonoBehaviour:
   rewardIslandText: {fileID: 1073671963}
   enemyShipToSpawn: {fileID: 79346669921403992, guid: 29b44decaaccfae4bb40e1f357b806c9,
     type: 3}
+  acceptButton: {fileID: 772908949}
+  completeButton: {fileID: 489410754}
 --- !u!114 &1320427441
 MonoBehaviour:
   m_ObjectHideFlags: 0
