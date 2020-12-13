@@ -2370,7 +2370,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 400989043}
+      - m_Target: {fileID: 1320427440}
         m_MethodName: AcceptQuest
         m_Mode: 1
         m_Arguments:
@@ -3583,7 +3583,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 400989043}
+      - m_Target: {fileID: 1320427440}
         m_MethodName: GiveItems
         m_Mode: 1
         m_Arguments:
@@ -4654,12 +4654,17 @@ MonoBehaviour:
   ports:
   - {fileID: 400989043}
   - {fileID: 592113011}
+  - {fileID: 796383106}
   islands:
   - {fileID: 1394617869}
   titeText: {fileID: 276669626}
   descriptionText: {fileID: 1764392640}
   rewardText: {fileID: 718129891}
   completedText: {fileID: 2107530652}
+  descriptionIslandText: {fileID: 1524015431}
+  rewardIslandText: {fileID: 1073671963}
+  enemyShipToSpawn: {fileID: 79346669921403992, guid: 29b44decaaccfae4bb40e1f357b806c9,
+    type: 3}
 --- !u!114 &1320427441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5804,8 +5809,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 400989043}
-        m_MethodName: closeQuestLog
+      - m_Target: {fileID: 1320427440}
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
