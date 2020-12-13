@@ -8,10 +8,20 @@ public class QuestGiverScript : MonoBehaviour {
     public PortScript[] ports;
     public IslandScript[] islands;
 
+    private Quest quest;
+
+    private PortScript port;
+    private InventorySlot inventorySlot;
+
     public TextMeshProUGUI titeText;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI rewardText;
     public TextMeshProUGUI completedText;
+
+    public TextMeshProUGUI descriptionIslandText;
+    public TextMeshProUGUI rewardIslandText;
+
+    public GameObject enemyShipToSpawn;
 
     private void Start() {
         FillPorts();
@@ -38,7 +48,7 @@ public class QuestGiverScript : MonoBehaviour {
                     port.quest.description = "We have an amazing offer for you waiting in our port. For only 15 planks we are willing to build a new ship for you! I have heard " +
                             "that you can find some on the island to the east of our port.";
                     port.quest.reward = "Reward: ship 1";
-                    port.quest.completed = "It is a plasure doing business with you!";
+                    port.quest.completed = "Reward: ship 1";
                     break;
             }
             case 2: {
@@ -85,5 +95,69 @@ public class QuestGiverScript : MonoBehaviour {
         descriptionText.gameObject.SetActive(false);
         rewardText.gameObject.SetActive(false);
         completedText.gameObject.SetActive(true);
+    }
+
+    public void SetIslandText(IslandScript island) {
+        descriptionIslandText.text = island.desc;
+        rewardIslandText.text = island.rewa;
+    }
+
+    public void SetPort(PortScript p) {
+        port = p;
+    }
+
+    public void SetInvetorySlot(InventorySlot slot) {
+        inventorySlot = slot;
+    }
+
+    public void GiveItems() {
+        int i = inventorySlot.amount;
+        if (inventorySlot != null) {
+            if (i == port.quest.goal.requiredAmount) {
+                port.player.GenerateReward(port.quest.reward);
+                port.quest.Complete();
+                port.questInteface.RemoveAll();
+                port.QuestCompleted();
+                port.questGiver.SetCompltedPortText(port);
+            }
+            else if (i > port.quest.goal.requiredAmount) {
+                int temp = i - port.quest.goal.requiredAmount;
+
+                if (port.quest.item.Id == 0) {
+                    string s = "Reward: gold " + temp;
+                    port.player.GenerateReward(s);
+                }
+                else if (port.quest.item.Id == 2) {
+                    string s = "Reward: plank " + temp;
+                    port.player.GenerateReward(s);
+                }
+                port.player.GenerateReward(port.quest.reward);
+                port.quest.Complete();
+                port.questInteface.RemoveAll();
+                port.QuestCompleted();
+                port.questGiver.SetCompltedPortText(port);
+            }
+        }
+    }
+
+    public void SetQuest(PortScript port) {
+        quest = port.quest;
+    }
+
+    public void AcceptQuest() {
+        quest.isActive = true;
+        FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
+        SpecialQuestAction();
+    }
+
+    public void SpecialQuestAction() {
+        if (quest.title == "Priate ship") {
+            Vector3 v = new Vector3(0, 100, 0);
+            GameObject ship = Instantiate(enemyShipToSpawn, v, gameObject.transform.rotation);
+        }
+    }
+
+    public void Quit() {
+        GameObject.Find("QuestLog").gameObject.SetActive(false);
     }
 }

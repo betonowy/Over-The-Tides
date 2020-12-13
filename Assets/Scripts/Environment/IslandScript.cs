@@ -9,11 +9,9 @@ public class IslandScript : MonoBehaviour {
     public GameObject islandWindow;
     public GameObject islandLog;
     public GameObject acceptBtn;
+    public QuestGiverScript questGiver;
 
     private PlayerScript player;
-
-    public TextMeshProUGUI descriptionText;
-    public TextMeshProUGUI rewardText;
 
     private bool isCompleted = false;
     private bool flag = true;
@@ -32,16 +30,10 @@ public class IslandScript : MonoBehaviour {
             islandWindow.transform.Find("IslandLog").gameObject.SetActive(true);
             islandLog = GameObject.Find("IslandLog");
 
-            descriptionText = islandLog.transform.Find("Description").GetComponent<TextMeshProUGUI>();
-            rewardText = islandLog.transform.Find("Reward").GetComponent<TextMeshProUGUI>();
-
-            descriptionText.text = desc;
-            rewardText.text = rewa;
-
         }
 
         if (isCompleted && flag) {
-            player.GenerateReward(rewardText.text);
+            player.GenerateReward(rewa);
             flag = false;
         }
 
@@ -51,6 +43,7 @@ public class IslandScript : MonoBehaviour {
         if (collision.name == "playerBoatBlue") {
             islandUI.transform.Find("IslandWindow").gameObject.SetActive(true);
             islandWindow = GameObject.Find("IslandWindow");
+            questGiver.SetIslandText(this);
         }
     }
 

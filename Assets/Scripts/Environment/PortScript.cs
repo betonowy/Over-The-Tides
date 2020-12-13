@@ -32,7 +32,11 @@ public class PortScript : MonoBehaviour
             questUI.transform.Find("QuestWindow").gameObject.SetActive(true);
             questWindow = GameObject.Find("QuestWindow");
             questWindow.SetActive(true);
+            questGiver.SetQuest(this);
             questGiver.SetPortText(this);
+            questGiver.SetPort(this);
+            questGiver.SetInvetorySlot(inventory.FindItemOnInventory(quest.item));
+
         }
     }
 
@@ -72,10 +76,8 @@ public class PortScript : MonoBehaviour
     public void AcceptQuest() {
         questLog.SetActive(false);
         quest.isActive = true;
-        FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
-        if (quest.title == "Priate ship")
-            Debug.Log("Special quest");
     }
+
 
     public Quest GetQuest() {
         return quest;
@@ -94,7 +96,21 @@ public class PortScript : MonoBehaviour
         int i = inventorySlot.amount;
         if (inventorySlot != null) {
             if (i == quest.goal.requiredAmount) {
-                Debug.Log(quest.reward);
+                player.GenerateReward(quest.reward);
+                quest.Complete();
+                questInteface.RemoveAll();
+                QuestCompleted();
+                questGiver.SetCompltedPortText(this);
+            } else if (i > quest.goal.requiredAmount) {
+                int temp = i - quest.goal.requiredAmount;
+
+                if (quest.item.Id == 0) {
+                    string s = "Reward: gold " + temp;
+                    player.GenerateReward(s);
+                } else if (quest.item.Id == 2) {
+                    string s = "Reward: plank " + temp;
+                    player.GenerateReward(s);
+                }
                 player.GenerateReward(quest.reward);
                 quest.Complete();
                 questInteface.RemoveAll();
