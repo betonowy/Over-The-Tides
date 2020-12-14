@@ -462,7 +462,7 @@ public class EnemyScript : MonoBehaviour {
                 float dist = getDistanceToTarget(target);
                 if (dist < minDist) {
                     minDist = dist;
-                    aiTargetDirection = (-getVectorToTarget(target).normalized + aiTargetDirection).normalized;
+                    aiTargetDirection = (-getVectorToTarget(target).normalized).normalized;
                 }
             }
         }
