@@ -44,8 +44,9 @@ public class QuestGiverScript : MonoBehaviour {
             case 0: {
                     port.quest.title = "Priate ship";
                     port.quest.description = "The rumor has it that not far to the north, there is a small pirate ship plundering nerby ports and islands. Please do something with it!";
-                    port.quest.reward = "Reward: cannon 1";
-                    port.quest.completed = "Thank you very much! But watch out for yourself now. You have angered whole horde of priates and they WILL come for you!";
+                    port.quest.reward = "Reward: sailor 1";
+                    // port.quest.completed = "Thank you very much! But watch out for yourself now. You have angered whole horde of priates and they WILL come for you!";
+                    port.quest.completed = "Watch out for yourself now. You have angered whole horde of priates and they WILL come for you! Swim to the north, there you might get some help";
                     break;
             }
             case 1: {
@@ -81,8 +82,13 @@ public class QuestGiverScript : MonoBehaviour {
                 break;
             }
             case 1: {
-                island.desc = "Asn.";
-                island.rewa = "Reward: plank 1";
+                island.desc = "Wood just wood";
+                island.rewa = "Reward: plank 30";
+                break;
+            }
+            case 2: {
+                island.desc = "You find a drunk pirate on the store. He claims that his name is Jack and he is a captain. Anyway you decide to took him on board";
+                island.rewa = "Reward: sailor 1";
                 break;
             }
         }

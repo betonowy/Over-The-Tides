@@ -24,6 +24,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject goldToPick;
     public GameObject plankToPick;
     public GameObject shipToSpawn;
+    public GameObject sailor;
 
     public bool rectDenied;
     public Rect[] deniedRects;
@@ -166,13 +167,50 @@ public class PlayerScript : MonoBehaviour
         }
         else if (item == "ship") {
             for (int i = 0; i < amount; i++) {
-                Vector3 v = new Vector3(0,0,0);
+               
+                GameObject[] allGM = GameObject.FindGameObjectsWithTag("Ship");
+                Vector3 v = new Vector3(transform.position.x + 40, transform.position.y + 40, 0);
+                while(!CheckSpace(allGM, v, 10)) {
+                    v = new Vector3(transform.position.x + UnityEngine.Random.Range(40, 90), transform.position.y + UnityEngine.Random.Range(40, 90), 0);
+                }
                 GameObject ship = Instantiate(shipToSpawn, v, gameObject.transform.rotation);
                // ship.transform.position = gameObject.transform.position;
             }
             return;
         }
+        else if (item == "heal") {
+            for (int i = 0; i < amount; i++) {
+                GameObject[] allGM = GameObject.FindGameObjectsWithTag("Ship");
+                for(int j = 0; j < allGM.Length; j++) {
+                    if (allGM[j].GetComponent<ShipScript>().team == ShipScript.teamEnum.teamBlue)
+                        allGM[j].GetComponent<ShipScript>().HealFullHealth();
+                }
+            }
+            return;
+        }
+        else if (item == "sailor") {
+            for (int i = 0; i < amount; i++) {
+                GameObject obj = Instantiate(sailor, gameObject.transform.position, gameObject.transform.rotation);
+                obj.transform.parent = gameObject.transform;
+                obj.transform.position = gameObject.transform.position;
+                obj.transform.GetComponent<SailorScript>().shipPosition = new Vector2(0, -0.8f);
+                obj.transform.GetComponent<SailorScript>().targetShipPosition = new Vector2(0, -0.8f);
+            }
+            return;
+        }
     }
+
+    private bool CheckSpace(GameObject[] objects, Vector2 position, float radius) {
+        foreach (GameObject obj in objects) {
+            if ((position - (Vector2)obj.transform.position).magnitude < radius) {
+                Debug.Log("Spawn space not OK");
+                return false;
+            }
+        }
+        Debug.Log("Spawn space OK");
+        return true;
+    }
+
 
     public void GenerateReward(string s) {
         string[] words = s.Split(' ');
