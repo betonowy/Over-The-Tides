@@ -94,6 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de71c4b36f4c004cadd809132537eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToLive: 5
+  timeToLive: 6
   scaleSpeed: 0.1
-  startingScale: 0.4
+  startingScale: 0.35
