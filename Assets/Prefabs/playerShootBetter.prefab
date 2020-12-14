@@ -137,6 +137,8 @@ MonoBehaviour:
   lifeTime: 8
   dieVelocityRatio: 0.5
   damageMultipier: 5
+  spawnOnDeath: {fileID: 6916491215899528537, guid: e28b3df465a319d438313048a0dedccb,
+    type: 3}
 --- !u!82 &8865067080355888898
 AudioSource:
   m_ObjectHideFlags: 0

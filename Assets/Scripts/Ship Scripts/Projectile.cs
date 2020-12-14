@@ -11,6 +11,8 @@ public class Projectile : MonoBehaviour {
 
     private Rigidbody2D rb;
 
+    public GameObject spawnOnDeath;
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         lateSpeed = rb.velocity.magnitude;
@@ -48,6 +50,8 @@ public class Projectile : MonoBehaviour {
     }
 
     void DestroyProjectile() {
+        GameObject g = Instantiate(spawnOnDeath);
+        g.transform.position = transform.position;
         Destroy(gameObject);
     }
 }

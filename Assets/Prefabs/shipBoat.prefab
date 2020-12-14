@@ -477,6 +477,7 @@ GameObject:
   - component: {fileID: 2892478142025911894}
   - component: {fileID: 8332993952375068801}
   - component: {fileID: 729321821}
+  - component: {fileID: 1823256086789042674}
   m_Layer: 8
   m_Name: shipBoat
   m_TagString: Ship
@@ -869,6 +870,22 @@ MonoBehaviour:
   aiFirstOrderDelay: 3
   aiOrderPeriodRandomize: 0.1
   aiAvoidStaticObjectsRadius: 14
+--- !u!114 &1823256086789042674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7063351172608460032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25eff746331651243809bca2c21428a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoint: {x: 0, y: -3.2}
+  separation: 0.33
+  spawnObject: {fileID: 6916491215899528537, guid: c355213e12c81404b9bc6227782e30fa,
+    type: 3}
 --- !u!1 &7063351172709882576
 GameObject:
   m_ObjectHideFlags: 0
