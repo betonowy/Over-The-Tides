@@ -264,6 +264,10 @@ public class ShipScript : MonoBehaviour
         }
     }
 
+    public void HealFullHealth() {
+        shipLife = 100;
+    }
+
     public void MakeLeader() {
         GameObject[] g = GameObject.FindGameObjectsWithTag("Ship");
         foreach (GameObject go in g) {
