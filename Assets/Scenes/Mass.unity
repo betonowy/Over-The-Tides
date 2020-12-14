@@ -2761,6 +2761,11 @@ PrefabInstance:
       propertyPath: m_IsCustomRangeActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4451032485816151184, guid: 37724890664820743a1c7c6669506ea4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4451032486344178676, guid: 37724890664820743a1c7c6669506ea4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2820,6 +2825,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: playerBoatBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4451032486705578280, guid: 37724890664820743a1c7c6669506ea4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5542201819301433526, guid: 37724890664820743a1c7c6669506ea4,
         type: 3}
@@ -4474,6 +4484,7 @@ GameObject:
   - component: {fileID: 1320427440}
   - component: {fileID: 1320427441}
   - component: {fileID: 1320427442}
+  - component: {fileID: 1320427443}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -4542,7 +4553,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 20e31e191fe962e4499fe5bb3f282891, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.06
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4710,6 +4721,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 873796032}
+--- !u!114 &1320427443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320427434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65be32674ec43064c88f7a2fa69ae4fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music:
+  - track: {fileID: 8300000, guid: 6178eac53339d194c9ad2b8d618969cd, type: 3}
+    volume: 0.1
+    type: 0
+  - track: {fileID: 8300000, guid: 6756e847fb86d9c45b6185753763756a, type: 3}
+    volume: 0.1
+    type: 2
+  - track: {fileID: 8300000, guid: c32a05b6974c67a4d8c283f070c83751, type: 3}
+    volume: 0.1
+    type: 0
+  - track: {fileID: 8300000, guid: 20e31e191fe962e4499fe5bb3f282891, type: 3}
+    volume: 0.1
+    type: 1
+  fadeOutTime: 3
+  fadeInTime: 5
 --- !u!1 &1322901717
 GameObject:
   m_ObjectHideFlags: 0
