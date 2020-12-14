@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24278907831985475}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.3, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7063351172608460047}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -226062267
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: ea877ae7ca06de8429cc1bdfede89cc5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0a202438c94b2024384d3e1bf409514e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1773428102 &717338547769152157
 ParentConstraint:
@@ -93,7 +93,7 @@ ParentConstraint:
   m_GameObject: {fileID: 24278907831985475}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 2.3, z: 0}
+  m_TranslationAtRest: {x: 0, y: 2, z: 0}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
   - {x: 0, y: 2.3, z: 1}
@@ -175,7 +175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41016573943558364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 7063351172608460047}
@@ -229,7 +229,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1773428102 &3035273840385370798
 ParentConstraint:
@@ -240,7 +240,7 @@ ParentConstraint:
   m_GameObject: {fileID: 41016573943558364}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 1.3, z: 0}
+  m_TranslationAtRest: {x: 0, y: 1, z: 0}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
   - {x: 0, y: 1.3, z: 1}
@@ -323,7 +323,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7063351171727065042}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.26999998, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 6.491102, y: 6.355225, z: 1}
   m_Children: []
   m_Father: {fileID: 7063351172608460047}
@@ -377,7 +377,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7063351171727065041
 MonoBehaviour:
@@ -425,10 +425,10 @@ ParentConstraint:
   m_GameObject: {fileID: 7063351171727065042}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0.26999998, z: 0}
+  m_TranslationAtRest: {x: 0, y: 0, z: 0}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: 0, y: 0.26999998, z: 0}
+  - {x: 0, y: 0, z: 0}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -550,7 +550,7 @@ SpriteRenderer:
   m_SortingLayerID: -226062267
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ebabc3deb53155243948cca15da0b53a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 828d57fea7d688940a4437bd3502152f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -559,7 +559,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &7063351172608460033
 Rigidbody2D:
@@ -607,12 +607,24 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.28, y: 1.99}
-      - {x: -1.28, y: -3.1999998}
-      - {x: 1.3199999, y: -3.1999998}
-      - {x: 1.3199999, y: 1.99}
-      - {x: 0.03, y: 3.28}
-      - {x: 0.01, y: 3.28}
+    - - {x: -0.12856668, y: 3.9802713}
+      - {x: -1.1005676, y: 2.156616}
+      - {x: -1.217185, y: 1.2098312}
+      - {x: -1.2584808, y: 0.348948}
+      - {x: -1.1400168, y: -2.1589048}
+      - {x: -0.96988946, y: -3.0198882}
+      - {x: -0.89902776, y: -3.9045427}
+      - {x: -0.9467676, y: -4.2894135}
+      - {x: 0.99958444, y: -4.30223}
+      - {x: 0.90596694, y: -3.9685445}
+      - {x: 1.0106688, y: -3.083465}
+      - {x: 1.1338037, y: -2.469426}
+      - {x: 1.3009737, y: -0.7122172}
+      - {x: 1.2634387, y: 1.4011371}
+      - {x: 1.1440063, y: 2.2159908}
+      - {x: 0.20495272, y: 3.9637606}
+      - {x: 0.1581662, y: 4.2284307}
+      - {x: -0.10534984, y: 4.241247}
 --- !u!114 &7063351172608460042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,14 +642,14 @@ MonoBehaviour:
   maxPropellerForce: 200
   shipLife: 100
   cannonPositions:
-  - {x: -1.2, y: 2}
-  - {x: -1.2, y: 1}
+  - {x: -1.1, y: 2}
+  - {x: -1.2, y: 0.7}
   - {x: -1.2, y: -1}
-  - {x: -1.2, y: -2}
-  - {x: 1.2, y: 2}
-  - {x: 1.2, y: 1}
+  - {x: -1, y: -2.7}
+  - {x: 1.1, y: 2}
+  - {x: 1.2, y: 0.7}
   - {x: 1.2, y: -1}
-  - {x: 1.2, y: -2}
+  - {x: 1, y: -2.7}
   cannonPrefab: {fileID: 3276126805382000785, guid: f249f214aa6293d439a0d45373d25579,
     type: 3}
   Shipwreck: {fileID: 1438795246459381750, guid: 3241a87050c74384183be604eec9c5a0,
@@ -915,7 +927,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7063351172709882576}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 6.491102, y: 6.3552246, z: 1}
   m_Children: []
   m_Father: {fileID: 7063351172608460047}
@@ -969,7 +981,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7063351172709882591
 MonoBehaviour:
@@ -996,10 +1008,10 @@ ParentConstraint:
   m_GameObject: {fileID: 7063351172709882576}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: -1.5, z: 0}
+  m_TranslationAtRest: {x: 0, y: -2, z: 0}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: 0, y: -1.5, z: 0}
+  - {x: 0, y: -2, z: 0}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -1081,7 +1093,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7063351173153395306}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.3, z: 0}
+  m_LocalPosition: {x: 0, y: -3.7, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 7063351172608460047}
@@ -1135,7 +1147,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7063351173153395305
 MonoBehaviour:
@@ -1183,10 +1195,10 @@ ParentConstraint:
   m_GameObject: {fileID: 7063351173153395306}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: -2.3, z: 0}
+  m_TranslationAtRest: {x: 0, y: -3.7, z: 0}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: 0, y: -2.3, z: 0}
+  - {x: 0, y: -3.7, z: 0}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -1228,7 +1240,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7997498065237837671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 7063351172608460047}
@@ -1282,7 +1294,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &7286186825755800863
 Rigidbody2D:
@@ -1314,7 +1326,7 @@ ParentConstraint:
   m_GameObject: {fileID: 7997498065237837671}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: -0.7, z: 0}
+  m_TranslationAtRest: {x: 0, y: -1, z: 0}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
   - {x: 0, y: -0.7, z: 0}
@@ -1354,6 +1366,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7063351172608460047}
     m_Modifications:
+    - target: {fileID: 9043490851812856257, guid: 7427f8ea3c601db43acce1d4212ba0d7,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9043490851812856258, guid: 7427f8ea3c601db43acce1d4212ba0d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1449,6 +1466,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7063351172608460047}
     m_Modifications:
+    - target: {fileID: 9043490851812856257, guid: 7427f8ea3c601db43acce1d4212ba0d7,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9043490851812856258, guid: 7427f8ea3c601db43acce1d4212ba0d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1549,6 +1571,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7063351172608460047}
     m_Modifications:
+    - target: {fileID: 9043490851812856257, guid: 7427f8ea3c601db43acce1d4212ba0d7,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9043490851812856258, guid: 7427f8ea3c601db43acce1d4212ba0d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1649,6 +1676,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7063351172608460047}
     m_Modifications:
+    - target: {fileID: 9043490851812856257, guid: 7427f8ea3c601db43acce1d4212ba0d7,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9043490851812856258, guid: 7427f8ea3c601db43acce1d4212ba0d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1754,6 +1786,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7063351172608460047}
     m_Modifications:
+    - target: {fileID: 9043490851812856257, guid: 7427f8ea3c601db43acce1d4212ba0d7,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9043490851812856258, guid: 7427f8ea3c601db43acce1d4212ba0d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1859,6 +1896,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7063351172608460047}
     m_Modifications:
+    - target: {fileID: 9043490851812856257, guid: 7427f8ea3c601db43acce1d4212ba0d7,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9043490851812856258, guid: 7427f8ea3c601db43acce1d4212ba0d7,
         type: 3}
       propertyPath: m_LocalPosition.x
