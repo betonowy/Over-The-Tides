@@ -33,19 +33,15 @@ public class MusicMan : MonoBehaviour {
 
     void Update() {
         if (TypeCorrect()) {
-            Debug.Log("FadeIn");
             FadeIn();
         } else {
-            Debug.Log("Wrong track... FadeOut!");
             FadeOut();
             if (Silenced()) {
-                Debug.Log("Wrong track... Changing!");
                 SetNextTrack();
             }
         }
 
         if (!aSource.isPlaying) {
-            Debug.Log("Track ended... Changing!");
             aSource.volume = 0;
             SetNextTrack();
         }
@@ -80,5 +76,9 @@ public class MusicMan : MonoBehaviour {
 
     bool Silenced() {
         return aSource.volume == 0;
+    }
+
+    public void SetMood(TRACK_TYPE type) {
+        currentMood = type;
     }
 }
