@@ -13,7 +13,7 @@ public class IslandScript : MonoBehaviour {
 
     private PlayerScript player;
 
-    private bool isCompleted = false;
+    public bool isCompleted = false;
     private bool flag = true;
 
     public string desc;
@@ -43,7 +43,10 @@ public class IslandScript : MonoBehaviour {
         if (collision.name == "playerBoatBlue") {
             islandUI.transform.Find("IslandWindow").gameObject.SetActive(true);
             islandWindow = GameObject.Find("IslandWindow");
+            islandWindow.SetActive(true);
+            questGiver.SetIsland(this);
             questGiver.SetIslandText(this);
+            
         }
     }
 

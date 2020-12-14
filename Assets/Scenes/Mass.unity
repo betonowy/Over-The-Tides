@@ -1892,8 +1892,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1394617869}
-        m_MethodName: Accept
+      - m_Target: {fileID: 1320427440}
+        m_MethodName: AcceptIsland
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5205,8 +5205,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5267,6 +5267,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Island (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1587512777257254849, guid: 031f8ad35439ec044b9ceca3ffe78912,
+        type: 3}
+      propertyPath: questGiver
+      value: 
+      objectReference: {fileID: 1320427440}
     - target: {fileID: 1587512777257254876, guid: 031f8ad35439ec044b9ceca3ffe78912,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7078,6 +7083,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Island (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1587512777257254849, guid: 031f8ad35439ec044b9ceca3ffe78912,
+        type: 3}
+      propertyPath: questGiver
+      value: 
+      objectReference: {fileID: 1320427440}
     - target: {fileID: 1587512777257254876, guid: 031f8ad35439ec044b9ceca3ffe78912,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7513,6 +7523,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Island
       objectReference: {fileID: 0}
+    - target: {fileID: 1587512777257254849, guid: 031f8ad35439ec044b9ceca3ffe78912,
+        type: 3}
+      propertyPath: questGiver
+      value: 
+      objectReference: {fileID: 1320427440}
     - target: {fileID: 1587512777257254876, guid: 031f8ad35439ec044b9ceca3ffe78912,
         type: 3}
       propertyPath: m_LocalPosition.x

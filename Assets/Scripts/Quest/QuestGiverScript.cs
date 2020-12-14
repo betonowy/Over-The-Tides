@@ -12,6 +12,7 @@ public class QuestGiverScript : MonoBehaviour {
 
     private PortScript port;
     private InventorySlot inventorySlot;
+    private IslandScript island;
     public InventoryObject inventory;
 
     public TextMeshProUGUI titeText;
@@ -52,7 +53,7 @@ public class QuestGiverScript : MonoBehaviour {
                     port.quest.description = "We have an amazing offer for you waiting in our port. For only 15 planks we are willing to build a new ship for you! I have heard " +
                             "that you can find some on the island to the east of our port.";
                     port.quest.reward = "Reward: ship 1";
-                    port.quest.completed = "Reward: ship 1";
+                    port.quest.completed = "We have an amazing offer for you waiting in our port. For only 15 planks we are willing to build a new ship for you!";
                     break;
             }
             case 2: {
@@ -122,6 +123,10 @@ public class QuestGiverScript : MonoBehaviour {
         port = p;
     }
 
+    public void SetIsland(IslandScript i) {
+        island = i;
+    }
+
     public void SetInvetorySlot() {
         inventorySlot = inventory.FindItemOnInventory(quest.item);
     }
@@ -176,6 +181,11 @@ public class QuestGiverScript : MonoBehaviour {
         SpecialQuestAction();
         acceptButton.SetActive(false);
         completeButton.SetActive(true);
+    }
+
+    public void AcceptIsland() {
+        island.isCompleted = true;
+        GameObject.Find("IslandLog").gameObject.SetActive(false);
     }
 
     public void CompleteButtonAction() {
