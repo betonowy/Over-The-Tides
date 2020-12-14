@@ -6,10 +6,14 @@ public class PlayerCamera : MonoBehaviour {
     public Camera cam;
     static bool check = false;
     public float widthMod = 0.15f;
+    public float offsetY = 1;
 
     void Start() {
         cam = GetComponent<Camera>();
         cam.enabled = false;
+        Vector3 tempPos = transform.position;
+        tempPos.y += offsetY;
+        transform.position = tempPos;
     }
 
     private void Update() {
