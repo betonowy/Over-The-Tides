@@ -121,6 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &46978790 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1587512777257254849, guid: 031f8ad35439ec044b9ceca3ffe78912,
+    type: 3}
+  m_PrefabInstance: {fileID: 1570499113}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3139485a1213f4aa16edcb98c2fc47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &67436844
 GameObject:
   m_ObjectHideFlags: 0
@@ -2749,6 +2761,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 991902234, guid: 37724890664820743a1c7c6669506ea4, type: 3}
+      propertyPath: sailor
+      value: 
+      objectReference: {fileID: 9043490851812856317, guid: 7427f8ea3c601db43acce1d4212ba0d7,
+        type: 3}
     - target: {fileID: 1027202345, guid: 37724890664820743a1c7c6669506ea4, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4679,6 +4696,8 @@ MonoBehaviour:
   - {fileID: 796383106}
   islands:
   - {fileID: 1394617869}
+  - {fileID: 46978790}
+  - {fileID: 1638664115}
   inventory: {fileID: 11400000, guid: f598141bda272c24c934497144db7dd7, type: 2}
   titeText: {fileID: 276669626}
   descriptionText: {fileID: 1764392640}
@@ -5367,6 +5386,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 031f8ad35439ec044b9ceca3ffe78912, type: 3}
+--- !u!114 &1638664115 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1587512777257254849, guid: 031f8ad35439ec044b9ceca3ffe78912,
+    type: 3}
+  m_PrefabInstance: {fileID: 2101052389}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3139485a1213f4aa16edcb98c2fc47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1737752798
 GameObject:
   m_ObjectHideFlags: 0
