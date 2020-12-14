@@ -143,8 +143,14 @@ public class EnemyScript : MonoBehaviour {
     void ExecuteOrders() {
         ship.Turn(turnCorrection(aiTargetDirection) < 0);
 
-        if (aiPropell)
-            ship.Propeller(true);
+        if (aiPropell) {
+            if (Vector2.Dot(aiTargetDirection, ship.GetMyDirection()) > 0) {
+                ship.Propeller(true);
+            } else {
+                ship.Propeller(false);
+            }
+        }
+            
 
         if (aiShootLeft)
             ship.ShootLeft();

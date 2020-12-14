@@ -86,7 +86,11 @@ public class PlayerScript : MonoBehaviour
         }
 
         if (!reachedTarget) {
-            shipScript.Propeller(true);
+            if (TargetInFront()) {
+                shipScript.Propeller(true);
+            } else {
+                shipScript.Propeller(false);
+            }
             shipScript.Turn(shipScript.TurnCorrection(WishToGoDirection()) < 0);
         }
 
@@ -116,6 +120,11 @@ public class PlayerScript : MonoBehaviour
         Vector2 distance = GetVectorPlayerToTarget();
         Vector2 directVector = distance.normalized;
         return directVector;
+    }
+
+    bool TargetInFront() {
+        Vector2 w = WishToGoDirection();
+        return Vector2.Dot(w, shipScript.GetMyDirection()) > 0;
     }
 
     public void OnTriggerEnter2D(Collider2D collision) {
