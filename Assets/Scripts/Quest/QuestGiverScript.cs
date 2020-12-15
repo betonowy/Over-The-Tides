@@ -113,7 +113,7 @@ public class QuestGiverScript : MonoBehaviour {
 
     public void OpenPort(PortScript p) {
         questLog.SetActive(true);
-        //  mess += " " + p.quest.goal.goalType;
+        GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", false);
         if (p.quest.goal.goalType == GoalType.Gathering) {
             questGath.SetActive(true);
             acceptButton.SetActive(false);
@@ -247,6 +247,7 @@ public class QuestGiverScript : MonoBehaviour {
             acceptButton.SetActive(false);
             completeButton.SetActive(true);
             GameObject.Find("QuestLog").gameObject.SetActive(false);
+            GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", true);
         }
     }
 
@@ -262,6 +263,7 @@ public class QuestGiverScript : MonoBehaviour {
             SpecialCompleteAction();
         }
         GameObject.Find("QuestLog").gameObject.SetActive(false);
+        GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", true);
     }
 
     public void SpecialQuestAction() {
@@ -291,6 +293,7 @@ public class QuestGiverScript : MonoBehaviour {
     }
     public void Quit() {
         GameObject.Find("QuestLog").gameObject.SetActive(false);
+        GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", true);
     }
 
     public void show(bool b) {

@@ -29,6 +29,7 @@ public class IslandScript : MonoBehaviour {
         if (Input.GetKey(KeyCode.J) && islandWindow.activeSelf == true) {
             islandWindow.transform.Find("IslandLog").gameObject.SetActive(true);
             islandLog = GameObject.Find("IslandLog");
+            GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", false);
 
         }
 
@@ -60,9 +61,11 @@ public class IslandScript : MonoBehaviour {
     public void Accept() {
         isCompleted = true;
         islandLog.SetActive(false);
+        GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", true);
     }
 
     public void Quit() {
         islandLog.SetActive(false);
+        GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", true);
     }
 }

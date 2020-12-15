@@ -264,7 +264,7 @@ public class PlayerScript : MonoBehaviour
         inventory.Container.Items = new InventorySlot[24];
     }
 
-    public void allowMovement(bool var) {
+    public void AllowMovement(bool var) {
         allowMove = var;
     }
 }
