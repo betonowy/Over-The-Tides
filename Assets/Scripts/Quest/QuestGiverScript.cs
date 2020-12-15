@@ -85,12 +85,21 @@ public class QuestGiverScript : MonoBehaviour {
             }
             case 2: {
                 port.quest.title = "Destroy the horde";
-                port.quest.description = "Oooh no! It is coming, the biggest pirate ship on entire sea and it is coming for you for what you have done to the rest of them!";
+                //port.quest.description = "Oooh no! It is coming, the biggest pirate ship on entire sea and it is coming for you for what you have done to the rest of them!";
                 port.quest.description = "Try do destroy as many ships as you can! So they will not trouble good people of the seas. Five should be enough :D";
                 port.quest.reward = "Reward: Victory and peace!";
                 port.quest.completed = "Impossible! You have done it, you have achived something no one even imagined to achive. Congratulations!";
                 port.id = 2;
                 //    mess += port.id + " ";
+                    break;
+            }
+            case 3: {
+                    port.quest.title = "Repair Center";
+                    port.quest.description = "Repair for some coins, 10 should be enough";
+                    port.quest.reward = "Reward: heal 1";
+                    port.quest.completed = "Repair for some coins, 10 should be enough";
+                    port.id = 3;
+                    //    mess += port.id + " ";
                     break;
             }
         }
