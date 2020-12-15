@@ -25,6 +25,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject plankToPick;
     public GameObject shipToSpawn;
     public GameObject sailor;
+    public GameObject endingScreen;
 
     public bool rectDenied;
     public Rect[] deniedRects;
@@ -220,6 +221,26 @@ public class PlayerScript : MonoBehaviour
             }
             return;
         }
+        else if (item == "victory") {
+            for (int i = 0; i < amount; i++) {
+                GameObject obj = Instantiate(sailor, gameObject.transform.position, gameObject.transform.rotation);
+                obj.transform.parent = gameObject.transform;
+                obj.transform.position = gameObject.transform.position;
+                obj.transform.GetComponent<SailorScript>().shipPosition = new Vector2(0, -0.8f);
+                obj.transform.GetComponent<SailorScript>().targetShipPosition = new Vector2(0, -0.8f);
+                for (int j = 0; j < 20; j++) {
+                    GameObject plank = Instantiate(plankToPick, gameObject.transform.position, gameObject.transform.rotation);
+                    plank.transform.position = gameObject.transform.position;
+                    GameObject gold = Instantiate(goldToPick, gameObject.transform.position, gameObject.transform.rotation);
+                    gold.transform.position = gameObject.transform.position;
+                }
+                GameObject cnn = Instantiate(cannonToPick, gameObject.transform.position, gameObject.transform.rotation);
+                cnn.transform.position = gameObject.transform.position;
+                endingScreen.SetActive(true);
+            }
+            return;
+        }
+
     }
 
     private bool CheckSpace(GameObject[] objects, Vector2 position, float radius) {
