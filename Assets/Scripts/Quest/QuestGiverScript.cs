@@ -10,9 +10,6 @@ public class QuestGiverScript : MonoBehaviour {
     public IslandScript[] islands;
 
     private Quest quest;
-
-    public TextMeshProUGUI baba;
-
     private PortScript port;
     private InventorySlot inventorySlot;
     private IslandScript island;
@@ -26,6 +23,8 @@ public class QuestGiverScript : MonoBehaviour {
     public TextMeshProUGUI descriptionIslandText;
     public TextMeshProUGUI rewardIslandText;
 
+    public TextMeshProUGUI specialText;
+
     public GameObject enemyShipToSpawn;
 
     public GameObject acceptButton;
@@ -35,13 +34,11 @@ public class QuestGiverScript : MonoBehaviour {
     public GameObject questWindow;
     public GameObject questLog;
     public GameObject questGath;
-
-    public GameObject marker;
+    public GameObject specialCompleteAction;
 
     private string mess;
     public bool[] playerDistance;
     public bool questWindowFlag = false;
-
 
     private void Start() {
         FillPorts();
@@ -249,6 +246,7 @@ public class QuestGiverScript : MonoBehaviour {
             SpecialQuestAction();
             acceptButton.SetActive(false);
             completeButton.SetActive(true);
+            GameObject.Find("QuestLog").gameObject.SetActive(false);
         }
     }
 
@@ -261,6 +259,7 @@ public class QuestGiverScript : MonoBehaviour {
         if(port.rewardTaken == false) {
             port.player.GenerateReward(quest.reward);
             port.rewardTaken = true;
+            SpecialCompleteAction();
         }
         GameObject.Find("QuestLog").gameObject.SetActive(false);
     }
@@ -278,6 +277,18 @@ public class QuestGiverScript : MonoBehaviour {
         }
     }
 
+    public void SpecialCompleteAction() {
+        if (quest.title == "Priate ship") {
+            specialCompleteAction.SetActive(true);
+            specialText.text = "Press M to open map";
+            StartCoroutine(ShowMessage(specialCompleteAction));
+        }
+    }
+
+    IEnumerator ShowMessage(GameObject obj) {
+        yield return new WaitForSeconds(10);
+        obj.SetActive(false);
+    }
     public void Quit() {
         GameObject.Find("QuestLog").gameObject.SetActive(false);
     }
