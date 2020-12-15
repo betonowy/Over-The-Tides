@@ -22,9 +22,11 @@ public class CombatManager : MonoBehaviour
                 if (ship.GetComponent<ShipScript>().team == ShipScript.teamEnum.teamRed)
                     port.quest.goal.EnemyKilled();
                 if(port.quest.goal.IsReached()) {
-                    port.quest.Complete();
+                    port.quest.isCompleted = true;
                     port.isCompleted = true;
                     text.SetActive(true);
+                    port.QuestCompleted();
+                    port.quest.isActive = false;
                     StartCoroutine(ShowMessage());
                 }
             }

@@ -77,6 +77,8 @@ public class PortScript : MonoBehaviour
     public bool dist = false;
     [System.NonSerialized]
     public float distance;
+    [System.NonSerialized]
+    public bool rewardTaken = false;
 
     public QuestInteface questInteface;
     public InventoryObject inventory;
@@ -91,7 +93,10 @@ public class PortScript : MonoBehaviour
         checkDistance();
         if (Input.GetKeyDown(KeyCode.J) && dist) {
             questGiver.OpenPort(this);
-            questGiver.CheckQuest();
+            //if (isCompleted) {
+                questGiver.CheckQuest();
+            //    isCompleted = false;
+            //}
         }
     }
 

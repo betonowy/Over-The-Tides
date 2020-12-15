@@ -228,7 +228,6 @@ public class QuestGiverScript : MonoBehaviour {
 
     public void CheckQuest() {
         if (port.isCompleted && quest.goal.goalType != GoalType.Gathering) {
-            port.player.GenerateReward(quest.reward);
             SetCompltedPortText(port);
             acceptButton.SetActive(false);
             completeButton.SetActive(true);
@@ -240,11 +239,13 @@ public class QuestGiverScript : MonoBehaviour {
     }
 
     public void AcceptQuest() {
-        quest.isActive = true;
-        FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
-        SpecialQuestAction();
-        acceptButton.SetActive(false);
-        completeButton.SetActive(true);
+        if (port.quest.isCompleted == false) {
+            quest.isActive = true;
+            FindObjectOfType<CombatManager>().SendMessage("SetQuest", quest);
+            SpecialQuestAction();
+            acceptButton.SetActive(false);
+            completeButton.SetActive(true);
+        }
     }
 
     public void AcceptIsland() {
@@ -253,6 +254,10 @@ public class QuestGiverScript : MonoBehaviour {
     }
 
     public void CompleteButtonAction() {
+        if(port.rewardTaken == false) {
+            port.player.GenerateReward(quest.reward);
+            port.rewardTaken = true;
+        }
         GameObject.Find("QuestLog").gameObject.SetActive(false);
     }
 
