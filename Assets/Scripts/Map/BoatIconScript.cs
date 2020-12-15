@@ -16,7 +16,7 @@ public class BoatIconScript : MonoBehaviour
     }
 
     private void Update() {
-        gameObject.GetComponent<RectTransform>().position = new Vector3(x + player.transform.position.x * 0.5f, y + player.transform.position.y * 0.5f, 0);
+        gameObject.GetComponent<RectTransform>().position = new Vector3(x + player.transform.position.x * 0.6f, y + player.transform.position.y * 0.6f, 0);
         gameObject.GetComponent<RectTransform>().rotation = player.transform.rotation;
     }
 

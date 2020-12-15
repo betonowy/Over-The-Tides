@@ -34,7 +34,7 @@ public class TimerScript : MonoBehaviour
         timeModifier = 4f;
     }
     public void EightfoldSpeed() {
-        timeModifier = 8f;
+        timeModifier = 6f;
     }
 
     public float GetTimeModifier() {
