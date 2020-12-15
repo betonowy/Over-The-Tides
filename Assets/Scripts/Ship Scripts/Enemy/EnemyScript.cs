@@ -21,6 +21,7 @@ public class EnemyScript : MonoBehaviour {
     public float aiDefendMinimumEnemySeparation = 5f;
     public float aiDefendAvoidFriendlyFactor = 0.5f;
     public float aiDefendAvoidEnemyFactor = 0.5f;
+    public float aiDefendAvoidStaticFactor = 1.1f;
     public float aiDefendTeammateMaxDistance = 15;
     public float aiDefendTeammateRatio = 0.3f;
     public float aiDefendLeaderFollowDistance = 10;
@@ -462,7 +463,7 @@ public class EnemyScript : MonoBehaviour {
                 float dist = getDistanceToTarget(target);
                 if (dist < minDist) {
                     minDist = dist;
-                    aiTargetDirection = (-getVectorToTarget(target).normalized).normalized;
+                    aiTargetDirection = (-getVectorToTarget(target).normalized * aiDefendAvoidStaticFactor + aiTargetDirection).normalized;
                 }
             }
         }

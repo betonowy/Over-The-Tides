@@ -90,12 +90,12 @@ public class CameraScript : MonoBehaviour {
             try {
                 Vector3 playercenterPoint = playerObject.transform.position;
                 playercenterPoint.z = -10;
-                transform.position = Vector3.SmoothDamp(transform.position, playercenterPoint, ref velocity, smoothTime);
+                transform.position = Vector3.SmoothDamp(transform.position, playercenterPoint, ref velocity, smoothTime * Time.timeScale);
             } catch {
                 freeMove = true;
             }
         } else {
-            transform.position = Vector3.SmoothDamp(transform.position, centerPoint, ref velocity, smoothTime); ;
+            transform.position = Vector3.SmoothDamp(transform.position, centerPoint, ref velocity, smoothTime * Time.timeScale); ;
         }
     }
 

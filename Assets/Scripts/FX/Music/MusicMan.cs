@@ -19,10 +19,12 @@ public class MusicMan : MonoBehaviour {
     public AudioSet[] music;
     public float fadeOutTime = 2;
     public float fadeInTime = 5;
+    public float chillCheckTime = 5;
 
     private AudioSource aSource;
     private TRACK_TYPE currentMood = TRACK_TYPE.CHILL;
     private int currentTrack = 0;
+    private float chillCheck = 1;
 
     void Start() {
         aSource = GetComponent<AudioSource>();
@@ -44,6 +46,23 @@ public class MusicMan : MonoBehaviour {
         if (!aSource.isPlaying) {
             aSource.volume = 0;
             SetNextTrack();
+        }
+
+        if ((chillCheck -= Time.deltaTime) < 0) {
+            chillCheck = chillCheckTime;
+            GameObject[] g = GameObject.FindGameObjectsWithTag("Ship");
+            bool flag = true;
+
+            foreach (var obj in g) {
+                if (obj.GetComponent<ShipScript>().team == ShipScript.teamEnum.teamRed) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                SetMood(TRACK_TYPE.CHILL);
+            }
         }
     }
 

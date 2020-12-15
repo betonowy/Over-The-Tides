@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HordeMan : MonoBehaviour {
 
-    public int waveCount = 5;
+    public int waveCount = 3;
     public int increment = 1;
     public int timeBetween = 600;
     public Vector2[] spawnPoints;
@@ -83,6 +83,9 @@ public class HordeMan : MonoBehaviour {
         }
 
         waveCount += increment;
+
+        GameObject.Find("LevelManager").GetComponent<MusicMan>().SetMood(MusicMan.TRACK_TYPE.HORDE);
+
         return true;
     }
 
