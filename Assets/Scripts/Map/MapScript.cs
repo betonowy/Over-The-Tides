@@ -5,6 +5,7 @@ using UnityEngine;
 public class MapScript : MonoBehaviour
 {
     public GameObject map;
+    public GameObject legend;
     private bool flag;
 
     void Update() {
@@ -15,6 +16,16 @@ public class MapScript : MonoBehaviour
             else {
                 map.SetActive(true);
             }
-        }   
+        }
+
+        if (Input.GetKeyDown(KeyCode.L) && map.activeSelf == true) {
+            if (legend.activeSelf == true) {
+                legend.SetActive(false);
+            }
+            else {
+                legend.SetActive(true);
+            }
+        }
+
     }
 }
