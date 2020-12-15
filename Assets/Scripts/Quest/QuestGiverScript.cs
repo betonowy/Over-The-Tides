@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestGiverScript : MonoBehaviour {
 
@@ -34,6 +35,8 @@ public class QuestGiverScript : MonoBehaviour {
     public GameObject questWindow;
     public GameObject questLog;
     public GameObject questGath;
+
+    public GameObject marker;
 
     private string mess;
     public bool[] playerDistance;
@@ -265,6 +268,12 @@ public class QuestGiverScript : MonoBehaviour {
         if (quest.title == "Priate ship") {
             Vector3 v = new Vector3(0, 100, 0);
             GameObject ship = Instantiate(enemyShipToSpawn, v, gameObject.transform.rotation);
+            transform.GetComponent<MapScript>().markerFlag = true;
+            transform.GetComponent<MarkerScript>().flag = true;
+        }
+        if (quest.title == "Plank exchange") {
+            transform.GetComponent<MarkerScript>().flag = false;
+            transform.GetComponent<MapScript>().markerFlag = false;
         }
     }
 

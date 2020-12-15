@@ -7,14 +7,27 @@ public class MapScript : MonoBehaviour
     public GameObject map;
     public GameObject legend;
     private bool flag;
+    public GameObject marker;
+    public MarkerScript markerScript;
+    public bool markerFlag = false;
 
     void Update() {
         if(Input.GetKeyDown(KeyCode.M) ) {
             if (map.activeSelf == true) {
+                if (markerFlag == true) {
+                    marker.SetActive(false);
+                    if (markerScript.flag == true)
+                        markerScript.StopBlinking();
+                }
                 map.SetActive(false);
             }
             else {
                 map.SetActive(true);
+                if (markerFlag == true) {
+                    marker.SetActive(true);
+                    if (markerScript.flag == true)
+                        markerScript.StartBlinking();
+                }
             }
         }
 
