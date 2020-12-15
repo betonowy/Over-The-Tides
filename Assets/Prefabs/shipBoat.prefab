@@ -640,6 +640,7 @@ MonoBehaviour:
   team: 1
   maxTurningForce: 50
   maxPropellerForce: 200
+  maxPaddlePushForce: 10
   shipLife: 100
   cannonPositions:
   - {x: -1.1, y: 2}
@@ -872,6 +873,7 @@ MonoBehaviour:
   aiDefendMinimumEnemySeparation: 10
   aiDefendAvoidFriendlyFactor: 1
   aiDefendAvoidEnemyFactor: 0.7
+  aiDefendAvoidStaticFactor: 1.1
   aiDefendTeammateMaxDistance: 20
   aiDefendTeammateRatio: 0.1
   aiDefendLeaderFollowDistance: 10

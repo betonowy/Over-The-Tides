@@ -63,8 +63,7 @@ public class PlayerScript : MonoBehaviour
             bool allow = true;
 
             if (rectDenied) {
-                if (MouseInDeniedRect())
-                    allow = false;
+                if (MouseInDeniedRect()) allow = false;
             }
 
             if (allow) {
@@ -82,6 +81,29 @@ public class PlayerScript : MonoBehaviour
                     }
                     activeMoveMark = Instantiate(moveTargetMark);
                     activeMoveMark.transform.position = targetPosition;
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1) && allowMove) {
+            Vector2 mousePos = Input.mousePosition;
+
+            bool allow = true;
+
+            if (rectDenied) {
+                if (MouseInDeniedRect()) allow = false;
+            }
+
+            if (allow) {
+                Vector2 viewport = Camera.allCameras[0].ScreenToViewportPoint(mousePos);
+                bool insideViewport = true;
+                if (viewport.x > 1f || viewport.x < 0f || viewport.y > 1f || viewport.y < 0f)
+                    insideViewport = false;
+
+                if (insideViewport) {
+                    Vector2 pushPosition = Camera.allCameras[0].ScreenToWorldPoint(mousePos);
+                    float pushForce = shipScript.GetPaddleObject().getNodeScript().ReadyCrewCount();
+                    shipScript.pushAwayFrom(pushPosition, pushForce);
                 }
             }
         }

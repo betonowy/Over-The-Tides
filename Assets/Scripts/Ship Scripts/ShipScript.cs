@@ -27,6 +27,7 @@ public class ShipScript : MonoBehaviour
 
     public float maxTurningForce;
     public float maxPropellerForce;
+    public float maxPaddlePushForce;
 
     public float shipLife = 100;
 
@@ -281,5 +282,10 @@ public class ShipScript : MonoBehaviour
 
     public void CancelLeader() {
         isLeader = false;
+    }
+
+    public void pushAwayFrom(Vector2 point, float force) {
+        Vector2 pushVector = (myBody.position - point).normalized;
+        myBody.AddForceAtPosition(pushVector * force * maxPaddlePushForce, point);
     }
 }
