@@ -130,7 +130,7 @@ public abstract class UserInterface : MonoBehaviour {
         Destroy(MouseData.tempItemBeingDragged);
         
         if (MouseData.InterfaceMouseIsOver == null) {
-            slotsOnInterface[obj].RemoveItem();
+            //slotsOnInterface[obj].RemoveItem();
             return;
         }
         if(MouseData.slotHoverdOver) {

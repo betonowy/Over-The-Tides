@@ -4715,6 +4715,7 @@ MonoBehaviour:
   - {fileID: 1394617869}
   - {fileID: 46978790}
   - {fileID: 1638664115}
+  baba: {fileID: 0}
   inventory: {fileID: 11400000, guid: f598141bda272c24c934497144db7dd7, type: 2}
   titeText: {fileID: 276669626}
   descriptionText: {fileID: 1764392640}
@@ -4726,6 +4727,12 @@ MonoBehaviour:
     type: 3}
   acceptButton: {fileID: 772908949}
   completeButton: {fileID: 489410754}
+  questUI: {fileID: 392670302}
+  questWindow: {fileID: 1442235036}
+  questLog: {fileID: 118356615}
+  questGath: {fileID: 1807937573}
+  playerDistance: 
+  questWindowFlag: 0
 --- !u!114 &1320427441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4784,6 +4791,7 @@ MonoBehaviour:
     type: 1
   fadeOutTime: 3
   fadeInTime: 5
+  chillCheckTime: 5
 --- !u!1 &1322901717
 GameObject:
   m_ObjectHideFlags: 0
@@ -5340,6 +5348,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Island (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1587512777257254848, guid: 031f8ad35439ec044b9ceca3ffe78912,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1587512777257254849, guid: 031f8ad35439ec044b9ceca3ffe78912,
         type: 3}
@@ -7169,6 +7182,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Island (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1587512777257254848, guid: 031f8ad35439ec044b9ceca3ffe78912,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1587512777257254849, guid: 031f8ad35439ec044b9ceca3ffe78912,
         type: 3}
       propertyPath: questGiver
@@ -7315,8 +7333,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7608,6 +7626,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Island
+      objectReference: {fileID: 0}
+    - target: {fileID: 1587512777257254848, guid: 031f8ad35439ec044b9ceca3ffe78912,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1587512777257254849, guid: 031f8ad35439ec044b9ceca3ffe78912,
         type: 3}

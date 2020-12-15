@@ -10,6 +10,8 @@ public class QuestGiverScript : MonoBehaviour {
 
     private Quest quest;
 
+    public TextMeshProUGUI baba;
+
     private PortScript port;
     private InventorySlot inventorySlot;
     private IslandScript island;
@@ -28,15 +30,35 @@ public class QuestGiverScript : MonoBehaviour {
     public GameObject acceptButton;
     public GameObject completeButton;
 
+    public GameObject questUI;
+    public GameObject questWindow;
+    public GameObject questLog;
+    public GameObject questGath;
+
+    private string mess;
+    public bool[] playerDistance;
+    public bool questWindowFlag = false;
+
+
     private void Start() {
         FillPorts();
         FillIslands();
+        playerDistance = new bool[ports.Length];
+    }
+
+    private void Update() {
+        checkWindow();
     }
 
     private void FillPorts() {
         for(int i = 0; i < ports.Length; i++) {
             StringFillerPorts(i, ports[i]);
         }
+    }
+
+    public void close() {
+        questLog.SetActive(false);
+        questWindow.SetActive(false);
     }
 
     private void StringFillerPorts(int i, PortScript port) {
@@ -47,6 +69,8 @@ public class QuestGiverScript : MonoBehaviour {
                     port.quest.reward = "Reward: sailor 1";
                     // port.quest.completed = "Thank you very much! But watch out for yourself now. You have angered whole horde of priates and they WILL come for you!";
                     port.quest.completed = "Watch out for yourself now. You have angered whole horde of priates and they WILL come for you! Swim to the north, there you might get some help";
+                    port.id = 0;
+                 //   mess += port.id + " ";
                     break;
             }
             case 1: {
@@ -55,6 +79,8 @@ public class QuestGiverScript : MonoBehaviour {
                             "that you can find some on the island to the east of our port.";
                     port.quest.reward = "Reward: ship 1";
                     port.quest.completed = "We have an amazing offer for you waiting in our port. For only 15 planks we are willing to build a new ship for you!";
+                    port.id = 1;
+                   // mess += port.id + " ";
                     break;
             }
             case 2: {
@@ -63,7 +89,9 @@ public class QuestGiverScript : MonoBehaviour {
                 port.quest.description = "Try do destroy as many ships as you can! So they will not trouble good people of the seas. Five should be enough :D";
                 port.quest.reward = "Reward: Victory and peace!";
                 port.quest.completed = "Impossible! You have done it, you have achived something no one even imagined to achive. Congratulations!";
-                break;
+                port.id = 2;
+                //    mess += port.id + " ";
+                    break;
             }
         }
     }
@@ -72,6 +100,15 @@ public class QuestGiverScript : MonoBehaviour {
         for (int i = 0; i < islands.Length; i++) {
             StringFillIslands(i, islands[i]);
         }
+    }
+
+    public void OpenPort(PortScript p) {
+        questLog.SetActive(true);
+      //  mess += " " + p.quest.goal.goalType;
+        if (p.quest.goal.goalType == GoalType.Gathering)
+            questGath.SetActive(true);
+        else
+            questGath.SetActive(false);
     }
 
     private void StringFillIslands(int i, IslandScript island) {
@@ -87,7 +124,7 @@ public class QuestGiverScript : MonoBehaviour {
                 break;
             }
             case 2: {
-                island.desc = "You find a drunk pirate on the store. He claims that his name is Jack and he is a captain. Anyway you decide to took him on board";
+                island.desc = "You find a drunk pirate on the shore. He claims that his name is capitan Jack. Anyway you decide to took him on board";
                 island.rewa = "Reward: sailor 1";
                 break;
             }
@@ -99,6 +136,12 @@ public class QuestGiverScript : MonoBehaviour {
         descriptionText.text = port.quest.description;
         rewardText.text = port.quest.reward;
         completedText.text = port.quest.completed;
+
+        //if (port.quest.goal.goalType == GoalType.Gathering)
+        //    port.questGath.SetActive(true);
+        //else
+        //    port.questGath.SetActive(false);
+
         if(port.isCompleted == true) {
             titeText.gameObject.SetActive(false);
             descriptionText.gameObject.SetActive(false);
@@ -207,5 +250,31 @@ public class QuestGiverScript : MonoBehaviour {
 
     public void Quit() {
         GameObject.Find("QuestLog").gameObject.SetActive(false);
+    }
+
+    public void show(bool b) {
+        if (b)
+            questWindow.SetActive(true);
+        else
+            questWindow.SetActive(false);
+    }
+
+    private void checkWindow() {
+        int counter = 0;
+        foreach (PortScript p in ports) {
+            if (p.distance < 20f)
+                playerDistance[counter] = true;
+            else
+                playerDistance[counter] = false;
+            counter++;
+        }
+        for (int i = 0; i < counter; i++)
+            if (playerDistance[i] == true)
+                questWindowFlag = true;
+        if (questWindowFlag == true)
+            questWindow.SetActive(true);
+        if(questWindowFlag == false)
+            questWindow.SetActive(false);
+        questWindowFlag = false;
     }
 }
