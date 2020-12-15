@@ -289,7 +289,7 @@ public class QuestGiverScript : MonoBehaviour {
     }
 
     IEnumerator ShowMessage(GameObject obj) {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(15);
         obj.SetActive(false);
     }
     public void Quit() {
