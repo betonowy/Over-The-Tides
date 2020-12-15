@@ -164,7 +164,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &3042633284931110068
 MonoBehaviour:
@@ -178,10 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614fa457cf2c9ca4492da469bfedcafe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questUI: {fileID: 0}
-  questWindow: {fileID: 0}
-  questLog: {fileID: 0}
-  questGath: {fileID: 0}
   quest:
     isActive: 0
     title: 
@@ -196,12 +192,8 @@ MonoBehaviour:
       goalType: 0
       requiredAmount: 1
       currentAmount: 0
-  player: {fileID: 0}
-  combatManager: {fileID: 0}
-  questGiver: {fileID: 0}
   questInteface: {fileID: 0}
   inventory: {fileID: 0}
-  isCompleted: 0
 --- !u!61 &3042633284931110073
 BoxCollider2D:
   m_ObjectHideFlags: 0
