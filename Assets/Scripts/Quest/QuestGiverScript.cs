@@ -254,6 +254,7 @@ public class QuestGiverScript : MonoBehaviour {
     public void AcceptIsland() {
         island.isCompleted = true;
         GameObject.Find("IslandLog").gameObject.SetActive(false);
+        GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", true);
     }
 
     public void CompleteButtonAction() {

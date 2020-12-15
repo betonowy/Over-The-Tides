@@ -53,6 +53,7 @@ public class IslandScript : MonoBehaviour {
 
     public void OnTriggerExit2D(Collider2D collision) {
         if (collision.name == "playerBoatBlue") {
+            GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", true);
             islandWindow.SetActive(false);
             islandLog.SetActive(false);
         }
@@ -65,7 +66,7 @@ public class IslandScript : MonoBehaviour {
     }
 
     public void Quit() {
-        islandLog.SetActive(false);
         GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", true);
+        islandLog.SetActive(false);
     }
 }
