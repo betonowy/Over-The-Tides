@@ -6404,6 +6404,12 @@ MonoBehaviour:
   - track: {fileID: 8300000, guid: 20e31e191fe962e4499fe5bb3f282891, type: 3}
     volume: 0.1
     type: 1
+  - track: {fileID: 8300000, guid: 89ab78751c55db04fb3d9f892579416a, type: 3}
+    volume: 0.1
+    type: 0
+  - track: {fileID: 8300000, guid: 9dcc96a0b6abc864fbe521ef65479bfb, type: 3}
+    volume: 0.1
+    type: 0
   fadeOutTime: 3
   fadeInTime: 5
   chillCheckTime: 5

@@ -90,17 +90,13 @@ public class AnimationV1 : MonoBehaviour {
     public Vector2 InterpolateVec2Linear(Vector2 first, Vector2 second, float beginVal, float endVal, float point) {
         if (beginVal == endVal) {
             if (point > beginVal) {
-                Debug.Log("First");
                 return first;
             } else {
-                Debug.Log("Second");
                 return second;
             }
         }
 
         float ratio = (point - beginVal) / (endVal - beginVal);
-
-        Debug.Log("Ratio: " + ratio);
 
         if (ratio > 1) {
             ratio = 1;

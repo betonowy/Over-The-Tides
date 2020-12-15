@@ -274,7 +274,7 @@ public class ShipScript : MonoBehaviour
         float maxMannedRepair = repairbenchObject.getNodeScript().countNodes();
         float currentlyMannedRepair = repairbenchObject.getNodeScript().ReadyCrewCount();
         if (currentlyMannedRepair > 0 && shipLife < 50) {
-            shipLife += currentlyMannedRepair * 0.005f / maxMannedRepair;
+            shipLife += Time.deltaTime * 60 * currentlyMannedRepair * 0.005f / maxMannedRepair;
         }
     }
 
