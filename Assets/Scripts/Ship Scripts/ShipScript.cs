@@ -42,12 +42,15 @@ public class ShipScript : MonoBehaviour
     private MastScript backMastObject;
     private PaddleScript paddlesObject;
     private RepairbenchScript repairbenchObject;
+    private GameObject lifeBar;
 
     private GameObject[] cannons;
 
     public GameObject cannonPrefab;
-
+    public GameObject lifeBarPrefab;
     public GameObject Shipwreck;
+
+    lilHealthBar barObj;
 
     private bool[] cannonExistence;
     private bool cannonsTouched;
@@ -69,7 +72,13 @@ public class ShipScript : MonoBehaviour
         paddlesObject = transform.Find("Paddles").GetComponent<PaddleScript>();
         repairbenchObject = transform.Find("Repairbench").GetComponent<RepairbenchScript>();
         staticInterface = GameObject.Find("Canvas").transform.Find("CanvasInventory").transform.Find("EquipmentScreen").GetComponent<StaticInterface>();
+        if (!GetComponent<PlayerScript>()) {
+            lifeBar = Instantiate(lifeBarPrefab);
+            barObj = lifeBar.GetComponent<lilHealthBar>();
 
+            barObj.SetMaster(gameObject);
+            barObj.UpdateValue(shipLife);
+        }
 
         InitialCannons();
         UpdateCannons();
@@ -191,16 +200,20 @@ public class ShipScript : MonoBehaviour
     }
 
     public void Propeller(bool direction) {
-        if (direction) {
+        /*if (direction) {
             myBody.AddForce(GetMyDirection() * maxPropellerForce * Time.deltaTime * SpeedModifier());
         } else {
             myBody.AddForce(-GetMyDirection() * maxPropellerForce * Time.deltaTime * SpeedModifier());
-        }
+        }*/
+        myBody.AddForce(GetMyDirection() * maxPropellerForce * Time.deltaTime * SpeedModifier());
     }
 
     public void Damage(float value) {
         gameObject.GetComponents<AudioSource>()[1].Play();
         shipLife -= value;
+        if (barObj) {
+            barObj.UpdateValue(shipLife);
+        }
     }
 
     private void CheckLife() {

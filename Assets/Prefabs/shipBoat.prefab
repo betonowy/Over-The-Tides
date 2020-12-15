@@ -653,6 +653,8 @@ MonoBehaviour:
   - {x: 1, y: -2.7}
   cannonPrefab: {fileID: 3276126805382000785, guid: f249f214aa6293d439a0d45373d25579,
     type: 3}
+  lifeBarPrefab: {fileID: 3656128927606824034, guid: f7465fdd0661c7044907fed2131b8754,
+    type: 3}
   Shipwreck: {fileID: 1438795246459381750, guid: 3241a87050c74384183be604eec9c5a0,
     type: 3}
   iTouchedCannons: 0
