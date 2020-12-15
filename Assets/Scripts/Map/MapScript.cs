@@ -15,9 +15,9 @@ public class MapScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.M) ) {
             if (map.activeSelf == true) {
                 if (markerFlag == true) {
-                    marker.SetActive(false);
-                    if (markerScript.flag == true)
+                    if (markerScript.flag == false)
                         markerScript.StopBlinking();
+                    marker.SetActive(false);
                 }
                 map.SetActive(false);
             }

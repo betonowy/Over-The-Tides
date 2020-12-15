@@ -227,6 +227,7 @@ public class QuestGiverScript : MonoBehaviour {
                 port.questGiver.SetCompltedPortText(port);
             }
         }
+        SpecialQuestAction();
     }
 
     public void CheckQuest() {

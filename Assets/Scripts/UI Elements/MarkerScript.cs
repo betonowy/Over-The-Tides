@@ -23,11 +23,11 @@ public class MarkerScript : MonoBehaviour
             switch (marker.GetComponent<Image>().color.a.ToString()) {
                 case "0":
                     marker.GetComponent<Image>().color = new Color(marker.GetComponent<Image>().color.r, marker.GetComponent<Image>().color.g, marker.GetComponent<Image>().color.b, 1);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(1f);
                     break;
                 case "1":
                     marker.GetComponent<Image>().color = new Color(marker.GetComponent<Image>().color.r, marker.GetComponent<Image>().color.g, marker.GetComponent<Image>().color.b, 0);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(1f);
                     break;
             }
         }
