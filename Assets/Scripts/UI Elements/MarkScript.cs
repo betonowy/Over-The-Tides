@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MarkScript : MonoBehaviour
 {
-    public int blinkTime = 30;
+    public int blinkTime = 0;
     private int blinkCounter = 0;
 
     private SpriteRenderer mySprite;
