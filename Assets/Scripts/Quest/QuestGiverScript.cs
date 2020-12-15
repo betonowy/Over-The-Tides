@@ -48,6 +48,9 @@ public class QuestGiverScript : MonoBehaviour {
 
     private void Update() {
         checkWindow();
+        if(Input.GetKeyDown(KeyCode.M) && specialCompleteAction.activeSelf == true) {
+            specialCompleteAction.SetActive(false);
+        }
     }
 
     private void FillPorts() {
@@ -284,7 +287,7 @@ public class QuestGiverScript : MonoBehaviour {
         if (quest.title == "Priate ship") {
             specialCompleteAction.SetActive(true);
             specialText.text = "Press M to open map";
-            StartCoroutine(ShowMessage(specialCompleteAction));
+           // StartCoroutine(ShowMessage(specialCompleteAction));
         }
     }
 
