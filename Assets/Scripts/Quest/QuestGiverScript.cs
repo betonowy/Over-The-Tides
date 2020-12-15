@@ -104,11 +104,15 @@ public class QuestGiverScript : MonoBehaviour {
 
     public void OpenPort(PortScript p) {
         questLog.SetActive(true);
-      //  mess += " " + p.quest.goal.goalType;
-        if (p.quest.goal.goalType == GoalType.Gathering)
+        //  mess += " " + p.quest.goal.goalType;
+        if (p.quest.goal.goalType == GoalType.Gathering) {
             questGath.SetActive(true);
-        else
+            acceptButton.SetActive(false);
+        }
+        else {
             questGath.SetActive(false);
+            acceptButton.SetActive(true);
+        }
     }
 
     private void StringFillIslands(int i, IslandScript island) {
