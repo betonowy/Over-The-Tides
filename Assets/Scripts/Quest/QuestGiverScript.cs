@@ -87,7 +87,7 @@ public class QuestGiverScript : MonoBehaviour {
                 port.quest.title = "Destroy the horde";
                 //port.quest.description = "Oooh no! It is coming, the biggest pirate ship on entire sea and it is coming for you for what you have done to the rest of them!";
                 port.quest.description = "Try do destroy as many ships as you can! So they will not trouble good people of the seas. Five should be enough :D";
-                port.quest.reward = "Reward: Victory and peace!";
+                port.quest.reward = "Reward: victory 1";
                 port.quest.completed = "Impossible! You have done it, you have achived something no one even imagined to achive. Congratulations!";
                 port.id = 2;
                 //    mess += port.id + " ";
@@ -147,6 +147,8 @@ public class QuestGiverScript : MonoBehaviour {
     public void SetPortText(PortScript port) {
         titeText.text = port.quest.title;
         descriptionText.text = port.quest.description;
+        if(port.quest.reward == "Reward: victory 1")
+            rewardText.text = "Reward: Victory and peace!";
         rewardText.text = port.quest.reward;
         completedText.text = port.quest.completed;
 
