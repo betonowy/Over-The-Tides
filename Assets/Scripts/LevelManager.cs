@@ -12,7 +12,6 @@ public class LevelManager : MonoBehaviour {
     private PlayerCamera playerCamera;
     private CameraScript mainCamera;
 
-    public TimerScript timerScript;
     private bool lockCameraChange = false;
     public bool nextSceneAfterTDM = false;
 
@@ -36,13 +35,10 @@ public class LevelManager : MonoBehaviour {
         }
         mainCamera = Instantiate(mainCameraPrefab);
         hordeManager = gameObject.GetComponent<HordeMan>();
-
-
     }
 
     // Update is called once per frame
     void Update() {
-        Time.timeScale = timerScript.GetTimeModifier();
         if (Input.GetKeyDown(KeyCode.Alpha1) && !lockCameraChange) {
             mainCamera.setFreeMove(false);
         }
