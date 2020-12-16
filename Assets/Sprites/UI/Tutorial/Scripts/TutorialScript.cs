@@ -29,7 +29,7 @@ public class TutorialScript : MonoBehaviour
     public void Next() {
         popUpIndex++;
         Debug.Log(popUpIndex);
-        if(popUpIndex <= 7)
+        if(popUpIndex <= 9)
             Image.GetComponent<Image>().sprite = popUps[popUpIndex];
     }
 
@@ -77,6 +77,6 @@ public class TutorialScript : MonoBehaviour
     }
 
     public void PlayGame() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
     }
 }
