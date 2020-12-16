@@ -237,6 +237,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 487850911}
   optionsMenu: {fileID: 400324230}
   audioMixer: {fileID: 24100000, guid: 64efd52ba67ddb14ea09f40c2e148a7a, type: 2}
+  musicMan: {fileID: 1320427443}
+  timerScript: {fileID: 785476569}
 --- !u!114 &46978790 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1587512777257254849, guid: 031f8ad35439ec044b9ceca3ffe78912,
@@ -4163,6 +4165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b30c2a9f174e5459a04315594d43b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeModifier: 1
   countdownDisplay: {fileID: 1907127083}
   hordeMan: {fileID: 1320427439}
 --- !u!114 &796383106 stripped

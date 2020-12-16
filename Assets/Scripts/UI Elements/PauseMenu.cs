@@ -8,6 +8,11 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject optionsMenu;
     public AudioMixer audioMixer;
+    public MusicMan musicMan;
+
+    private void Start() {
+        musicMan = GameObject.Find("LevelManager").GetComponent<MusicMan>();
+    }
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
