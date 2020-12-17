@@ -47,7 +47,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void QuitGame() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+        Application.Quit();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
     }
 
     public void GoBack() {
