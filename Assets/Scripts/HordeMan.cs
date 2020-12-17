@@ -6,9 +6,9 @@ public class HordeMan : MonoBehaviour {
 
     public int waveCount = 3;
     public int increment = 1;
-    public int timeBetween = 600;
+    public int timeBetween = 900;
     public Vector2[] spawnPoints;
-    private float currentTime = 400;
+    private float currentTime = 700;
     public float minimumSpace = 10;
     public float checkForSpawnTime = 5;
     private float currentSpawnTime = 0;
