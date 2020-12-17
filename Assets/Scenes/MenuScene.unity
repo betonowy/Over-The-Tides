@@ -1211,7 +1211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 1006434598}
   optionsMenu: {fileID: 437004054}
-  mainMixer: {fileID: 0}
+  mainMixer: {fileID: 24100000, guid: 64efd52ba67ddb14ea09f40c2e148a7a, type: 2}
 --- !u!1 &1057736123
 GameObject:
   m_ObjectHideFlags: 0
