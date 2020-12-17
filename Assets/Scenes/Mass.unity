@@ -238,7 +238,6 @@ MonoBehaviour:
   optionsMenu: {fileID: 400324230}
   audioMixer: {fileID: 24100000, guid: 64efd52ba67ddb14ea09f40c2e148a7a, type: 2}
   musicMan: {fileID: 1320427443}
-  timerScript: {fileID: 785476569}
 --- !u!114 &46978790 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1587512777257254849, guid: 031f8ad35439ec044b9ceca3ffe78912,
@@ -1242,7 +1241,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -122.50122, y: 66}
+  m_AnchoredPosition: {x: -666.5, y: 69.348}
   m_SizeDelta: {x: 244.99756, y: 364.69598}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &228894679
@@ -4165,7 +4164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b30c2a9f174e5459a04315594d43b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeModifier: 1
   countdownDisplay: {fileID: 1907127083}
   hordeMan: {fileID: 1320427439}
 --- !u!114 &796383106 stripped
@@ -7398,7 +7396,6 @@ MonoBehaviour:
     type: 3}
   mainCameraPrefab: {fileID: 4581306014267745841, guid: 891437326261d4c459240fc03afe6a94,
     type: 3}
-  timerScript: {fileID: 785476569}
   nextSceneAfterTDM: 1
   database: {fileID: 11400000, guid: 53cab9e8331338c44b023f733f7d46a9, type: 2}
 --- !u!4 &1320427436
