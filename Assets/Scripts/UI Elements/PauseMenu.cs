@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool isPaused = false;
 
+    private float timeScaleMulti;
     public GameObject pauseMenu;
     public GameObject optionsMenu;
     public AudioMixer audioMixer;
@@ -30,11 +31,12 @@ public class PauseMenu : MonoBehaviour
             optionsMenu.SetActive(false);
         }
         pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
+        Time.timeScale = timeScaleMulti;
         isPaused = false;
     }
 
     void PauseGame() {
+        timeScaleMulti = Time.timeScale;
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
