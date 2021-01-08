@@ -21,6 +21,8 @@ public class FlagScript : MonoBehaviour{
     [System.NonSerialized]
     public FlagGiverScript flagGiver;
 
+    public FlagInterface flagInterface;
+
     private void Start(){
         player = GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>();
         flagGiver = GameObject.Find("LevelManager").GetComponent<FlagGiverScript>();
@@ -28,23 +30,19 @@ public class FlagScript : MonoBehaviour{
 
     private void Update(){
         if (Input.GetKeyDown(KeyCode.J) && CheckLogDistance()){
-            
+            flagGiver.OpenFlag(this);
         }
     }
 
-    private bool CheckLogDistance() {
+    private bool CheckLogDistance(){
         distance = Vector3.Distance(transform.position, player.transform.position);
-        if (distance > 20f) {
-            return false;
-            //questGiver.show(false);
-        }
-        else {
-            
-            //questGiver.show(true);
-            // questGiver.SetQuest(this);
-            // questGiver.SetPortText(this);
-            // questGiver.SetPort(this);
-            return true;
+        switch (distance > 20f){
+            case true:
+                return false;
+            default:
+                flagGiver.SetFlag(this);
+                flagGiver.SetFlagText(this);
+                return true;
         }
     }
 

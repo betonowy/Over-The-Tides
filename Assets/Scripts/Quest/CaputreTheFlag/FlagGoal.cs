@@ -8,7 +8,9 @@ public class FlagGoal{
     private const int modifier = 3;
     
     public const int blueRequiredAmount =  100;
-    public const int redRequiredAmount = - 100;
+    public const int redRequiredAmount =  -100;
+
+    public int itemsRequired;
     
     public int currentAmount;
 

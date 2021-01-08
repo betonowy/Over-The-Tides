@@ -150,9 +150,9 @@ public class QuestGiverScript : MonoBehaviour {
     public void SetPortText(PortScript port) {
         titeText.text = port.quest.title;
         descriptionText.text = port.quest.description;
+        rewardText.text = port.quest.reward;
         if(port.quest.reward == "Reward: victory 1")
             rewardText.text = "Reward: Victory and peace!";
-        rewardText.text = port.quest.reward;
         completedText.text = port.quest.completed;
 
         //if (port.quest.goal.goalType == GoalType.Gathering)
@@ -208,6 +208,7 @@ public class QuestGiverScript : MonoBehaviour {
                 port.questInteface.RemoveAll();
                 port.QuestCompleted();
                 port.questGiver.SetCompltedPortText(port);
+                SpecialQuestAction();
             }
             else if (i > port.quest.goal.requiredAmount) {
                 int temp = i - port.quest.goal.requiredAmount;
@@ -225,9 +226,10 @@ public class QuestGiverScript : MonoBehaviour {
                 port.questInteface.RemoveAll();
                 port.QuestCompleted();
                 port.questGiver.SetCompltedPortText(port);
+                SpecialQuestAction();
             }
         }
-        SpecialQuestAction();
+        
     }
 
     public void CheckQuest() {

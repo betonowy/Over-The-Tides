@@ -9,6 +9,7 @@ public class Flag{
     public defenceLevel defenceLevel;
 
     public bool isProducing;
+    public string title;
     public string description;
     public string leveUpDescription;
     public string reward;
