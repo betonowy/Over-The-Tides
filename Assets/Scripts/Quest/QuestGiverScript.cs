@@ -263,7 +263,7 @@ public class QuestGiverScript : MonoBehaviour {
     }
 
     public void CompleteButtonAction() {
-        if(port.rewardTaken == false) {
+        if(port.rewardTaken == false && port.quest.isCompleted == true) {
             port.player.GenerateReward(quest.reward);
             port.rewardTaken = true;
             SpecialCompleteAction();
