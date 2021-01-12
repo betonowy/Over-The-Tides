@@ -9151,8 +9151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0ec130113d9ed4580421fbc2bace43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveCount: 5
-  increment: 1
+  waveCount: 2
+  increment: 2
   timeBetween: 600
   spawnPoints:
   - {x: 120, y: 0}
@@ -9256,7 +9256,7 @@ MonoBehaviour:
     type: 0
   - track: {fileID: 8300000, guid: 6756e847fb86d9c45b6185753763756a, type: 3}
     volume: 0.1
-    type: 2
+    type: 1
   - track: {fileID: 8300000, guid: c32a05b6974c67a4d8c283f070c83751, type: 3}
     volume: 0.1
     type: 0
