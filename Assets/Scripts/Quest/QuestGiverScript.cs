@@ -323,8 +323,10 @@ public class QuestGiverScript : MonoBehaviour {
                 questWindowFlag = true;
         if (questWindowFlag == true)
             questWindow.SetActive(true);
-        if(questWindowFlag == false)
+        if (questWindowFlag == false){
             questWindow.SetActive(false);
+            GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", true);
+        }
         questWindowFlag = false;
     }
 }
