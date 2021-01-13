@@ -75,7 +75,7 @@ public class TutorialScript : MonoBehaviour
                 newRects[1] = newRect;
 
                 ps.deniedRects = newRects;
-                ps.rectDenied = true;
+                ps.rectDenied = !obj.activeSelf;
             }
         }
     }
