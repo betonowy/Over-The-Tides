@@ -263,7 +263,7 @@ public class QuestGiverScript : MonoBehaviour {
     }
 
     public void CompleteButtonAction() {
-        if(port.rewardTaken == false) {
+        if(port.rewardTaken == false && port.quest.isCompleted == true) {
             port.player.GenerateReward(quest.reward);
             port.rewardTaken = true;
             SpecialCompleteAction();
@@ -323,8 +323,10 @@ public class QuestGiverScript : MonoBehaviour {
                 questWindowFlag = true;
         if (questWindowFlag == true)
             questWindow.SetActive(true);
-        if(questWindowFlag == false)
+        if (questWindowFlag == false){
             questWindow.SetActive(false);
+            GameObject.Find("playerBoatBlue").GetComponent<PlayerScript>().SendMessage("AllowMovement", true);
+        }
         questWindowFlag = false;
     }
 }
