@@ -28,10 +28,10 @@ public class TutorialScript : MonoBehaviour
 
     public void Next() {
         popUpIndex++;
-        if (popUpIndex > 10)
-            popUpIndex = 10;
+        if (popUpIndex > 11)
+            popUpIndex = 11;
         Debug.Log(popUpIndex);
-        if(popUpIndex <= 10)
+        if(popUpIndex <= 11)
             Image.GetComponent<Image>().sprite = popUps[popUpIndex];
     }
 
