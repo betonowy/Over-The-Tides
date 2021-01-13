@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerScript : MonoBehaviour
-{
+public class PlayerScript : MonoBehaviour {
     CameraScript pCam;
 
     // UI elements
@@ -19,7 +18,7 @@ public class PlayerScript : MonoBehaviour
     private ShipScript shipScript;
 
     public InventoryObject inventory;
-    
+
     public GameObject cannonToPick;
     public GameObject goldToPick;
     public GameObject plankToPick;
@@ -34,17 +33,15 @@ public class PlayerScript : MonoBehaviour
 
     Vector3 pos;
 
-    void Start()
-    {
+    void Start() {
         shipScript = gameObject.GetComponent<ShipScript>();
         pCam = FindObjectOfType<CameraScript>();
         healthBar = GameObject.Find("Health bar");
         healthBar.SendMessage("setMaxHealth", shipScript.shipLife);
     }
-    
+
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         healthBar.SendMessage("setHealth", shipScript.shipLife);
         Movement();
         Shooting();
@@ -65,13 +62,13 @@ public class PlayerScript : MonoBehaviour
 
             if (rectDenied) {
                 if (MouseInDeniedRect()) allow = false;
+            } else {
+                if (MouseInDeniedRectB()) allow = false;
             }
 
             if (allow) {
                 Vector2 viewport = Camera.allCameras[0].ScreenToViewportPoint(mousePos);
-                bool insideViewport = true;
-                if (viewport.x > 1f || viewport.x < 0f || viewport.y > 1f || viewport.y < 0f)
-                    insideViewport = false;
+                bool insideViewport = !(viewport.x > 1f || viewport.x < 0f || viewport.y > 1f || viewport.y < 0f);
 
                 if (insideViewport) {
                     targetPosition = Camera.allCameras[0].ScreenToWorldPoint(mousePos);
@@ -80,6 +77,7 @@ public class PlayerScript : MonoBehaviour
                     if (activeMoveMark != null) {
                         Destroy(activeMoveMark);
                     }
+
                     activeMoveMark = Instantiate(moveTargetMark);
                     activeMoveMark.transform.position = targetPosition;
                 }
@@ -93,13 +91,13 @@ public class PlayerScript : MonoBehaviour
 
             if (rectDenied) {
                 if (MouseInDeniedRect()) allow = false;
+            } else {
+                if (MouseInDeniedRectB()) allow = false;
             }
 
             if (allow) {
                 Vector2 viewport = Camera.allCameras[0].ScreenToViewportPoint(mousePos);
-                bool insideViewport = true;
-                if (viewport.x > 1f || viewport.x < 0f || viewport.y > 1f || viewport.y < 0f)
-                    insideViewport = false;
+                bool insideViewport = !(viewport.x > 1f || viewport.x < 0f || viewport.y > 1f || viewport.y < 0f);
 
                 if (insideViewport) {
                     Vector2 pushPosition = Camera.allCameras[0].ScreenToWorldPoint(mousePos);
@@ -112,9 +110,11 @@ public class PlayerScript : MonoBehaviour
         if (!reachedTarget) {
             if (TargetInFront()) {
                 shipScript.Propeller(true);
-            } else {
+            }
+            else {
                 shipScript.Propeller(false);
             }
+
             shipScript.Turn(shipScript.TurnCorrection(WishToGoDirection()) < 0);
         }
 
@@ -133,6 +133,14 @@ public class PlayerScript : MonoBehaviour
             if (dr.Contains(viewport))
                 return true;
         }
+
+        return false;
+    }
+
+    private bool MouseInDeniedRectB() {
+        Vector2 viewport = Camera.allCameras[0].ScreenToViewportPoint(Input.mousePosition);
+        if (deniedRects[1].Contains(viewport))
+            return true;
         return false;
     }
 
@@ -153,7 +161,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision) {
         var item = collision.GetComponent<GroundItem>();
-        if(item) {
+        if (item) {
             inventory.AddItem(new Item(item.item), 1);
             Destroy(collision.gameObject);
         }
@@ -170,45 +178,55 @@ public class PlayerScript : MonoBehaviour
 
     private void CreateItems(string item, int amount) {
         if (item == "cannon") {
-            for(int i=0; i<amount; i++) {
-                GameObject cnn = Instantiate(cannonToPick, gameObject.transform.position, gameObject.transform.rotation);
+            for (int i = 0; i < amount; i++) {
+                GameObject cnn = Instantiate(cannonToPick, gameObject.transform.position,
+                    gameObject.transform.rotation);
                 cnn.transform.position = gameObject.transform.position;
             }
+
             return;
-        } else if(item == "gold") {
+        }
+        else if (item == "gold") {
             for (int i = 0; i < amount; i++) {
                 GameObject gold = Instantiate(goldToPick, gameObject.transform.position, gameObject.transform.rotation);
                 gold.transform.position = gameObject.transform.position;
             }
+
             return;
-        } else if (item == "plank") {
+        }
+        else if (item == "plank") {
             for (int i = 0; i < amount; i++) {
-                GameObject plank = Instantiate(plankToPick, gameObject.transform.position, gameObject.transform.rotation);
+                GameObject plank = Instantiate(plankToPick, gameObject.transform.position,
+                    gameObject.transform.rotation);
                 plank.transform.position = gameObject.transform.position;
             }
+
             return;
         }
         else if (item == "ship") {
             for (int i = 0; i < amount; i++) {
-               
                 GameObject[] allGM = GameObject.FindGameObjectsWithTag("Ship");
                 Vector3 v = new Vector3(transform.position.x + 40, transform.position.y + 40, 0);
-                while(!CheckSpace(allGM, v, 10)) {
-                    v = new Vector3(transform.position.x + UnityEngine.Random.Range(40, 90), transform.position.y + UnityEngine.Random.Range(40, 90), 0);
+                while (!CheckSpace(allGM, v, 10)) {
+                    v = new Vector3(transform.position.x + UnityEngine.Random.Range(40, 90),
+                        transform.position.y + UnityEngine.Random.Range(40, 90), 0);
                 }
+
                 GameObject ship = Instantiate(shipToSpawn, v, gameObject.transform.rotation);
-               // ship.transform.position = gameObject.transform.position;
+                // ship.transform.position = gameObject.transform.position;
             }
+
             return;
         }
         else if (item == "heal") {
             for (int i = 0; i < amount; i++) {
                 GameObject[] allGM = GameObject.FindGameObjectsWithTag("Ship");
-                for(int j = 0; j < allGM.Length; j++) {
+                for (int j = 0; j < allGM.Length; j++) {
                     if (allGM[j].GetComponent<ShipScript>().team == ShipScript.teamEnum.teamBlue)
                         allGM[j].GetComponent<ShipScript>().HealFullHealth();
                 }
             }
+
             return;
         }
         else if (item == "sailor") {
@@ -219,6 +237,7 @@ public class PlayerScript : MonoBehaviour
                 obj.transform.GetComponent<SailorScript>().shipPosition = new Vector2(0, -0.8f);
                 obj.transform.GetComponent<SailorScript>().targetShipPosition = new Vector2(0, -0.8f);
             }
+
             return;
         }
         else if (item == "victory") {
@@ -229,27 +248,32 @@ public class PlayerScript : MonoBehaviour
                 obj.transform.GetComponent<SailorScript>().shipPosition = new Vector2(0, -0.8f);
                 obj.transform.GetComponent<SailorScript>().targetShipPosition = new Vector2(0, -0.8f);
                 for (int j = 0; j < 20; j++) {
-                    GameObject plank = Instantiate(plankToPick, gameObject.transform.position, gameObject.transform.rotation);
+                    GameObject plank = Instantiate(plankToPick, gameObject.transform.position,
+                        gameObject.transform.rotation);
                     plank.transform.position = gameObject.transform.position;
-                    GameObject gold = Instantiate(goldToPick, gameObject.transform.position, gameObject.transform.rotation);
+                    GameObject gold = Instantiate(goldToPick, gameObject.transform.position,
+                        gameObject.transform.rotation);
                     gold.transform.position = gameObject.transform.position;
                 }
-                GameObject cnn = Instantiate(cannonToPick, gameObject.transform.position, gameObject.transform.rotation);
+
+                GameObject cnn = Instantiate(cannonToPick, gameObject.transform.position,
+                    gameObject.transform.rotation);
                 cnn.transform.position = gameObject.transform.position;
                 endingScreen.SetActive(true);
             }
+
             return;
         }
-
     }
 
     private bool CheckSpace(GameObject[] objects, Vector2 position, float radius) {
         foreach (GameObject obj in objects) {
-            if ((position - (Vector2)obj.transform.position).magnitude < radius) {
+            if ((position - (Vector2) obj.transform.position).magnitude < radius) {
                 Debug.Log("Spawn space not OK");
                 return false;
             }
         }
+
         Debug.Log("Spawn space OK");
         return true;
     }

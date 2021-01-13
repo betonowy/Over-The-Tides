@@ -63,21 +63,21 @@ public class TutorialScript : MonoBehaviour
                 // tutorial window
                 newRect.width = 480f / Screen.width;
                 newRect.height = 500f / Screen.height;
-                newRect.x = 30f / Screen.width;
+                newRect.x = -240f / Screen.width + 0.5f;
                 newRect.y = 0.5f - newRect.height / 2;
                 newRects[0] = newRect;
 
                 // hide button
                 newRect.width = 100f / Screen.width;
-                newRect.height = 50f / Screen.height;
-                newRect.x = 20f / Screen.width;
-                newRect.y = 20f / Screen.height;
+                newRect.height = 100f / Screen.height;
+                newRect.x = 0f / Screen.width;
+                newRect.y = 0f / Screen.height;
                 newRects[1] = newRect;
 
                 ps.deniedRects = newRects;
-                ps.rectDenied = !obj.activeSelf;
             }
         }
+        ps.rectDenied = flag;
     }
 
     public void PlayGame() {
