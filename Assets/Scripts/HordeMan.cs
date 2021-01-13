@@ -14,13 +14,14 @@ public class HordeMan : MonoBehaviour {
     private float currentSpawnTime = 0;
     public GameObject basicEnemyPrefab;
     private PlayerScript playerHandler;
-
+    public bool stopTimer = false;
     void Start() {
         playerHandler = GameObject.FindObjectOfType<PlayerScript>();
     }
 
     void Update() {
-        CheckWave();
+        if(stopTimer)
+            CheckWave();
     }
 
     void CheckWave() {

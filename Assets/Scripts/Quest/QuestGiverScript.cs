@@ -278,6 +278,7 @@ public class QuestGiverScript : MonoBehaviour {
             GameObject ship = Instantiate(enemyShipToSpawn, v, gameObject.transform.rotation);
             transform.GetComponent<MapScript>().markerFlag = true;
             transform.GetComponent<MarkerScript>().flag = true;
+            GameObject.Find("LevelManager").GetComponent<HordeMan>().stopTimer = true;
         }
         if (quest.title == "Plank exchange") {
             transform.GetComponent<MarkerScript>().flag = false;
